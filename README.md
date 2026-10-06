@@ -39,8 +39,10 @@ Then in the R2 bucket settings, connect a custom domain (e.g. `media.visualon.to
 
 ## Payments (Dodo)
 
-1. In the Dodo dashboard, create one **one-time product per package per currency** (Single INR, Single USD, …) with the
-   prices from `site.ts`. Paste each `pdt_…` ID into `packages[].dodo`.
+1. One Dodo one-time product per package, priced in USD with a localized INR price. Its `pdt_…` ID goes in both
+   `packages[].dodo.INR` and `.USD`; checkout receives `paymentCurrency` so the buyer pays in the currency they picked.
+   Keep the prices in `site.ts` in sync with Dodo. Dodo adds tax on top, so the site says "+ tax".
+   Test-mode and live-mode products have different IDs. When going live, recreate them in live mode and swap the IDs.
 2. Until an ID is filled in, "order" falls back to a pre-filled email to the studio, so the site works before Dodo is live.
 3. Checkout gets the buyer's name/email plus `metadata_package`, `metadata_product_link`, `metadata_formats`,
    `metadata_feel`, `metadata_brief`. You'll see them on each payment in the dashboard.

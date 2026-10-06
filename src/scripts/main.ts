@@ -177,7 +177,8 @@ const guessCurrency = (): Currency => {
   return /Asia\/(Kolkata|Calcutta)/.test(tz) ? "INR" : "USD";
 };
 let currency: Currency = (store.get("vo-currency") as Currency) || guessCurrency();
-const fmt = (n: number, c: Currency) => (c === "INR" ? "₹" : "$") + n.toLocaleString(c === "INR" ? "en-IN" : "en-US");
+const fmt = (n: number, c: Currency) =>
+  (c === "INR" ? "₹" : "$") + n.toLocaleString(c === "INR" ? "en-IN" : "en-US", { maximumFractionDigits: 2 });
 const applyCurrency = () => {
   $$("[data-price]").forEach((el) => {
     const n = Number(currency === "INR" ? el.dataset.inr : el.dataset.usd);
@@ -226,7 +227,7 @@ function openOrder(id: string) {
   const formats = $(`[data-o="formats"]`, dialog)!;
   formats.innerHTML = "";
   formats.dataset.group = "formats";
-  if (current.id === "launch" || current.id === "series") formats.setAttribute("data-multi", "");
+  if (current.id === "launch") formats.setAttribute("data-multi", "");
   else formats.removeAttribute("data-multi");
   current.formats.forEach((f, i) => {
     const b = document.createElement("button");

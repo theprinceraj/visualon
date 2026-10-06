@@ -1,8 +1,8 @@
 ---
 import { packages, formatPrice, site } from "../data/site";
-const [single, launch, hooks, series] = packages;
-const span = { [single.id]: 1, [launch.id]: 2, [hooks.id]: 1, [series.id]: 2 } as Record<string, number>;
-const order = [single, launch, hooks, series];
+const [single, launch, hooks] = packages;
+const span = { [single.id]: 1, [launch.id]: 2, [hooks.id]: 1 } as Record<string, number>;
+const order = [single, launch, hooks];
 const steps = [
   ["pick + pay", "choose a package, tell us about the product, pay in rupees or dollars."],
   ["we capture", "we pull your real ui, copy, colours and fonts. send anything else by email."],
@@ -44,7 +44,7 @@ const steps = [
               <span data-price data-inr={p.price.INR} data-usd={p.price.USD}>
                 {formatPrice(p.price.INR, "INR")}
               </span>
-              <span class="caps once muted">one-time · {p.delivery}</span>
+              <span class="caps once muted">one-time + tax · {p.delivery}</span>
             </p>
             <ul class="chips">
               {p.includes.map((x) => (
@@ -58,10 +58,10 @@ const steps = [
         ))
       }
 
-      <article class="cell pkg custom" data-reveal>
-        <div class="top"><span class="n caps">05</span></div>
+      <article class="cell pkg custom span3" data-reveal>
+        <div class="top"><span class="n caps">04</span></div>
         <h3 class="display name">Custom</h3>
-        <p class="sub muted">longer films, explainers, a whole campaign</p>
+        <p class="sub muted">longer films, a monthly series, a whole campaign</p>
         <p class="read muted">if it doesn't fit a box, tell us what it is. we'll reply with a fixed quote.</p>
         <a href="#contact" class="btn dark">request a quote <span aria-hidden="true">→</span></a>
       </article>
