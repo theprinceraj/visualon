@@ -72,7 +72,9 @@ export const dodoMode = (import.meta.env.PUBLIC_DODO_MODE ?? "test") as "test" |
 export const checkoutBase =
   dodoMode === "live" ? "https://checkout.dodopayments.com" : "https://test.checkout.dodopayments.com";
 
-const mediaBase = (import.meta.env.PUBLIC_MEDIA_BASE ?? "/media").replace(/\/$/, "");
+// Dev serves public/media; production builds use the R2 bucket unless PUBLIC_MEDIA_BASE overrides it.
+const R2_MEDIA = "https://pub-8f13f60a2584475488fcd0bb210a757d.r2.dev";
+const mediaBase = (import.meta.env.PUBLIC_MEDIA_BASE || (import.meta.env.DEV ? "/media" : R2_MEDIA)).replace(/\/$/, "");
 export const media = (slug: string, ratio: string, file: "full.mp4" | "preview.mp4" | "poster.jpg" | "preview.jpg") =>
   `${mediaBase}/${slug}/${ratio}/${file}`;
 export const reelUrl = `${mediaBase}/reel.mp4`;
