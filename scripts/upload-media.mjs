@@ -22,7 +22,7 @@ for (const f of files) {
   execFileSync(
     "npx",
     ["wrangler", "r2", "object", "put", `${bucket}/${key}`, "--file", f, "--content-type", type,
-      "--cache-control", "public, max-age=31536000, immutable", "--remote"],
+      "--cache-control", "public,max-age=31536000,immutable", "--remote"],
     { stdio: ["ignore", "ignore", "inherit"], shell: process.platform === "win32" },
   );
   console.log(`↑ ${key}`);

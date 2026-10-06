@@ -27,14 +27,16 @@ Videos are **not** in git. `public/media/` is built from the studio renders and 
 
 ```
 npm run media                      # renders → public/media/<slug>/<ratio>/{full,preview}.mp4, poster.jpg + reel.mp4
-npx wrangler login                 # once
+npx wrangler login                 # once; the bucket lives in the "Prince Raj" account:
+export CLOUDFLARE_ACCOUNT_ID=5b474c59fa79834059d1e9d9f450ebf5
 npx wrangler r2 bucket create visualon-media
 npx wrangler r2 bucket cors set visualon-media --file r2-cors.json   # the hero plays reel.mp4 in WebGL, so CORS is required
 npm run media:upload
 ```
 
-Then in the R2 bucket settings, connect a custom domain (e.g. `media.visualon.top`) or enable the `r2.dev` URL, and set
-`PUBLIC_MEDIA_BASE` to it. Adding a project: render it in the studio repo, add an entry to `work.json`,
+Public URL (r2.dev): `https://pub-8f13f60a2584475488fcd0bb210a757d.r2.dev`, which is `PUBLIC_MEDIA_BASE`. r2.dev is
+rate-limited and meant for light traffic; when visualon.top is bought, connect `media.visualon.top` to the bucket and
+switch the variable. Adding a project: render it in the studio repo, add an entry to `work.json`,
 `npm run media -- --only <slug>`, `npm run media:upload -- --only <slug>`, push.
 
 ## Payments (Dodo)
