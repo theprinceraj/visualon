@@ -1,0 +1,51 @@
+---
+import "../styles/global.css";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import OrderDialog from "../components/OrderDialog.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  home?: boolean;
+}
+const {
+  title = `${site.name}: ${site.tagline}`,
+  description = "Product launch films, reels and ads that show your real product, made with AI and directed by taste. Fixed prices, delivered in days.",
+  image = "/og.jpg",
+  home = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#f4f5f7" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body class={home ? "is-home" : ""}>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <OrderDialog />
+    <script>
+      import "../scripts/main";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+---
+import Wordmark from "./Wordmark.astro";
+import { site } from "../data/site";
+---
+
+<footer class="footer on-ink section">
+  <div class="top wrap">
+    <div class="mark">
+      <Wordmark size="clamp(72px, 11vw, 150px)" />
+      <p class="display it tag">We prompt it, then we direct it. Since {site.since}.</p>
+    </div>
+    <nav class="cols" aria-label="Footer">
+      <div class="col">
+        <a href="/#work">/work</a>
+        <a href="/work">/all work</a>
+        <a href="/#packages">/packages</a>
+        <a href="/#method">/method</a>
+        <a href="/#contact">/contact</a>
+      </div>
+      <div class="col">
+        <a href="/terms">terms ↗</a>
+        <a href="/privacy">privacy ↗</a>
+        <a href="/refunds">refunds ↗</a>
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </div>
+    </nav>
+  </div>
+  <div class="bar wrap caps muted">
+    <span>© {site.since} {site.name}</span>
+    <span>{site.rendersPerDay} renders a day · made with ai, directed by taste</span>
+    <span>{site.domain}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--line-paper);
+  }
+  .top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding-block: 80px 72px;
+    border-bottom: 1px solid var(--line-paper);
+  }
+  .tag {
+    margin-top: 28px;
+    font-size: 20px;
+    color: #a6a9af;
+    letter-spacing: -0.01em;
+  }
+  .cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .col a {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    width: fit-content;
+    transition: color 0.2s;
+  }
+  .col a:hover {
+    color: var(--accent-soft);
+  }
+  .bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding-block: 26px;
+    font-size: 11px;
+  }
+  @media (max-width: 860px) {
+    .top {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

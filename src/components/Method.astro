@@ -1,0 +1,304 @@
+---
+const stages = [
+  {
+    n: "001",
+    t: "Capture",
+    b: "we pull your real ui, copy, colours and fonts from the live product. no stock dashboards, no invented screens.",
+    icon: "capture",
+  },
+  {
+    n: "002",
+    t: "Direct",
+    b: "one idea, a hook that lands in the first 1.5 seconds, and a beat grid that every cut falls on.",
+    icon: "direct",
+  },
+  {
+    n: "003",
+    t: "Score",
+    b: "music and sound effects composed as one piece, so the whoosh hits when the screen does.",
+    icon: "score",
+  },
+  {
+    n: "004",
+    t: "Review",
+    b: "every render checked still by still against our anti-slop rules before it ever reaches you.",
+    icon: "review",
+  },
+];
+---
+
+<section class="method on-ink section" id="method">
+  <div class="wrap">
+    <div class="intro">
+      <div>
+        <div class="label caps" data-reveal><span class="num">04</span><span class="txt">— the method</span></div>
+        <h2 class="display title" data-reveal>Taste is the <em>tool</em>.</h2>
+      </div>
+      <p class="read muted side" data-reveal>
+        ai does the heavy lifting: the rendering, the variants, the late-night re-cuts. people do the deciding: what to
+        show, what to cut, and when it's good enough to ship. that split is the whole point.
+      </p>
+    </div>
+    <p class="caps muted spec" data-reveal>stages</p>
+    <div class="cells">
+      {
+        stages.map((s) => (
+          <article class="cell" data-reveal>
+            <div class="top">
+              <div class:list={["icon", s.icon]} aria-hidden="true">
+                {s.icon === "capture" && (
+                  <>
+                    <span class="bar" />
+                    <span class="cursor" />
+                    <span class="rec" />
+                  </>
+                )}
+                {s.icon === "direct" && <span class="display hook">1.5s</span>}
+                {s.icon === "score" && (
+                  <span class="eq">
+                    {Array.from({ length: 9 }, (_, i) => (
+                      <i style={`animation-delay:${-(i * 0.17).toFixed(2)}s`} />
+                    ))}
+                  </span>
+                )}
+                {s.icon === "review" && (
+                  <span class="sheet">
+                    {Array.from({ length: 9 }, (_, i) => (
+                      <i class:list={{ bad: i === 4 }} />
+                    ))}
+                  </span>
+                )}
+              </div>
+              <span class="arr" aria-hidden="true">↗</span>
+            </div>
+            <span class="n caps">{s.n}</span>
+            <h3 class="display">{s.t}</h3>
+            <p class="read muted">{s.b}</p>
+          </article>
+        ))
+      }
+    </div>
+    <div class="below caps muted">
+      <span>( ai is the instrument. taste is the player. )</span>
+      <a href="#packages" class="link-arrow">see the packages <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .method {
+    padding-block: 140px 120px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 48px;
+  }
+  .title {
+    margin-top: 28px;
+    font-size: clamp(46px, 6.4vw, 104px);
+  }
+  .side {
+    max-width: 30em;
+    margin: 0 0 10px;
+  }
+  .spec {
+    margin: 64px 0 22px;
+    font-size: 11px;
+  }
+  .cells {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line-paper);
+    border-left: 1px solid var(--line-paper);
+  }
+  .cell {
+    border-right: 1px solid var(--line-paper);
+    border-bottom: 1px solid var(--line-paper);
+    padding: 32px 32px 40px;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 52px;
+  }
+  .arr {
+    font-size: 11px;
+    color: #9a9da4;
+  }
+  .n {
+    font-size: 10px;
+    color: #9a9da4;
+  }
+  h3 {
+    font-size: clamp(32px, 3vw, 46px);
+    margin: 10px 0 18px;
+  }
+  .cell .read {
+    font-size: 14px;
+    margin: 0;
+  }
+  .icon {
+    width: 114px;
+    height: 114px;
+    border: 1px solid var(--line-paper);
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  /* capture: a tiny browser with a cursor clicking */
+  .capture .bar {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    top: 18px;
+    height: 70px;
+    border: 1px solid #5a5d63;
+  }
+  .capture .bar::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 10px;
+    border-top: 1px solid #5a5d63;
+  }
+  .capture .cursor {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 14px solid var(--paper);
+    transform: rotate(-30deg);
+    animation: cur 3.2s var(--ease-expo) infinite;
+  }
+  .capture .rec {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--magenta);
+    animation: blink 1.2s steps(1) infinite;
+  }
+  @keyframes cur {
+    0%,
+    100% {
+      translate: -20px 18px;
+    }
+    40% {
+      translate: 18px -6px;
+    }
+    55% {
+      translate: 18px -6px;
+      scale: 0.8;
+    }
+    65% {
+      scale: 1;
+    }
+  }
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+  /* direct */
+  .hook {
+    font-size: 34px;
+    color: var(--accent-soft);
+    animation: pulse 1.5s var(--ease-expo) infinite;
+  }
+  @keyframes pulse {
+    0% {
+      transform: scale(0.82);
+      opacity: 0.4;
+    }
+    30% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  /* score */
+  .eq {
+    display: flex;
+    gap: 5px;
+    align-items: flex-end;
+    height: 50px;
+  }
+  .eq i {
+    width: 5px;
+    height: 100%;
+    background: var(--paper);
+    transform-origin: bottom;
+    animation: eq 0.9s ease-in-out infinite alternate;
+  }
+  @keyframes eq {
+    from {
+      transform: scaleY(0.15);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+  /* review: contact sheet, one frame flagged */
+  .sheet {
+    display: grid;
+    grid-template-columns: repeat(3, 22px);
+    gap: 5px;
+  }
+  .sheet i {
+    height: 14px;
+    border: 1px solid #5a5d63;
+    animation: scan 2.7s steps(1) infinite;
+  }
+  .sheet i.bad {
+    border-color: var(--magenta);
+    animation: none;
+  }
+  @keyframes scan {
+    0% {
+      background: transparent;
+    }
+    50% {
+      background: #3a3d44;
+    }
+  }
+  .below {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 40px;
+    font-size: 11px;
+  }
+  .below a:hover {
+    color: var(--paper);
+  }
+  @media (max-width: 1060px) {
+    .cells {
+      grid-template-columns: 1fr 1fr;
+    }
+    .intro {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  @media (max-width: 600px) {
+    .cells {
+      grid-template-columns: 1fr;
+    }
+    .below {
+      flex-direction: column;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .icon * {
+      animation: none !important;
+    }
+  }
+</style>

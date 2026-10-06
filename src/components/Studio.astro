@@ -1,0 +1,92 @@
+---
+import { reelUrl, site } from "../data/site";
+---
+
+<section class="studio-wrap on-ink section" aria-labelledby="studio-title">
+  <div class="wrap">
+    <div class="studio" data-reveal>
+      <div class="copy">
+        <span class="tag caps"><span class="box">{site.wordmark}●</span> open about it</span>
+        <h2 id="studio-title" class="display">We built a studio<br /><em>out of prompts.</em></h2>
+        <p class="read">
+          yes, it's ai, and that's the advantage. what used to take a production team weeks takes us days, so you can
+          afford to test five hooks instead of guessing one. {site.rendersPerDay} renders a day means your revision isn't
+          stuck in a queue. the machine is fast. the taste is ours.
+        </p>
+        <p class="caps steps">capture · storyboard · motion · score · qa · export</p>
+        <a href="#packages" class="btn dark">see the packages <span aria-hidden="true">→</span></a>
+      </div>
+      <figure class="media">
+        <video src={reelUrl} muted loop playsinline autoplay preload="none" data-inview-play></video>
+        <figcaption class="caps">
+          <span>real renders, straight from the studio</span>
+          <span>prompt → direct → ship</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<style>
+  .studio-wrap {
+    padding-block: 40px 140px;
+  }
+  .studio {
+    background: var(--magenta);
+    color: var(--ink);
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 48px;
+    padding: 48px;
+  }
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+  }
+  .box {
+    border: 1px solid var(--ink);
+    padding: 3px 6px;
+  }
+  h2 {
+    font-size: clamp(40px, 4vw, 60px);
+    margin: 48px 0 52px;
+  }
+  .read {
+    max-width: 25em;
+    margin: 0;
+  }
+  .steps {
+    font-size: 11px;
+    margin: 48px 0 52px;
+  }
+  .media {
+    margin: 0;
+  }
+  .media video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: #000;
+  }
+  figcaption {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 18px;
+    font-size: 11px;
+  }
+  @media (max-width: 960px) {
+    .studio {
+      grid-template-columns: 1fr;
+      padding: 28px 22px;
+    }
+    h2 {
+      margin: 32px 0;
+    }
+    figcaption {
+      flex-direction: column;
+    }
+  }
+</style>

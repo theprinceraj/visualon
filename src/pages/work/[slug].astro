@@ -1,0 +1,170 @@
+---
+import Base from "../../layouts/Base.astro";
+import { projects, media, ratioLabel, type Project } from "../../data/site";
+
+export function getStaticPaths() {
+  return projects.map((p, i) => ({ params: { slug: p.slug }, props: { p, n: i + 1, next: projects[(i + 1) % projects.length] } }));
+}
+const { p, n, next } = Astro.props as { p: Project; n: number; next: Project };
+const main = p.media[0];
+---
+
+<Base title={`${p.title} — ${p.logline} · VisualOn`} description={p.brief} image={media(p.slug, main.ratio, "poster.jpg")}>
+  <article class="case on-ink section">
+    <header class="head wrap">
+      <a href="/#work" class="link-arrow caps back"><span class="arr">←</span> all work</a>
+      <div class="label caps"><span class="num">{String(n).padStart(2, "0")}</span><span class="txt">— {p.tags.join(" / ")} · {p.year}{p.concept ? " · concept" : ""}</span></div>
+      <h1 class="display">{p.title}</h1>
+      <p class="display it blue logline">{p.logline}</p>
+    </header>
+
+    <div class="player wrap">
+      {
+        p.media.length > 1 && (
+          <div class="ratios" role="group" aria-label="Format">
+            {p.media.map((m, i) => (
+              <button type="button" class="chip" aria-pressed={i === 0 ? "true" : "false"} data-ratio={m.ratio}>
+                {ratioLabel(m.ratio)}
+              </button>
+            ))}
+          </div>
+        )
+      }
+      {
+        p.media.map((m, i) => (
+          <div class:list={["screen", `r${m.ratio}`]} data-screen={m.ratio} hidden={i !== 0}>
+            <video controls playsinline preload={i === 0 ? "metadata" : "none"} poster={media(p.slug, m.ratio, "poster.jpg")}>
+              <source src={media(p.slug, m.ratio, "full.mp4")} type="video/mp4" />
+            </video>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="notes wrap">
+      <section>
+        <span class="caps muted">the product</span>
+        <p class="read">{p.brief}</p>
+      </section>
+      <section>
+        <span class="caps muted">the idea</span>
+        <p class="read">{p.approach}</p>
+      </section>
+      <section>
+        <span class="caps muted">delivered as</span>
+        <ul class="fmt">{p.media.map((m) => <li class="chip">{ratioLabel(m.ratio)}</li>)}</ul>
+        <a href="/#packages" class="btn">get one like this <span aria-hidden="true">→</span></a>
+      </section>
+    </div>
+
+    <a href={`/work/${next.slug}`} class="next wrap">
+      <span class="caps muted">next</span>
+      <span class="display">{next.title} <span class="arr">→</span></span>
+    </a>
+  </article>
+</Base>
+
+<style>
+  .case {
+    padding-top: 130px;
+  }
+  .back {
+    color: #9a9da4;
+    margin-bottom: 48px;
+  }
+  .back:hover {
+    color: var(--paper);
+  }
+  h1 {
+    margin-top: 28px;
+    font-size: clamp(56px, 9vw, 150px);
+  }
+  .logline {
+    font-size: clamp(22px, 2.4vw, 36px);
+    margin: 18px 0 0;
+    color: var(--accent-soft);
+  }
+  .player {
+    margin-top: 64px;
+  }
+  .ratios {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .screen {
+    border: 1px solid var(--line-paper);
+    padding: 12px;
+  }
+  .screen[hidden] {
+    display: none;
+  }
+  .screen video {
+    width: 100%;
+    background: #000;
+  }
+  .screen.r9x16 video,
+  .screen.r4x5 video,
+  .screen.r1x1 video {
+    max-height: 82vh;
+    width: auto;
+    margin-inline: auto;
+  }
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px;
+    padding-block: 72px 96px;
+  }
+  .notes section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .notes .read {
+    margin: 0;
+  }
+  .fmt {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px;
+    display: flex;
+    gap: 8px;
+  }
+  .next {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-block: 64px 96px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .next .display {
+    font-size: clamp(40px, 6vw, 96px);
+  }
+  .next .arr {
+    display: inline-block;
+    transition: transform 0.5s var(--ease-expo);
+  }
+  .next:hover .arr {
+    transform: translateX(16px);
+  }
+  @media (max-width: 860px) {
+    .notes {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-ratio]").forEach((b) =>
+    b.addEventListener("click", () => {
+      document.querySelectorAll<HTMLButtonElement>("[data-ratio]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      document.querySelectorAll<HTMLElement>("[data-screen]").forEach((s) => {
+        const on = s.dataset.screen === b.dataset.ratio;
+        s.hidden = !on;
+        if (!on) s.querySelector("video")?.pause();
+      });
+    }),
+  );
+</script>

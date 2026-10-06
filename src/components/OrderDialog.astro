@@ -1,0 +1,187 @@
+---
+import { packages, checkoutBase, site } from "../data/site";
+const config = { packages, checkoutBase, email: site.email };
+---
+
+<dialog id="order" class="order on-ink" aria-labelledby="order-title" data-lenis-prevent>
+  <form class="panel" novalidate>
+    <header class="head">
+      <div class="label caps"><span class="num">→</span><span class="txt">— your order</span></div>
+      <button type="button" class="close caps" data-close aria-label="Close">close ✕</button>
+    </header>
+
+    <h2 id="order-title" class="display">
+      <span data-o="name">Launch kit</span>, <em class="blue">for</em><br /><span class="it" data-o="price">₹5,999</span>
+    </h2>
+    <p class="read muted" data-o="summary"></p>
+
+    <div class="row two">
+      <label class="field">
+        <span class="caps muted">from</span>
+        <input name="name" required autocomplete="name" placeholder="your name" />
+      </label>
+      <label class="field">
+        <span class="caps muted">reply to</span>
+        <input name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
+      </label>
+    </div>
+
+    <label class="field">
+      <span class="caps muted">the product — a link we can open</span>
+      <input name="link" type="url" inputmode="url" placeholder="https://yourproduct.com" required />
+    </label>
+
+    <fieldset class="field">
+      <legend class="caps muted">format</legend>
+      <div class="chips" data-o="formats"></div>
+    </fieldset>
+
+    <fieldset class="field">
+      <legend class="caps muted">feel — optional</legend>
+      <div class="chips" data-group="tone">
+        {["punchy", "premium", "playful", "calm", "bold"].map((t) => <button type="button" class="chip" aria-pressed="false" data-value={t}>{t}</button>)}
+      </div>
+    </fieldset>
+
+    <label class="field">
+      <span class="caps muted">the brief, in your words</span>
+      <textarea name="brief" rows="4" maxlength="450" required placeholder="who it's for, what should they feel, the one thing they must remember..."></textarea>
+      <span class="count caps muted"><span data-o="count">0</span>/450</span>
+    </label>
+
+    <p class="error caps" role="alert" hidden></p>
+
+    <div class="actions">
+      <button type="submit" class="btn">continue to payment <span aria-hidden="true">→</span></button>
+      <p class="read muted small">
+        secure checkout by dodo payments: upi, cards, wallets. after paying, you'll get a receipt and a reply from us
+        within a day. send logos, screenshots or footage by email then.
+      </p>
+    </div>
+  </form>
+</dialog>
+
+<script type="application/json" id="order-config" set:html={JSON.stringify(config)} />
+
+<style>
+  .order {
+    margin: 0 0 0 auto;
+    width: min(640px, 100vw);
+    max-width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border: 0;
+    padding: 0;
+    border-left: 1px solid var(--line-paper);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    transform: translateX(100%);
+    transition:
+      transform 0.6s var(--ease-expo),
+      display 0.6s allow-discrete,
+      overlay 0.6s allow-discrete;
+  }
+  .order[open] {
+    transform: none;
+  }
+  @starting-style {
+    .order[open] {
+      transform: translateX(100%);
+    }
+  }
+  .order::backdrop {
+    background: rgba(16, 17, 19, 0);
+    backdrop-filter: blur(0);
+    transition: all 0.5s;
+  }
+  .order[open]::backdrop {
+    background: rgba(16, 17, 19, 0.55);
+    backdrop-filter: blur(4px);
+  }
+  .panel {
+    padding: 28px clamp(20px, 4vw, 48px) 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .close:hover {
+    color: var(--accent-soft);
+  }
+  h2 {
+    font-size: clamp(38px, 5vw, 60px);
+    margin-top: 12px;
+  }
+  .row.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  legend {
+    padding: 0;
+    margin-bottom: 10px;
+  }
+  input,
+  textarea {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(244, 245, 247, 0.3);
+    padding: 10px 0 14px;
+    font-size: 16px;
+    outline: none;
+    resize: vertical;
+    transition: border-color 0.2s;
+  }
+  input:focus,
+  textarea:focus {
+    border-color: var(--paper);
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #6d7077;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .count {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 10px;
+  }
+  .error {
+    color: var(--magenta);
+    margin: 0;
+  }
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .small {
+    font-size: 13px;
+    margin: 0;
+    max-width: 44em;
+  }
+  @media (max-width: 560px) {
+    .row.two {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { site } from "../data/site";
+---
+
+<Legal title="Terms" updated="7 October 2026">
+  <p>These terms cover videos ordered from {site.name} ("we", "us"), a studio operated by Prince Raj in India. By placing an order you agree to them.</p>
+
+  <h2>What you're buying</h2>
+  <p>Each package describes its length, formats, number of revision rounds and delivery window. We make the video from the product link and brief you give us, plus anything you send afterwards. Videos are made with AI-assisted tools and reviewed and directed by us.</p>
+
+  <h2>Payment</h2>
+  <p>Packages are paid in full upfront. Payments are processed by Dodo Payments, which acts as the merchant of record and issues your receipt and any tax invoice. Prices are shown in Indian rupees or US dollars. Taxes may be added at checkout depending on where you are.</p>
+
+  <h2>Delivery</h2>
+  <p>The delivery window starts when we have your brief and a working product link, or the assets we ask for. We deliver by email as downloadable MP4 files. If we can't meet a window, we'll tell you before it passes.</p>
+
+  <h2>Revisions</h2>
+  <p>A revision round is one consolidated set of notes on the current cut. Changes to the brief after we've started, such as a different product, a new script or extra formats, count as new work and may be quoted separately.</p>
+
+  <h2>Your material and rights</h2>
+  <p>You confirm you have the right to use the product, brand, logos, screenshots and footage you give us. Once paid, you may use the finished video for any lawful purpose, including paid ads. Music and sound effects we use are licensed for that use, or come from free sources whose credits we'll give you if they're required.</p>
+  <p>Unless you ask us not to, we may show the finished video in our portfolio. Just tell us if it's confidential.</p>
+
+  <h2>What we won't make</h2>
+  <p>We don't make videos that are misleading, defamatory or infringing, or that use invented statistics, testimonials or results. Claims in your video must be ones you can stand behind.</p>
+
+  <h2>Liability</h2>
+  <p>Our total liability for any order is limited to the amount you paid for it.</p>
+
+  <h2>Contact</h2>
+  <p>Questions: <a href={`mailto:${site.email}`}>{site.email}</a>. These terms are governed by the laws of India.</p>
+</Legal>

@@ -1,0 +1,18 @@
+---
+import Legal from "../layouts/Legal.astro";
+import { site } from "../data/site";
+---
+
+<Legal title="Refunds" updated="7 October 2026">
+  <p>We want you to be happy with your video. Here's how refunds work.</p>
+  <h2>Full refund</h2>
+  <ul>
+    <li>If you cancel before we've started work (before we reply with questions or a direction).</li>
+    <li>If we can't take the order, for example because the product can't be shown or the queue is full.</li>
+    <li>If we miss the delivery window and you'd rather not wait.</li>
+  </ul>
+  <h2>After work has started</h2>
+  <p>Once we've started, we fix problems with revisions instead of refunds: that's what the revision rounds are for. If the first cut clearly doesn't match the package or your brief, tell us within 7 days of delivery and we'll either remake it or refund up to 50% of the order.</p>
+  <h2>How to ask</h2>
+  <p>Email <a href={`mailto:${site.email}`}>{site.email}</a> with your payment ID. We reply within 2 working days. Approved refunds go back to the original payment method through Dodo Payments, usually within 5–10 working days.</p>
+</Legal>

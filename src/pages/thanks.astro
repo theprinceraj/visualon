@@ -1,0 +1,126 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+const steps = [
+  ["we read your brief", "and reply by email within a day with questions, if we have any."],
+  ["send the extras", "logo, screenshots, footage, a login to a demo account: reply to that email with anything that helps."],
+  ["first cut", "lands inside your package's delivery window."],
+  ["revise + ship", "plain-words notes, revisions, then final files in every format."],
+];
+---
+
+<Base title="Thanks · VisualOn">
+  <section class="thanks on-ink section wrap">
+    <div class="label caps"><span class="num">✓</span><span class="txt" data-t="label">— order received</span></div>
+    <h1 class="display" data-t="title">Paid. <em class="blue">Let's make it.</em></h1>
+    <p class="read muted lede" data-t="lede">
+      your receipt is on its way from dodo payments. keep the payment id below. it's how we find your order.
+    </p>
+    <p class="caps pid" data-t="pid" hidden>payment id · <span></span></p>
+
+    <ol class="steps" data-t="steps">
+      {
+        steps.map(([h, b], i) => (
+          <li>
+            <span class="caps n">{String(i + 1).padStart(2, "0")}</span>
+            <span class="display h">{h}</span>
+            <span class="read muted">{b}</span>
+          </li>
+        ))
+      }
+    </ol>
+
+    <div class="actions">
+      <a class="btn" data-mail href={`mailto:${site.email}?subject=${encodeURIComponent("VisualOn order")}`}>email us your assets</a>
+      <a href="/" class="link-arrow caps">back to the studio <span class="arr">→</span></a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .thanks {
+    min-height: 100vh;
+    padding-block: 160px 120px;
+  }
+  h1 {
+    margin-top: 28px;
+    font-size: clamp(56px, 8vw, 128px);
+  }
+  .lede {
+    max-width: 32em;
+    margin: 32px 0 16px;
+  }
+  .pid {
+    color: var(--accent-soft);
+    font-size: 12px;
+  }
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 64px 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line-paper);
+    border-left: 1px solid var(--line-paper);
+  }
+  .steps li {
+    border-right: 1px solid var(--line-paper);
+    border-bottom: 1px solid var(--line-paper);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .n {
+    font-size: 10px;
+    color: #9a9da4;
+  }
+  .h {
+    font-size: 26px;
+  }
+  .steps .read {
+    font-size: 14px;
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 960px) {
+    .steps {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const q = new URLSearchParams(location.search);
+  const id = q.get("payment_id") || q.get("subscription_id");
+  const status = (q.get("status") || "").toLowerCase();
+  const pkg = q.get("package");
+  const el = (k: string) => document.querySelector<HTMLElement>(`[data-t="${k}"]`)!;
+  if (id) {
+    const pid = el("pid");
+    pid.hidden = false;
+    pid.querySelector("span")!.textContent = id;
+    const mail = document.querySelector<HTMLAnchorElement>("[data-mail]")!;
+    const u = new URL(mail.href);
+    const to = u.pathname;
+    mail.href = `mailto:${to}?subject=${encodeURIComponent(`VisualOn order ${id}${pkg ? ` (${pkg})` : ""}`)}&body=${encodeURIComponent(`Payment ID: ${id}\n\nAssets / links:\n`)}`;
+  }
+  if (status && status !== "succeeded" && status !== "active") {
+    el("label").textContent = "— payment not completed";
+    el("title").innerHTML = 'That didn\'t go <em class="blue">through.</em>';
+    el("lede").textContent =
+      status === "processing"
+        ? "your payment is still processing. you'll get an email from dodo payments once it settles, and we'll start then."
+        : "no money was taken. you can try again from the packages, or email us and we'll sort it out.";
+    el("steps").hidden = true;
+  }
+</script>

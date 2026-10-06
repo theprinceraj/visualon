@@ -1,0 +1,98 @@
+---
+import Base from "../../layouts/Base.astro";
+import { projects, media } from "../../data/site";
+---
+
+<Base title="Work · VisualOn" description="Every product video, reel and ad we've made, with the brief and the idea behind each one.">
+  <section class="all on-ink section">
+    <div class="wrap">
+      <div class="label caps"><span class="num">01</span><span class="txt">— the whole shelf</span></div>
+      <h1 class="display">All the <em>work</em>.</h1>
+      <p class="read muted lede">{projects.length} products, each one shown as it really is: its own ui, its own copy, its own colours.</p>
+    </div>
+    <div class="grid wrap">
+      {
+        projects.map((p, i) => {
+          const m = p.media.find((x) => x.ratio === "16x9") ?? p.media[0];
+          return (
+            <a href={`/work/${p.slug}`} class="card" data-hoverplay data-reveal>
+              <div class="frame">
+                <video muted loop playsinline preload="none" poster={media(p.slug, m.ratio, "preview.jpg")} src={media(p.slug, m.ratio, "preview.mp4")} />
+              </div>
+              <div class="meta">
+                <span class="caps n">{String(i + 1).padStart(2, "0")}/</span>
+                <span class="display t">{p.title}</span>
+                <span class="caps tags">{p.tags.join(" / ")}{p.concept ? " · concept" : ""}</span>
+              </div>
+              <p class="it line">{p.logline}</p>
+            </a>
+          );
+        })
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .all {
+    padding-block: 140px 140px;
+  }
+  h1 {
+    margin-top: 28px;
+    font-size: clamp(56px, 8vw, 128px);
+  }
+  .lede {
+    max-width: 30em;
+    margin: 24px 0 72px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 64px 32px;
+  }
+  .frame {
+    border: 1px solid var(--line-paper);
+    padding: 10px;
+  }
+  .frame video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--ink-soft);
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: baseline;
+    margin-top: 22px;
+  }
+  .n,
+  .tags {
+    font-size: 11px;
+    color: #9a9da4;
+  }
+  .t {
+    font-size: clamp(28px, 2.6vw, 40px);
+  }
+  .line {
+    margin: 8px 0 0 44px;
+    color: #9a9da4;
+  }
+  .card:hover .t {
+    color: var(--accent-soft);
+  }
+  @media (max-width: 760px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .meta {
+      grid-template-columns: 36px 1fr;
+    }
+    .tags {
+      grid-column: 2;
+    }
+    .line {
+      margin-left: 36px;
+    }
+  }
+</style>

@@ -1,0 +1,257 @@
+---
+import { packages, formatPrice, site } from "../data/site";
+const [single, launch, hooks, series] = packages;
+const span = { [single.id]: 1, [launch.id]: 2, [hooks.id]: 1, [series.id]: 2 } as Record<string, number>;
+const order = [single, launch, hooks, series];
+const steps = [
+  ["pick + pay", "choose a package, tell us about the product, pay in rupees or dollars."],
+  ["we capture", "we pull your real ui, copy, colours and fonts. send anything else by email."],
+  ["first cut", "you get the video inside the delivery window, with a still-by-still look first if you want it."],
+  ["revise + ship", "notes in plain words, revisions done, final files in every format you ordered."],
+];
+---
+
+<section class="packages on-paper section" id="packages">
+  <span class="plus tl" aria-hidden="true">+</span><span class="plus tr" aria-hidden="true">+</span>
+  <div class="wrap">
+    <div class="grid">
+      <div class="cell intro span2">
+        <div class="label caps" data-reveal><span class="num">03</span><span class="txt">— start here</span></div>
+        <h2 class="display title" data-reveal>Anything, within <em class="blue">frame</em>.</h2>
+        <p class="read muted lede" data-reveal>
+          ( frame negotiable. ) launch films, reels, ad variants and walkthroughs, captured from your real product and
+          directed by people with taste. fixed prices, paid upfront, delivered in days.
+        </p>
+        <div class="currency" data-reveal>
+          <span class="caps muted">prices in</span>
+          <div class="toggle" role="group" aria-label="Currency">
+            <button type="button" class="chip" data-currency="INR" aria-pressed="true">₹ inr</button>
+            <button type="button" class="chip" data-currency="USD" aria-pressed="false">$ usd</button>
+          </div>
+        </div>
+      </div>
+
+      {
+        order.map((p) => (
+          <article class:list={["cell", "pkg", { span2: span[p.id] === 2, rec: p.recommended }]} data-reveal>
+            <div class="top">
+              <span class="n caps">{String(packages.indexOf(p) + 1).padStart(2, "0")}</span>
+              {p.recommended && <span class="badge caps">recommended</span>}
+            </div>
+            <h3 class="display name">{p.name}</h3>
+            <p class="sub muted">{p.sub}</p>
+            <p class="price display">
+              <span data-price data-inr={p.price.INR} data-usd={p.price.USD}>
+                {formatPrice(p.price.INR, "INR")}
+              </span>
+              <span class="caps once muted">one-time · {p.delivery}</span>
+            </p>
+            <ul class="chips">
+              {p.includes.map((x) => (
+                <li class="chip">{x}</li>
+              ))}
+            </ul>
+            <button type="button" class:list={["btn", { dark: !p.recommended }]} data-order={p.id}>
+              order {p.name.toLowerCase()} <span aria-hidden="true">→</span>
+            </button>
+          </article>
+        ))
+      }
+
+      <article class="cell pkg custom" data-reveal>
+        <div class="top"><span class="n caps">05</span></div>
+        <h3 class="display name">Custom</h3>
+        <p class="sub muted">longer films, explainers, a whole campaign</p>
+        <p class="read muted">if it doesn't fit a box, tell us what it is. we'll reply with a fixed quote.</p>
+        <a href="#contact" class="btn dark">request a quote <span aria-hidden="true">→</span></a>
+      </article>
+
+      <div class="cell steps span3" data-reveal>
+        <span class="caps muted">how ordering works</span>
+        <ol>
+          {
+            steps.map(([h, b], i) => (
+              <li>
+                <span class="n caps">{String(i + 1).padStart(2, "0")}</span>
+                <span class="h display">{h}</span>
+                <span class="read muted">{b}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </div>
+    <div class="below caps muted">
+      <span>( {site.rendersPerDay} renders a day. when the queue is full, we'll say so before you pay. )</span>
+      <a href="/refunds" class="link-arrow">refund policy <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .packages {
+    padding-block: 120px 140px;
+  }
+  .plus {
+    position: absolute;
+    top: 28px;
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .plus.tl {
+    left: var(--gutter);
+  }
+  .plus.tr {
+    right: var(--gutter);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--line-ink);
+    border-left: 1px solid var(--line-ink);
+  }
+  .cell {
+    border-right: 1px solid var(--line-ink);
+    border-bottom: 1px solid var(--line-ink);
+    padding: clamp(24px, 2.8vw, 40px) clamp(20px, 2.8vw, 40px) 40px;
+    display: flex;
+    flex-direction: column;
+  }
+  .span2 {
+    grid-column: span 2;
+  }
+  .span3 {
+    grid-column: 1 / -1;
+  }
+  .intro .title {
+    margin: 48px 0 26px;
+    font-size: clamp(42px, 4.6vw, 72px);
+  }
+  .lede {
+    max-width: 34em;
+    margin: 0 0 32px;
+  }
+  .currency {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: auto;
+  }
+  .toggle {
+    display: flex;
+    gap: 6px;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .n {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .badge {
+    font-size: 10px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 3px 7px;
+  }
+  .name {
+    font-size: clamp(30px, 2.5vw, 38px);
+    margin-top: 18px;
+  }
+  .sub {
+    margin: 10px 0 0;
+    font-size: 15px;
+  }
+  .price {
+    margin: 30px 0 22px;
+    font-size: clamp(44px, 4.2vw, 64px);
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    letter-spacing: -0.03em;
+  }
+  .rec .price [data-price] {
+    color: var(--accent);
+  }
+  .once {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .chips {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chips .chip {
+    height: 30px;
+    font-size: 11px;
+  }
+  .pkg .btn {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+  .custom .read {
+    margin: 24px 0 30px;
+    max-width: 24em;
+  }
+  .steps ol {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .steps li {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .steps .h {
+    font-size: 24px;
+  }
+  .steps .read {
+    font-size: 14px;
+  }
+  .below {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 28px;
+    font-size: 11px;
+  }
+  .below a:hover {
+    color: var(--ink);
+  }
+  @media (max-width: 1060px) {
+    .grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .intro {
+      grid-column: 1 / -1;
+    }
+    .steps ol {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 680px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .span2 {
+      grid-column: auto;
+    }
+    .steps ol {
+      grid-template-columns: 1fr;
+    }
+    .below {
+      flex-direction: column;
+    }
+  }
+</style>

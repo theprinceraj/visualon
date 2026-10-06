@@ -1,0 +1,143 @@
+---
+import Wordmark from "./Wordmark.astro";
+import { reelUrl, site } from "../data/site";
+---
+
+<div class="loader" aria-hidden="true">
+  <div class="loader-inner">
+    <Wordmark size="20px" /><span class="count caps" data-count>000</span>
+  </div>
+</div>
+
+<div class="hero-scroll" id="top">
+  <canvas class="hero-canvas" aria-hidden="true" data-reel={reelUrl}></canvas>
+
+  <section class="hero on-paper" aria-label="Intro">
+    <h1 class="sr-only">{site.name}: unskippable product videos, made with AI and directed by taste</h1>
+    <div class="word display" aria-hidden="true" data-word>
+      <span class="blue">UN</span>SKIPPABLE
+    </div>
+    <div class="sub wrap">
+      <p class="display">there are probably videos people scroll past.</p>
+      <p class="display it blue soft">we'd rather not make those.</p>
+    </div>
+  </section>
+
+  <section class="curtain on-ink" aria-label="What we do">
+    <p class="caps tagline muted wrap">{site.tagline}, made with ai</p>
+    <p class="caps hint muted wrap">scroll <span aria-hidden="true">↓</span></p>
+  </section>
+</div>
+
+<style>
+  .loader {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    transition: opacity 0.6s;
+  }
+  .loader-inner {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 34vh;
+  }
+  .count {
+    font-size: 10px;
+    color: var(--muted);
+  }
+  :global(body.loaded) .loader {
+    opacity: 0;
+  }
+
+  .hero-scroll {
+    position: relative;
+  }
+  .hero-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100lvh;
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.5s;
+  }
+  .hero-canvas.gone {
+    opacity: 0;
+  }
+  .hero {
+    position: relative;
+    height: 100vh;
+    height: 100svh;
+    min-height: 560px;
+    overflow: hidden;
+  }
+  .word {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    text-align: center;
+    white-space: nowrap;
+    font-size: 13.2vw;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    will-change: transform;
+  }
+  .word,
+  .sub {
+    opacity: 0;
+    transition: opacity 0.8s 0.2s;
+  }
+  :global(body.loaded) .word,
+  :global(body.loaded) .sub {
+    opacity: 1;
+  }
+  .sub {
+    position: absolute;
+    left: 0;
+    bottom: clamp(28px, 6vh, 60px);
+  }
+  .sub p {
+    margin: 0;
+    font-size: clamp(19px, 1.75vw, 25px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .soft {
+    color: var(--accent-soft);
+  }
+  .curtain {
+    position: relative;
+    height: 130vh;
+  }
+  .tagline,
+  .hint {
+    position: sticky;
+    top: calc(100vh - 56px);
+    font-size: 11px;
+    margin: 0;
+  }
+  .hint {
+    position: absolute;
+    right: 0;
+    bottom: 32px;
+    top: auto;
+  }
+  @media (max-width: 860px) {
+    .word {
+      top: 22%;
+      font-size: 12.4vw;
+    }
+  }
+</style>
+
+<script>
+  import { initHero } from "../scripts/hero";
+  initHero();
+</script>

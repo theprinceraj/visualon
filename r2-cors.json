@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {
+      "allowed": {
+        "origins": ["https://visualon.top", "https://www.visualon.top", "https://visualon.theprinceraj.in", "https://visualon.pages.dev", "http://localhost:4321"],
+        "methods": ["GET", "HEAD"],
+        "headers": ["*"]
+      },
+      "maxAgeSeconds": 86400
+    }
+  ]
+}

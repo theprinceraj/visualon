@@ -1,0 +1,39 @@
+---
+// "visualon" + a record dot, in the spot where kott-style marks put their ®.
+interface Props {
+  size?: string;
+}
+const { size } = Astro.props;
+---
+
+<span class="wordmark" style={size ? `font-size:${size}` : undefined}
+  >visualon<span class="dot" aria-hidden="true"></span></span
+>
+
+<style>
+  .wordmark {
+    font-family: var(--display);
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    display: inline-flex;
+    align-items: flex-start;
+  }
+  .dot {
+    width: 0.22em;
+    height: 0.22em;
+    margin: 0.2em 0 0 0.06em;
+    border-radius: 50%;
+    background: currentColor;
+    animation: rec 2.4s steps(1) infinite;
+  }
+  @keyframes rec {
+    0%,
+    70% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 0.25;
+    }
+  }
+</style>

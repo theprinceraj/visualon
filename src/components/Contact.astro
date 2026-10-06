@@ -1,0 +1,151 @@
+---
+import { site } from "../data/site";
+const regarding = ["launch film", "reels", "ad variants", "product tutorial", "a series", "something else"];
+const startWith = ["a product launch", "an app or site to show", "ads that aren't converting", "not sure yet — can we talk"];
+const budgets = {
+  INR: ["under ₹10k", "₹10k – ₹50k", "₹50k – ₹2L", "₹2L +", "not sure yet"],
+  USD: ["under $150", "$150 – $600", "$600 – $2.5k", "$2.5k +", "not sure yet"],
+};
+---
+
+<section class="contact on-ink section" id="contact">
+  <div class="grid wrap">
+    <div class="left">
+      <div class="label caps" data-reveal><span class="num">05</span><span class="txt">— say hi anytime</span></div>
+      <h2 class="display title" data-reveal>
+        Bring us the <br /><em class="blue">unskippable</em><br /><em class="blue">one.</em>
+      </h2>
+      <p class="read muted lede" data-reveal>
+        the launch nobody has filmed yet. the product that's hard to explain in a sentence. the ad that has to stop a
+        thumb at 1.5 seconds. if it doesn't fit a package, tell us here, and we'll come back with a fixed quote.
+      </p>
+    </div>
+
+    <form class="form" data-mailto={site.email} novalidate data-reveal>
+      <div class="row two">
+        <label class="field"><span class="caps muted">from</span><input name="name" placeholder="your name" autocomplete="name" /></label>
+        <label class="field"><span class="caps muted">reply to</span><input name="email" type="email" placeholder="you@company.com" autocomplete="email" /></label>
+      </div>
+      <fieldset class="field">
+        <legend class="caps muted">regarding</legend>
+        <div class="chips" data-group="regarding" data-multi>
+          {regarding.map((r) => <button type="button" class="chip" aria-pressed="false" data-value={r}>{r}</button>)}
+        </div>
+      </fieldset>
+      <fieldset class="field">
+        <legend class="caps muted">start with</legend>
+        <div class="chips" data-group="start">
+          {startWith.map((r) => <button type="button" class="chip" aria-pressed="false" data-value={r}>{r}</button>)}
+        </div>
+      </fieldset>
+      <label class="field">
+        <span class="caps muted">the situation, in your words</span>
+        <textarea name="message" rows="4" placeholder="a few honest lines about the product and where it's headed..."></textarea>
+      </label>
+      <fieldset class="field">
+        <legend class="caps muted">rough budget — optional</legend>
+        <div class="chips" data-group="budget" data-budgets={JSON.stringify(budgets)}>
+          {budgets.INR.map((r, i) => <button type="button" class="chip" aria-pressed="false" data-i={i} data-value={r}>{r}</button>)}
+        </div>
+      </fieldset>
+      <div class="send">
+        <button type="submit" class="btn">send the letter</button>
+        <span class="read muted note">{site.founder} reads every one.</span>
+        <a class="caps muted mail" href={`mailto:${site.email}`}>or just email {site.email}</a>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact {
+    padding-block: 120px 140px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 64px;
+  }
+  .title {
+    margin: 64px 0 44px;
+    font-size: clamp(48px, 6vw, 96px);
+  }
+  .lede {
+    max-width: 30em;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+  }
+  .row.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+  legend {
+    padding: 0;
+    margin-bottom: 12px;
+  }
+  input,
+  textarea {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid rgba(244, 245, 247, 0.3);
+    padding: 10px 0 16px;
+    font-size: 16px;
+    outline: none;
+    resize: vertical;
+  }
+  input:focus,
+  textarea:focus {
+    border-color: var(--paper);
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: #6d7077;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .send {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px 24px;
+  }
+  .note {
+    font-size: 14px;
+  }
+  .mail {
+    font-size: 11px;
+  }
+  .mail:hover {
+    color: var(--paper);
+  }
+  @media (max-width: 960px) {
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .title {
+      margin: 32px 0 24px;
+    }
+  }
+  @media (max-width: 560px) {
+    .row.two {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

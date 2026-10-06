@@ -1,0 +1,127 @@
+---
+import Wordmark from "./Wordmark.astro";
+const links = [
+  ["/#work", "/work"],
+  ["/#packages", "/packages"],
+  ["/#method", "/method"],
+  ["/#contact", "/contact"],
+];
+---
+
+<header class="nav">
+  <a href="/" class="brand" aria-label="VisualOn home"><Wordmark /></a>
+  <nav class="links" aria-label="Main">
+    {links.map(([href, label]) => <a href={href}>{label}</a>)}
+    <a href="/#packages" class="cta">order a video <span aria-hidden="true">↗</span></a>
+  </nav>
+  <button class="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+    <span></span><span></span>
+  </button>
+</header>
+<div id="mobile-menu" class="mobile-menu on-ink" hidden data-lenis-prevent>
+  <nav aria-label="Mobile">
+    {links.map(([href, label]) => <a href={href} class="display">{label}</a>)}
+    <a href="/#packages" class="display blue">order ↗</a>
+  </nav>
+</div>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px var(--gutter);
+    color: #fff;
+    mix-blend-mode: difference;
+    pointer-events: none;
+  }
+  .nav > * {
+    pointer-events: auto;
+  }
+  .brand {
+    font-size: 24px;
+  }
+  .links {
+    display: flex;
+    gap: 32px;
+  }
+  .links a {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    position: relative;
+  }
+  .links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -4px;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s var(--ease-expo);
+  }
+  .links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  .burger {
+    display: none;
+    width: 28px;
+    height: 20px;
+    position: relative;
+  }
+  .burger span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.3s var(--ease-expo);
+  }
+  .burger span:first-child {
+    top: 6px;
+  }
+  .burger span:last-child {
+    top: 13px;
+  }
+  .burger[aria-expanded="true"] span:first-child {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .burger[aria-expanded="true"] span:last-child {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+  .mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    display: flex;
+    align-items: flex-end;
+    padding: 100px var(--gutter) 48px;
+  }
+  .mobile-menu[hidden] {
+    display: none;
+  }
+  .mobile-menu nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .mobile-menu a {
+    font-size: clamp(40px, 12vw, 64px);
+  }
+  @media (max-width: 860px) {
+    .links {
+      display: none;
+    }
+    .burger {
+      display: block;
+    }
+  }
+</style>

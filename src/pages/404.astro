@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Not found · VisualOn">
+  <section class="on-ink section nf wrap">
+    <div class="label caps"><span class="num">404</span><span class="txt">— lost frame</span></div>
+    <h1 class="display">This one got <em class="blue">skipped.</em></h1>
+    <a href="/" class="link-arrow caps">back to the start <span class="arr">→</span></a>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px;
+  }
+  h1 {
+    font-size: clamp(48px, 8vw, 128px);
+  }
+</style>
