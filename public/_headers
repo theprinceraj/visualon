@@ -1,0 +1,11 @@
+# Cloudflare Pages response headers.
+# The *.pages.dev hosts mirror the custom domain; keep them out of search results so they don't compete with it.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+# Hashed build assets never change.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

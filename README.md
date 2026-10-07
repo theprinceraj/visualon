@@ -21,6 +21,20 @@ npm run check        # type check
 | Order dialog → Dodo checkout, quote form → email, currency toggle | `src/scripts/main.ts` |
 | Terms / privacy / refunds (needed for Dodo verification) | `src/pages/{terms,privacy,refunds}.astro` |
 
+## SEO
+
+| What | File |
+|---|---|
+| Titles, descriptions, Open Graph, robots meta, JSON-LD output | `src/layouts/Base.astro` |
+| Brand alternate names, social profiles (`sameAs`) | `src/data/site.ts` → `site` |
+| Structured data builders (organization, service + offers, video, FAQ, breadcrumbs) | `src/data/seo.ts` |
+| Service landing pages (`/ai-product-videos`, `/saas-launch-videos`, `/ecommerce-product-videos`) | `src/data/services.ts`, `src/pages/[service].astro` |
+| Sitemap, robots.txt | `src/pages/sitemap.xml.ts`, `src/pages/robots.txt.ts` |
+| `noindex` on *.pages.dev, asset caching | `public/_headers` |
+
+Each project in `work.json` carries a `date` (published on the site) and a `duration` (seconds) per media entry for
+the video structured data. Add both when adding a project (`ffprobe -v error -show_entries format=duration -of csv=p=0 full.mp4`).
+
 ## Videos (R2)
 
 Videos are **not** in git. `public/media/` is built from the studio renders and served from R2 in production.
@@ -34,9 +48,9 @@ npx wrangler r2 bucket cors set visualon-media --file r2-cors.json   # the hero 
 npm run media:upload
 ```
 
-Public URL (r2.dev): `https://pub-8f13f60a2584475488fcd0bb210a757d.r2.dev`, which is `PUBLIC_MEDIA_BASE`. r2.dev is
-rate-limited and meant for light traffic; when visualon.top is bought, connect `media.visualon.top` to the bucket and
-switch the variable. Adding a project: render it in the studio repo, add an entry to `work.json`,
+Public URL: `https://media.visualon.top` (R2 custom domain; the default media base in `src/data/site.ts`, overridable
+with `PUBLIC_MEDIA_BASE`). The bucket's r2.dev URL (`https://pub-8f13f60a2584475488fcd0bb210a757d.r2.dev`) still works
+but is rate-limited. Adding a project: render it in the studio repo, add an entry to `work.json`,
 `npm run media -- --only <slug>`, `npm run media:upload -- --only <slug>`, push.
 
 ## Payments (Dodo)
@@ -53,13 +67,13 @@ switch the variable. Adding a project: render it in the studio repo, add an entr
 ## Deploy (Cloudflare Pages)
 
 Cloudflare Pages project `visualon` (account "Prince Raj"), Git-connected: every push to `main` deploys to
-https://visualon.theprinceraj.in (and visualon.pages.dev). Build `npm run build` → `dist`, `NODE_VERSION=22`.
+https://visualon.top (and visualon.pages.dev, which sends `noindex`). Build `npm run build` → `dist`, `NODE_VERSION=22`.
 
 | Environment | Branch | URL | `PUBLIC_DODO_MODE` (set in `wrangler.jsonc`) |
 |---|---|---|---|
-| Production | `main` | visualon.theprinceraj.in | `live` |
+| Production | `main` | visualon.top | `live` |
 | Dev / test | `dev` | dev.visualon.pages.dev | `test` (Pages "Preview" variables) |
 
 Work on `dev`, test the full checkout with Dodo test payments, then merge `dev` → `main` to ship. Every other branch
 also gets its own preview URL in test mode. Media defaults to R2 in all deployed builds.
-Custom domain: `visualon.theprinceraj.in` now (CNAME → `<project>.pages.dev`), `visualon.top` later.
+Custom domains: `visualon.top` and `www.visualon.top` (Cloudflare zone; www 301s to the bare domain). Media: `media.visualon.top`.

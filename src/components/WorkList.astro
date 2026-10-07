@@ -41,7 +41,7 @@ const first = featured[0];
                 <span class="meta caps">
                   {p.tags.join(" / ")} · {p.year}
                 </span>
-                <img class="m-thumb" src={media(p.slug, "16x9", "poster.jpg")} alt="" loading="lazy" />
+                <img class="m-thumb" src={media(p.slug, "16x9", "poster.jpg")} alt={`${p.title} ${p.tags[0]} video`} loading="lazy" />
               </a>
             </li>
           ))

@@ -1,0 +1,127 @@
+---
+import type { Faq } from "../data/seo";
+interface Props {
+  items: Faq[];
+  num: string;
+  label?: string;
+  id?: string;
+}
+const { items, num, label = "questions, answered", id = "faq" } = Astro.props;
+---
+
+<section class="faq on-ink section" id={id} aria-labelledby={`${id}-title`}>
+  <div class="grid wrap">
+    <div class="left">
+      <div class="label caps" data-reveal><span class="num">{num}</span><span class="txt">— {label}</span></div>
+      <h2 id={`${id}-title`} class="display title" data-reveal><slot>Fair <em>questions</em>.</slot></h2>
+    </div>
+    <div class="list" data-reveal>
+      {
+        items.map(({ q, a }, i) => (
+          <details open={i === 0}>
+            <summary>
+              <span class="n caps">{String(i + 1).padStart(2, "0")}/</span>
+              <h3 class="display q">{q}</h3>
+              <span class="plus" aria-hidden="true">+</span>
+            </summary>
+            <p class="read muted a" set:html={a} />
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding-block: 120px 140px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.1fr);
+    gap: 64px;
+  }
+  .left {
+    position: sticky;
+    top: 110px;
+    align-self: start;
+  }
+  .title {
+    margin-top: 28px;
+    font-size: clamp(46px, 6.4vw, 104px);
+  }
+  .list {
+    border-top: 1px solid var(--line-paper);
+  }
+  details {
+    border-bottom: 1px solid var(--line-paper);
+  }
+  summary {
+    display: grid;
+    grid-template-columns: 66px 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    padding: 28px 0;
+    cursor: pointer;
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  .n {
+    font-size: 11px;
+    color: #9a9da4;
+  }
+  .q {
+    font-size: clamp(22px, 2vw, 30px);
+    line-height: 1.1;
+    transition: color 0.3s;
+  }
+  summary:hover .q {
+    color: var(--accent-soft);
+  }
+  .plus {
+    color: var(--accent-soft);
+    font-size: 22px;
+    line-height: 1;
+    transition: transform 0.4s var(--ease-expo);
+  }
+  details[open] .plus {
+    transform: rotate(45deg);
+  }
+  .a {
+    margin: -8px 0 0 82px;
+    padding-bottom: 30px;
+    max-width: 38em;
+  }
+  .a :global(a) {
+    color: var(--paper);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .a :global(a:hover) {
+    color: var(--accent-soft);
+  }
+  @media (max-width: 960px) {
+    .faq {
+      padding-block: 100px;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .left {
+      position: static;
+    }
+    .title {
+      font-size: clamp(40px, 11vw, 64px);
+    }
+    summary {
+      grid-template-columns: 44px 1fr auto;
+    }
+    .a {
+      margin-left: 60px;
+    }
+  }
+</style>

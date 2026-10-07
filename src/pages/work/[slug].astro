@@ -1,15 +1,23 @@
 ---
 import Base from "../../layouts/Base.astro";
 import { projects, media, ratioLabel, type Project } from "../../data/site";
+import { breadcrumbs, video } from "../../data/seo";
 
 export function getStaticPaths() {
   return projects.map((p, i) => ({ params: { slug: p.slug }, props: { p, n: i + 1, next: projects[(i + 1) % projects.length] } }));
 }
 const { p, n, next } = Astro.props as { p: Project; n: number; next: Project };
 const main = p.media[0];
+const kind = /film|reel|ad$|video/.test(p.tags[0]) ? p.tags[0] : `${p.tags[0]} video`;
+const schema = [video(Astro.site!, p), breadcrumbs(Astro.site!, [["Work", "/work"], [p.title, `/work/${p.slug}`]])];
 ---
 
-<Base title={`${p.title} — ${p.logline} · VisualOn`} description={p.brief} image={media(p.slug, main.ratio, "poster.jpg")}>
+<Base
+  title={`${p.title}: ${kind} by VisualOn`}
+  description={`${p.logline} ${p.brief}`}
+  image={media(p.slug, main.ratio, "poster.jpg")}
+  schema={schema}
+>
   <article class="case on-ink section">
     <header class="head wrap">
       <a href="/#work" class="link-arrow caps back"><span class="arr">←</span> all work</a>

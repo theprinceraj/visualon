@@ -6,15 +6,52 @@ import Reels from "../components/Reels.astro";
 import Packages from "../components/Packages.astro";
 import Method from "../components/Method.astro";
 import Studio from "../components/Studio.astro";
+import Faq from "../components/Faq.astro";
 import Contact from "../components/Contact.astro";
+import { site, packages } from "../data/site";
+import { services, priceLine, speedLine } from "../data/services";
+import { faqPage, productionService } from "../data/seo";
+import type { Faq as FaqItem } from "../data/seo";
+
+const link = (slug: string) => {
+  const s = services.find((x) => x.slug === slug)!;
+  return `<a href="/${s.slug}">${s.nav}</a>`;
+};
+const faqs: FaqItem[] = [
+  {
+    q: `What is ${site.name}?`,
+    a: `${site.name} (also written Visual On, at visualon.top) is a product video studio. We make launch films, reels and ads with AI, directed by people, from your real product. <a href="/work">See the work</a>.`,
+  },
+  {
+    q: "What kind of videos do you make?",
+    a: `Launch films, product promos, app demos, reels and ad variants: ${link("ai-product-videos")}, ${link("saas-launch-videos")} and ${link("ecommerce-product-videos")}, in 9:16, 4:5, 1:1 and 16:9.`,
+  },
+  { q: "How much does a video cost?", a: priceLine },
+  { q: "How long does delivery take?", a: speedLine },
+  {
+    q: "Is it really made with AI?",
+    a: "Yes, and we're open about it. AI does the rendering, the variants and the re-cuts. People decide what to show, what to cut and when it's good enough to ship, and every render is checked still by still before it reaches you.",
+  },
+  {
+    q: "Can I ask for changes?",
+    a: `Every package includes revisions: ${packages.map((p) => `${p.includes.find((x) => x.includes("revision"))} with ${p.name.toLowerCase()}`).join(", ")}. Notes in plain words are fine.`,
+  },
+];
 ---
 
-<Base home>
+<Base
+  home
+  schema={[
+    productionService(Astro.site!, "AI product video production", "AI product videos, SaaS and app launch films and e-commerce ads, made from the real product and directed by people."),
+    faqPage(faqs),
+  ]}
+>
   <Hero />
   <WorkList />
   <Reels />
   <Packages />
   <Method />
   <Studio />
+  <Faq items={faqs} num="05" />
   <Contact />
 </Base>

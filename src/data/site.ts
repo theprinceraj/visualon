@@ -3,13 +3,18 @@ import work from "./work.json";
 export const site = {
   name: "VisualOn",
   wordmark: "visualon",
-  domain: "visualon.top",
   email: "profile.princeraj@gmail.com",
   founder: "Prince",
   since: 2026,
   tagline: "product videos, directed by taste",
   // Daily render capacity. Shown on the site, and used to size delivery windows.
   rendersPerDay: 20,
+  description:
+    "VisualOn makes AI product videos, SaaS and app launch films and e-commerce ads from your real product. Fixed prices, delivered in days.",
+  // Other ways people spell or search the brand. Used in structured data so search engines connect them to this site.
+  alternateNames: ["Visual On", "Visual On Top", "VisualOn Top", "visualon.top"],
+  // Public profiles (Instagram, X, LinkedIn, YouTube...). Each one added here becomes a `sameAs` link for search engines.
+  sameAs: [] as string[],
 };
 
 export type Currency = "INR" | "USD";
@@ -76,7 +81,7 @@ export const checkoutBase =
   dodoMode === "live" ? "https://checkout.dodopayments.com" : "https://test.checkout.dodopayments.com";
 
 // Dev serves public/media; production builds use the R2 bucket unless PUBLIC_MEDIA_BASE overrides it.
-const R2_MEDIA = "https://pub-8f13f60a2584475488fcd0bb210a757d.r2.dev";
+const R2_MEDIA = "https://media.visualon.top";
 const mediaBase = (import.meta.env.PUBLIC_MEDIA_BASE || (import.meta.env.DEV ? "/media" : R2_MEDIA)).replace(/\/$/, "");
 export const media = (slug: string, ratio: string, file: "full.mp4" | "preview.mp4" | "poster.jpg" | "preview.jpg") =>
   `${mediaBase}/${slug}/${ratio}/${file}`;

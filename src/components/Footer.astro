@@ -1,6 +1,7 @@
 ---
 import Wordmark from "./Wordmark.astro";
 import { site } from "../data/site";
+import { services } from "../data/services";
 ---
 
 <footer class="footer on-ink section">
@@ -18,6 +19,9 @@ import { site } from "../data/site";
         <a href="/#contact">/contact</a>
       </div>
       <div class="col">
+        {services.map((sv) => <a href={`/${sv.slug}`}>/{sv.nav}</a>)}
+      </div>
+      <div class="col">
         <a href="/terms">terms ↗</a>
         <a href="/privacy">privacy ↗</a>
         <a href="/refunds">refunds ↗</a>
@@ -28,7 +32,7 @@ import { site } from "../data/site";
   <div class="bar wrap caps muted">
     <span>© {site.since} {site.name}</span>
     <span>{site.rendersPerDay} renders a day · made with ai, directed by taste</span>
-    <span>{site.domain}</span>
+    <span>{Astro.site!.host}</span>
   </div>
 </footer>
 
@@ -51,7 +55,7 @@ import { site } from "../data/site";
   }
   .cols {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, auto);
     gap: 24px;
   }
   .col {
@@ -81,6 +85,11 @@ import { site } from "../data/site";
   @media (max-width: 860px) {
     .top {
       grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .cols {
+      grid-template-columns: 1fr 1fr;
     }
   }
 </style>

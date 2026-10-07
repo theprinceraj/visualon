@@ -4,20 +4,29 @@ import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import OrderDialog from "../components/OrderDialog.astro";
 import { site, dodoMode } from "../data/site";
+import { siteGraph, jsonLd } from "../data/seo";
 
 interface Props {
   title?: string;
   description?: string;
   image?: string;
   home?: boolean;
+  /** Keep the page out of search results (thanks, 404). */
+  noindex?: boolean;
+  /** Extra schema.org nodes for this page, added to the site-wide organization + website graph. */
+  schema?: Record<string, unknown>[];
 }
 const {
-  title = `${site.name}: ${site.tagline}`,
-  description = "Product launch films, reels and ads that show your real product, made with AI and directed by taste. Fixed prices, delivered in days.",
+  title = `${site.name}: AI Product Videos & Launch Films for SaaS and E-commerce`,
+  description = `${site.name} (Visual On Top) makes AI product videos, SaaS launch films and e-commerce ads from your real product, directed by taste. Fixed prices, delivered in 48 hours.`,
   image = "/og.jpg",
   home = false,
+  noindex = false,
+  schema = [],
 } = Astro.props;
-const canonical = new URL(Astro.url.pathname, Astro.site);
+const base = Astro.site!;
+const canonical = new URL(Astro.url.pathname.replace(/\.html$/, "").replace(/\/index$/, "/"), base);
+const ogImage = new URL(image, base);
 ---
 
 <!doctype html>
@@ -29,14 +38,40 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta name="theme-color" content="#f4f5f7" />
-    {dodoMode === "test" && <meta name="robots" content="noindex, nofollow" />}
+    {
+      dodoMode === "test" ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : noindex ? (
+        <meta name="robots" content="noindex, follow" />
+      ) : (
+        <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1, max-snippet:-1" />
+      )
+    }
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image" content={ogImage} />
+    {
+      image === "/og.jpg" && (
+        <>
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+        </>
+      )
+    }
+    <meta property="og:image:alt" content={title} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script type="application/ld+json" set:html={jsonLd([...siteGraph(base), ...schema])} />
   </head>
   <body class={home ? "is-home" : ""}>
     {

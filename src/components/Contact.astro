@@ -11,7 +11,7 @@ const budgets = {
 <section class="contact on-ink section" id="contact">
   <div class="grid wrap">
     <div class="left">
-      <div class="label caps" data-reveal><span class="num">05</span><span class="txt">— say hi anytime</span></div>
+      <div class="label caps" data-reveal><span class="num">06</span><span class="txt">— say hi anytime</span></div>
       <h2 class="display title" data-reveal>
         Bring us the <br /><em class="blue">unskippable</em><br /><em class="blue">one.</em>
       </h2>
@@ -45,7 +45,7 @@ const budgets = {
       <fieldset class="field">
         <legend class="caps muted">rough budget — optional</legend>
         <div class="chips" data-group="budget" data-budgets={JSON.stringify(budgets)}>
-          {budgets.INR.map((r, i) => <button type="button" class="chip" aria-pressed="false" data-i={i} data-value={r}>{r}</button>)}
+          {budgets.USD.map((r, i) => <button type="button" class="chip" aria-pressed="false" data-i={i} data-value={r}>{r}</button>)}
         </div>
       </fieldset>
       <div class="send">

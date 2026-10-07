@@ -1,0 +1,203 @@
+---
+import Base from "../layouts/Base.astro";
+import WorkCard from "../components/WorkCard.astro";
+import Packages from "../components/Packages.astro";
+import Faq from "../components/Faq.astro";
+import { packages, projects } from "../data/site";
+import { services, type Service } from "../data/services";
+import { breadcrumbs, faqPage, productionService } from "../data/seo";
+
+export function getStaticPaths() {
+  return services.map((s, i) => ({ params: { service: s.slug }, props: { s, next: services[(i + 1) % services.length] } }));
+}
+const { s, next } = Astro.props as { s: Service; next: Service };
+const work = s.work.map((slug) => projects.find((p) => p.slug === slug)!);
+const pkg = packages.find((p) => p.id === s.pkg)!;
+const base = Astro.site!;
+const path = `/${s.slug}`;
+const name = s.h1.replace(/<[^>]+>/g, "").replace(/\.$/, "");
+---
+
+<Base
+  title={s.title}
+  description={s.description}
+  schema={[productionService(base, name, s.description, path), breadcrumbs(base, [[name, path]]), faqPage(s.faqs)]}
+>
+  <section class="hero on-ink section">
+    <div class="wrap">
+      <a href="/" class="link-arrow caps back"><span class="arr">←</span> visualon</a>
+      <div class="label caps"><span class="num">01</span><span class="txt">— {s.label}</span></div>
+      <h1 class="display" set:html={s.h1} />
+      <p class="display it logline">{s.logline}</p>
+      <p class="read muted lede">{s.lede}</p>
+      <div class="ctas">
+        <button type="button" class="btn" data-order={pkg.id}>order {pkg.name.toLowerCase()} <span aria-hidden="true">→</span></button>
+        <a href="#work" class="link-arrow caps">see the work <span class="arr">↓</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="work on-ink section" id="work">
+    <div class="wrap">
+      <div class="head">
+        <div class="label caps" data-reveal><span class="num">02</span><span class="txt">— made like this</span></div>
+        <a href="/work" class="link-arrow caps">all {projects.length} projects <span class="arr">→</span></a>
+      </div>
+      <h2 class="display title" data-reveal>Recent <em>cuts</em>.</h2>
+    </div>
+    <div class="grid wrap">
+      {work.map((p) => <WorkCard p={p} n={projects.indexOf(p) + 1} />)}
+    </div>
+  </section>
+
+  <section class="points on-paper section">
+    <div class="wrap">
+      <div class="label caps" data-reveal><span class="num">03</span><span class="txt">— what you get</span></div>
+      <h2 class="display title" data-reveal>Why it <em class="blue">works</em>.</h2>
+      <div class="cells">
+        {
+          s.points.map((pt, i) => (
+            <article class="cell" data-reveal>
+              <span class="n caps">{String(i + 1).padStart(3, "0")}</span>
+              <h3 class="display">{pt.t}</h3>
+              <p class="read muted">{pt.b}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Packages num="04" />
+
+  <Faq items={s.faqs} num="05" />
+
+  <a href={`/${next.slug}`} class="next on-ink section wrap">
+    <span class="caps muted">also</span>
+    <span class="display">{next.nav} <span class="arr">→</span></span>
+  </a>
+</Base>
+
+<style>
+  .hero {
+    padding-block: 150px 120px;
+  }
+  .back {
+    color: #9a9da4;
+    margin-bottom: 48px;
+  }
+  .back:hover {
+    color: var(--paper);
+  }
+  h1 {
+    margin-top: 28px;
+    font-size: clamp(52px, 8.4vw, 136px);
+    max-width: 11em;
+  }
+  .logline {
+    font-size: clamp(22px, 2.4vw, 36px);
+    margin: 18px 0 0;
+    color: var(--accent-soft);
+  }
+  .lede {
+    max-width: 36em;
+    margin: 40px 0 36px;
+  }
+  .ctas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+  }
+  .ctas .link-arrow {
+    color: #9a9da4;
+  }
+  .ctas .link-arrow:hover {
+    color: var(--paper);
+  }
+  .work {
+    padding-block: 120px 140px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .head .link-arrow {
+    color: #9a9da4;
+  }
+  .head .link-arrow:hover {
+    color: var(--paper);
+  }
+  .title {
+    margin: 28px 0 64px;
+    font-size: clamp(46px, 6.4vw, 104px);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 64px 32px;
+  }
+  .points {
+    padding-top: 120px;
+  }
+  .cells {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    border-top: 1px solid var(--line-ink);
+    border-left: 1px solid var(--line-ink);
+  }
+  .cell {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: clamp(24px, 2.8vw, 40px) clamp(20px, 2.4vw, 32px) 40px;
+    border-right: 1px solid var(--line-ink);
+    border-bottom: 1px solid var(--line-ink);
+  }
+  .cell .n {
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .cell h3 {
+    font-size: clamp(24px, 2vw, 30px);
+    margin-top: 28px;
+  }
+  .cell .read {
+    margin: 0;
+    font-size: 14px;
+  }
+  .next {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-block: 64px 96px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .next .display {
+    font-size: clamp(40px, 6vw, 96px);
+  }
+  .next .arr {
+    display: inline-block;
+    transition: transform 0.5s var(--ease-expo);
+  }
+  .next:hover .arr {
+    transform: translateX(16px);
+  }
+  @media (max-width: 1060px) {
+    .cells {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 760px) {
+    .grid,
+    .cells {
+      grid-template-columns: 1fr;
+    }
+    .title {
+      margin-bottom: 40px;
+    }
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import { media, type Project } from "../data/site";
+interface Props {
+  p: Project;
+  n: number;
+}
+const { p, n } = Astro.props;
+const m = p.media.find((x) => x.ratio === "16x9") ?? p.media[0];
+---
+
+<a href={`/work/${p.slug}`} class="card" data-hoverplay data-reveal>
+  <div class="frame">
+    <video muted loop playsinline preload="none" poster={media(p.slug, m.ratio, "preview.jpg")} src={media(p.slug, m.ratio, "preview.mp4")} />
+  </div>
+  <div class="meta">
+    <span class="caps n">{String(n).padStart(2, "0")}/</span>
+    <span class="display t">{p.title}</span>
+    <span class="caps tags">{p.tags.join(" / ")}{p.concept ? " · concept" : ""}</span>
+  </div>
+  <p class="it line">{p.logline}</p>
+</a>
+
+<style>
+  .frame {
+    border: 1px solid var(--line-paper);
+    padding: 10px;
+  }
+  .frame video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--ink-soft);
+  }
+  .meta {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: baseline;
+    margin-top: 22px;
+  }
+  .n,
+  .tags {
+    font-size: 11px;
+    color: #9a9da4;
+  }
+  .t {
+    font-size: clamp(28px, 2.6vw, 40px);
+  }
+  .line {
+    margin: 8px 0 0 44px;
+    color: #9a9da4;
+  }
+  .card:hover .t {
+    color: var(--accent-soft);
+  }
+  @media (max-width: 760px) {
+    .meta {
+      grid-template-columns: 36px 1fr;
+    }
+    .tags {
+      grid-column: 2;
+    }
+    .line {
+      margin-left: 36px;
+    }
+  }
+</style>

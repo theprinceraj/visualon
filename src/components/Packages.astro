@@ -1,5 +1,9 @@
 ---
 import { packages, formatPrice, site } from "../data/site";
+interface Props {
+  num?: string;
+}
+const { num = "03" } = Astro.props;
 const [single, launch, hooks] = packages;
 const span = { [single.id]: 1, [launch.id]: 2, [hooks.id]: 1 } as Record<string, number>;
 const order = [single, launch, hooks];
@@ -16,7 +20,7 @@ const steps = [
   <div class="wrap">
     <div class="grid">
       <div class="cell intro span2">
-        <div class="label caps" data-reveal><span class="num">03</span><span class="txt">— start here</span></div>
+        <div class="label caps" data-reveal><span class="num">{num}</span><span class="txt">— start here</span></div>
         <h2 class="display title" data-reveal>Anything, within <em class="blue">frame</em>.</h2>
         <p class="read muted lede" data-reveal>
           ( frame negotiable. ) launch films, reels, ad variants and walkthroughs, captured from your real product and
@@ -25,8 +29,8 @@ const steps = [
         <div class="currency" data-reveal>
           <span class="caps muted">prices in</span>
           <div class="toggle" role="group" aria-label="Currency">
-            <button type="button" class="chip" data-currency="INR" aria-pressed="true">₹ inr</button>
-            <button type="button" class="chip" data-currency="USD" aria-pressed="false">$ usd</button>
+            <button type="button" class="chip" data-currency="INR" aria-pressed="false">₹ inr</button>
+            <button type="button" class="chip" data-currency="USD" aria-pressed="true">$ usd</button>
           </div>
         </div>
       </div>
@@ -42,7 +46,7 @@ const steps = [
             <p class="sub muted">{p.sub}</p>
             <p class="price display">
               <span data-price data-inr={p.price.INR} data-usd={p.price.USD}>
-                {formatPrice(p.price.INR, "INR")}
+                {formatPrice(p.price.USD, "USD")}
               </span>
               <span class="caps once muted">one-time · tax incl. · {p.delivery}</span>
             </p>
@@ -63,7 +67,7 @@ const steps = [
         <h3 class="display name">Custom</h3>
         <p class="sub muted">longer films, a monthly series, a whole campaign</p>
         <p class="read muted">if it doesn't fit a box, tell us what it is. we'll reply with a fixed quote.</p>
-        <a href="#contact" class="btn dark">request a quote <span aria-hidden="true">→</span></a>
+        <a href="/#contact" class="btn dark">request a quote <span aria-hidden="true">→</span></a>
       </article>
 
       <div class="cell steps span3" data-reveal>
