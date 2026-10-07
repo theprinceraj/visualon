@@ -16,7 +16,7 @@ npm run check        # type check
 |---|---|
 | Studio name, email, capacity | `src/data/site.ts` → `site` |
 | Packages, prices (INR + USD), Dodo product IDs | `src/data/site.ts` → `packages` |
-| Portfolio projects (title, logline, brief, idea, source renders) | `src/data/work.json` |
+| Portfolio projects (title, logline, brief, idea, source renders, case study) | `src/data/work.json` |
 | Hero (impossible play-triangle → screen with the reel) | `src/components/Hero.astro`, `src/scripts/hero.ts` |
 | Order dialog → Dodo checkout, quote form → email, currency toggle | `src/scripts/main.ts` |
 | Terms / privacy / refunds (needed for Dodo verification) | `src/pages/{terms,privacy,refunds}.astro` |
@@ -34,6 +34,11 @@ npm run check        # type check
 
 Each project in `work.json` carries a `date` (published on the site) and a `duration` (seconds) per media entry for
 the video structured data. Add both when adding a project (`ffprobe -v error -show_entries format=duration -of csv=p=0 full.mp4`).
+
+Case studies: a project's optional `story` (challenge, audience, idea, `scenes`, `craft`) fills its work page. Each scene's
+`t` is where it starts (scene links and `?t=` seek there; Google gets them as key moments) and `frame` is the moment
+used for its still. `turnaround` adds the "from request to final cut" line. No prices in case-study copy or stills.
+After changing scenes: `npm run media -- --stills` and `npm run media:upload -- --stills`.
 
 ## Videos (R2)
 

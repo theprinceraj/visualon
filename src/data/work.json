@@ -6,10 +6,31 @@
       "title": "Scan4Feedback",
       "tags": ["product promo", "saas"],
       "year": 2026,
+      "turnaround": "6 hours",
       "featured": true,
       "logline": "One QR code. Two very different outcomes.",
       "brief": "A QR review tool for restaurants, cafés, hotels and clinics. Happy guests get routed to Google, unhappy ones to the owner's private inbox, and an AI-assisted review writes itself in the guest's language.",
       "approach": "We built the guest's phone flow and the owner's dashboard from the live product's own UI, then cut the two outcomes side by side so the idea lands in one glance.",
+      "story": {
+        "challenge": "Scan4Feedback does two jobs at once. It gets happy guests to actually post a review, and it keeps unhappy ones off Google until the owner has heard them first. Both had to land in under a minute, with no voiceover, for owners scrolling between services.",
+        "audience": "Owners and managers of Indian restaurants, cafés, hotels and clinics, from a single outlet to many branches, who live and die by their Google, Zomato and Swiggy rating.",
+        "idea": "Open on the owner's pain: a busy Saturday kitchen, a one-star review dropping onto the screen and the rating ticking down while the happy table walks out without a word. Then show the fix twice, side by side. The same QR code sends a five-star guest to Google with the review already written, and a two-star guest to the owner's private inbox.",
+        "scenes": [
+          { "t": 0, "frame": 2.5, "title": "The hook", "text": "Wok fire on a Saturday night. A one-star review slams in and the rating ticks from 4.6 to 4.3. Happy guests leave quietly; unhappy ones review you." },
+          { "t": 4, "frame": 6.3, "title": "The reveal", "text": "The product's own hero footage of a guest scanning the table tent, with the logo and the site's headline: one QR code, two very different outcomes." },
+          { "t": 7, "frame": 10, "title": "No app, nine languages", "text": "The table tent on the left, the guest's phone on the right. The rating screen switches from English to Hindi to Bengali before the guest taps the fifth star." },
+          { "t": 11.5, "frame": 15, "title": "The review writes itself", "text": "The guest picks what stood out, chooses a warm tone and watches the review draft itself. They edit a line, copy it and paste it straight onto Google." },
+          { "t": 21, "frame": 23.5, "title": "Two outcomes", "text": "Two phones side by side. Four and five stars go to Google, Zomato or Swiggy. One to three stars go to the owner, privately, and are never posted." },
+          { "t": 26, "frame": 29, "title": "One dashboard", "text": "The owner's view: total scans, average rating, reviews routed to Google against feedback kept private, and every branch in one table." },
+          { "t": 31, "frame": 33.5, "title": "The proof", "text": "The product's own numbers count up over close-up footage of stars being tapped, followed by a café owner's testimonial." }
+        ],
+        "craft": [
+          "Every screen is the live product. The guest flow and the owner dashboard were rebuilt from scan4feedback.com, with copy lifted word for word from its language files.",
+          "The language switch uses the app's real Hindi and Bengali strings, not placeholder text.",
+          "Cut to a 120 BPM score so every scene change lands on a bar, with sound effects on each tap. No voiceover, so it works muted in a feed.",
+          "Two masters from one edit: 16:9 for YouTube, LinkedIn and the website, 9:16 for Reels, Shorts and WhatsApp Status."
+        ]
+      },
       "media": [
         { "ratio": "16x9", "src": "scan4feedback-promo/out/scan4feedback-promo-v2-16x9.mp4", "previewAt": 3, "duration": 44 },
         { "ratio": "9x16", "src": "scan4feedback-promo/out/scan4feedback-promo-v2-9x16.mp4", "previewAt": 3, "duration": 44 }
@@ -21,10 +42,33 @@
       "title": "Headel",
       "tags": ["launch film", "e-commerce"],
       "year": 2026,
+      "turnaround": "6 hours",
       "featured": true,
       "logline": "One link. The whole shop.",
       "brief": "A no-code store builder for social sellers: add products, get a shop link, share it on Instagram and WhatsApp, and get paid by UPI, card or net banking.",
       "approach": "A relay story. The shop link is the hero: a home baker builds it, a buyer taps it, and it gets passed on to the next seller. The real builder UI carries every handoff.",
+      "story": {
+        "challenge": "Headel's real competitor isn't another store builder. It's the DM inbox. Social sellers already have followers who want to buy; what they don't have is a way to stop answering \"price?\" forty times a post. The film had to make one link feel like the whole shop, for sellers who have never built a website.",
+        "audience": "Indian home businesses and resellers who sell through Instagram and WhatsApp DMs today: home bakers, sneaker resellers, thrift sellers, achaar makers.",
+        "idea": "A relay where the shop link is the hero. Meher, a home baker, posts a cake and drowns in identical DMs. She builds her shop, a follower taps the link and pays, and then the link flies over the hill to a sneaker reseller, a thrift seller and a grandmother selling achaar, each on a different screen, until the whole cast stands under Headel's sky.",
+        "scenes": [
+          { "t": 0, "frame": 4.6, "title": "The hook", "text": "Meher posts a cake and her phone erupts: \"price?\", \"price??\", \"kitna?\". The unread badge climbs to 99+." },
+          { "t": 6, "frame": 9, "title": "The reveal", "text": "An iris out of her phone into Headel's own sky-blue hero: \"Start selling online in minutes\", and a click on Get Started." },
+          { "t": 10, "frame": 15.5, "title": "Build the shop", "text": "Headel Admin: the cake photo drops in, a name and a price are typed, Save, and the product grid fills." },
+          { "t": 17, "frame": 21, "title": "Her own link", "text": "Domain chips roll until \"meherbakes\" is typed, the address locks in with free SSL and goes straight into her bio." },
+          { "t": 22, "frame": 27, "title": "A follower buys", "text": "Arjun taps the bio link, lands on the storefront, picks the cake and pays with UPI." },
+          { "t": 29, "frame": 32, "title": "Paid", "text": "Back on Meher's phone: a New Order toast and a payout card, straight to her bank. She cheers." },
+          { "t": 33, "frame": 37, "title": "The relay", "text": "The link flies over the hill to Kabir's sneakers, Zoya's thrift store and Nani's achaar, on phone, tablet and laptop." },
+          { "t": 38, "frame": 42, "title": "One dashboard", "text": "Total sales count up, the bars grow and recent orders fill in, while Meher sips her chai." },
+          { "t": 43, "frame": 47, "title": "Everything you need", "text": "A feature board on the sky. Eight cards pop in one by one while the cast peeks around the edges." }
+        ],
+        "craft": [
+          "The site hero, the admin dashboard, the storefront and the domain chips are rebuilt from headel.com's own design. Screens behind the login are recreated in the same system.",
+          "Five characters drawn in code, each a different kind of social seller, so every viewer finds the one that looks like them.",
+          "The site's statistics and testimonials are marked as fictional in its own footer, so none of them appear in the film.",
+          "Cut to a 120 BPM score across ten scenes in 58 seconds, with no voiceover."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "headel-promo/out/headel-promo-16x9.mp4", "previewAt": 4, "duration": 58 }]
     },
     {
@@ -33,10 +77,32 @@
       "title": "Lensmilk",
       "tags": ["product promo", "ai video"],
       "year": 2026,
+      "turnaround": "6 hours",
       "featured": true,
       "logline": "Five UGC ads. Zero shoots.",
       "brief": "An AI studio that turns one product brief into creator-style UGC ads, explainers and localised cuts.",
       "approach": "Open on five finished ads slamming onto the screen, then show the flow from brief to master to every format, using the product's real screens.",
+      "story": {
+        "challenge": "Lensmilk makes ads. A promo for an AI ad studio has to clear a higher bar than most: it has to look like the work it promises, and prove that one brief really does turn into a batch of finished ads, in under 40 seconds.",
+        "audience": "Performance marketers, DTC brands and agencies who need many UGC ad angles to test, quickly, without booking creators.",
+        "idea": "Lead with the output, not the interface. Five finished UGC ads, all real Lensmilk renders, slap onto the screen in the first beat and none of them was shot. Then walk the pipeline one feature per shot: brief, hooks, cast, free sketch, master, every format, every language.",
+        "scenes": [
+          { "t": 0, "frame": 3.2, "title": "The hook", "text": "Five real Lensmilk UGC ads land as 9:16 cards. Five UGC ads. Zero shoots." },
+          { "t": 4, "frame": 5, "title": "The reveal", "text": "lensmilk.com's hero, rebuilt: \"Start with UGC. Build beyond the ad.\"" },
+          { "t": 7.5, "frame": 11, "title": "UGC ad factory", "text": "A brief is typed into the studio and three hook cards come back: problem, proof and review." },
+          { "t": 12, "frame": 15, "title": "Cast", "text": "A presenter grid: house talent, a custom avatar, or your own face with consent verified. Raw UGC or polished." },
+          { "t": 16, "frame": 19.5, "title": "Preview free", "text": "The sketch board renders hook, proof and ask in seconds for zero credits, and gets an Approved stamp." },
+          { "t": 20.5, "frame": 24, "title": "Engine routing", "text": "Each beat is routed to the best of 17 verified engines, and the master plays." },
+          { "t": 25, "frame": 28, "title": "Every format", "text": "The master splits into 9:16, 1:1 and 16:9 cards labelled for TikTok, feeds, YouTube and Shorts." },
+          { "t": 29, "frame": 32, "title": "Every language", "text": "The same ad re-voiced, with captions cycling through English, Spanish, French, German and Portuguese." }
+        ],
+        "craft": [
+          "Every ad on screen is Lensmilk's own proof-gallery output, not a mock-up.",
+          "The studio is behind sign-in, so it's rebuilt in the site's own design language: Space Grotesk, mono labels, hard ink shadows and red full stops.",
+          "One feature per shot, each with a numbered eyebrow, so a viewer can count the pipeline as it goes past.",
+          "Cut to 120 BPM with every shot starting on a beat. No voiceover."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "lensmilk-promo/out/lensmilk-promo-16x9.mp4", "previewAt": 2, "duration": 38 }]
     },
     {
@@ -49,6 +115,23 @@
       "logline": "Life begins after coffee.",
       "brief": "A cosy neighbourhood café and restaurant in Belgharia, Kolkata, with a big menu in one small, warm room.",
       "approach": "Built from the owner's own photos and menu: we start close on their wall sign, pull back to reveal the room, and end on the way there.",
+      "story": {
+        "challenge": "A neighbourhood café doesn't need a feature list. It needs people to walk in. The ad had to make a small room in Belgharia feel worth the trip, using only the owner's own photos and menu, in about 20 seconds.",
+        "audience": "Locals in Belgharia and North Kolkata looking for a place to sit with coffee, snacks and a big menu.",
+        "idea": "Start on the café's own wall sign, \"Life Begins After Coffee\", and finish the line for it: \"…and it begins here.\" Then pull back to show the room, open the actual menu and end with a pin on the street map, so every shot points at the door.",
+        "scenes": [
+          { "t": 0, "frame": 3, "title": "The hook", "text": "Tight on the orange wall sign, then a pull back to the tables and stools: \"…and it begins here.\"" },
+          { "t": 4, "frame": 7, "title": "The reveal", "text": "The owner's photo of a cup pushes in as The Junction's logo, name and neighbourhood land on wood." },
+          { "t": 7.5, "frame": 13.6, "title": "The menu", "text": "Their own menu page, wood and parchment. Eight real categories tick in on the beat while the menu's food art lands around it." },
+          { "t": 14, "frame": 16.8, "title": "Bites and corners", "text": "The owner's photos as polaroids: crispy bites with dip, and the wall art. Crispy bites, cosy corners." }
+        ],
+        "craft": [
+          "Built entirely from the café's own material: the owner's photos, the menu PDF's logo, colours, textures and food art.",
+          "No customer photos from Google, and no prices, at the owner's request.",
+          "The menu's own slab and rounded fonts, matched with close free equivalents, so the ad feels like the café rather than a template.",
+          "Ends on a warm street map with a pin, the address and the Google rating, so viewers know exactly where to go."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "the-junction-cafe-promo/out/the-junction-cafe-promo-16x9.mp4", "previewAt": 1, "duration": 22 }]
     },
     {
@@ -57,10 +140,32 @@
       "title": "The MindMates",
       "tags": ["character film", "edtech"],
       "year": 2026,
+      "turnaround": "6 hours",
       "featured": true,
       "logline": "Worries, meet your Mate.",
       "brief": "An AI wellbeing companion for students that remembers your journey across journals, mood logs, Worry Jars and breathing tools.",
       "approach": "It's 1:47 AM before the boards, and a student's worries pop out as small anxious creatures. The companion's real UI calms them down one by one.",
+      "story": {
+        "challenge": "A wellbeing app for students can't sound like an ad, and it can't make light of stress either. The MindMates' real difference, that it remembers you, is also the hardest thing to show in a 40-second video with no voiceover.",
+        "audience": "Indian school and college students facing exams, career choices and stress, and the schools and colleges that support them.",
+        "idea": "It's 1:47 AM, the night before boards. Meera's worries pop out of her head as small, anxious creatures with labels. The MindMates logo comes alive as \"the Mate\" and catches them one at a time, one feature each, until every worry has a home and is fast asleep.",
+        "scenes": [
+          { "t": 0, "frame": 3, "title": "The hook", "text": "1:47 AM. Worries pop out of Meera's head on the beat: \"Boards in 12 days\", \"Sleep: 4h\", \"Engineering or design?\"" },
+          { "t": 3.75, "frame": 7.9, "title": "The reveal", "text": "Her phone lights up and the Mate springs out and waves. Every student deserves someone who understands them." },
+          { "t": 8.75, "frame": 13, "title": "Worry Jar", "text": "She types \"What if I'm not enough?\" and drops it in. The worry flies into the jar and falls asleep." },
+          { "t": 13.75, "frame": 16.8, "title": "Breathe", "text": "A guided breathing ring, grounded in CBT and DBT: breathe in, hold, breathe out." },
+          { "t": 17.5, "frame": 21.5, "title": "Morning brief", "text": "Sunrise. Her Brief shows last night's sleep, a Physics mock on Thursday and what today needs." },
+          { "t": 22.5, "frame": 27.5, "title": "It remembers", "text": "The site's own comparison: a goldfish of a generic AI says \"How can I help?\" while the Mate recalls last week." },
+          { "t": 28.75, "frame": 33, "title": "One companion", "text": "The last worries settle into the four pillars: health, career, daily guidance and AI companion." },
+          { "t": 33.75, "frame": 35.6, "title": "Privacy", "text": "Permission toggles, one switched off. Your information remains yours." }
+        ],
+        "craft": [
+          "Meera, the Mate and the worry creatures are all drawn and animated in code, so the story could be warm without using stock people.",
+          "Every line on screen is the site's own copy, and the comparison cards are rebuilt from themindmates.in.",
+          "The app isn't public yet, so its screens are recreated in the brand's own system: indigo, Playfair and soft paper.",
+          "A calmer 96 BPM score instead of the usual 120, with cuts on bars, to match the subject."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "mindmates-promo/out/mindmates-promo-16x9.mp4", "previewAt": 3, "duration": 43 }]
     },
     {
@@ -69,10 +174,30 @@
       "title": "ParkKolkata",
       "tags": ["app promo", "maps"],
       "year": 2026,
+      "turnaround": "6 hours",
       "featured": true,
       "logline": "Third lap around Esplanade?",
       "brief": "A free community map of parking spots across Kolkata, with free, paid and verified spots shown before you arrive.",
       "approach": "A yellow car circles the real Esplanade blocks on an OpenStreetMap base, then the app's search, filters and spot sheet park it.",
+      "story": {
+        "challenge": "ParkKolkata is a free community map with a simple job: tell drivers where they can park before they get there. The video had to make that feel urgent to anyone who has ever circled a block in central Kolkata, and walk through every feature in 30 seconds.",
+        "audience": "Drivers and riders heading into Kolkata's busiest areas: Esplanade, New Market, Park Street.",
+        "idea": "Esplanade, 6 PM. A small yellow car laps the real blocks while every kerb says FULL and the lap counter climbs. Then the phone comes up, the search finds a verified free spot, and the car parks. No fourth lap.",
+        "scenes": [
+          { "t": 0, "frame": 4, "title": "The hook", "text": "A yellow car circles the real Esplanade streets past red FULL markers. Third lap. Still no parking." },
+          { "t": 5, "frame": 8.5, "title": "Search", "text": "The phone rises, \"Esplanade\" is typed and the map flies to the area." },
+          { "t": 9, "frame": 12.5, "title": "Filters", "text": "Pins drop. Tap 4-Wheeler, Free only and Verified, and the list narrows to two spots." },
+          { "t": 13, "frame": 16.6, "title": "Before you go", "text": "A verified, free spot opens: its status, the vehicle types it takes and Get Directions." },
+          { "t": 17, "frame": 20, "title": "Parked", "text": "The route draws on the map, the car drives straight there and parks." },
+          { "t": 20.5, "frame": 24.5, "title": "Add a spot", "text": "The community form: name, area, vehicle type and a pin, then Submit. Know a spot? Add it for Kolkata." }
+        ],
+        "craft": [
+          "The map is real OpenStreetMap data of Esplanade, so local viewers recognise the streets in the first second.",
+          "Every screen is the live app: the search, the filter chips, the spot sheet and the Add Spot form.",
+          "Cut as two masters, 16:9 and 9:16, from one edit, at 120 BPM with no voiceover.",
+          "The story was built to run longer than our usual 25 seconds because the client wanted the full feature list included."
+        ]
+      },
       "media": [
         { "ratio": "16x9", "src": "parkkolkata-esplanade-promo/out/parkkolkata-esplanade-promo-16x9.mp4", "previewAt": 2, "duration": 30 },
         { "ratio": "9x16", "src": "parkkolkata-esplanade-promo/out/parkkolkata-esplanade-promo-9x16.mp4", "previewAt": 2, "duration": 30 }
@@ -84,10 +209,30 @@
       "title": "WittyWing",
       "tags": ["extension promo", "creator tools"],
       "year": 2026,
+      "turnaround": "6 hours",
       "featured": true,
       "logline": "Great tweet. Blank reply box.",
       "brief": "A Chrome extension that adds tone-picked AI reply suggestions inside X's own reply box.",
       "approach": "Everyone on X has typed \"Congrats!\" and deleted it. We start on that moment, then show the extension working inside the real reply dialog.",
+      "story": {
+        "challenge": "WittyWing lives in a reply box. The product is small, fast and easy to undersell, and the video had to make a Chrome extension feel like a relief rather than a gimmick, for people who already spend too long on X.",
+        "audience": "Founders, indie hackers and creators who build in public and want to keep up with replies without losing hours on X.",
+        "idea": "Open on the moment everyone on X knows: a friend's launch tweet, and a reply box where you type \"Congrats!\", delete it, try again and delete that too. Then WittyWing appears inside the same box and the whole flow, from tone to posted reply, takes under five seconds.",
+        "scenes": [
+          { "t": 0, "frame": 2.8, "title": "The hook", "text": "A founder's launch tweet. \"Congrats!\" is typed and deleted, then \"Huge, well done\" too. Great tweet. Blank reply box." },
+          { "t": 3.6, "frame": 6, "title": "The reveal", "text": "A paper wipe to WittyWing's site hero: Turn Every Tweet Into a Conversation." },
+          { "t": 6.6, "frame": 11.2, "title": "The demo", "text": "Back in X, the toolbar appears under the reply box. Funny, Generate, copied, pasted, posted." },
+          { "t": 14.4, "frame": 18.5, "title": "Eight tones", "text": "The site's tone grid lands card by card, then a gold highlight walks through all eight." },
+          { "t": 19.2, "frame": 24, "title": "Built for builders", "text": "Six feature rows tick in: lives in X's reply box, sounds like you, never posts without permission." },
+          { "t": 24.6, "frame": 28.5, "title": "Early users", "text": "A real early user's testimonial, with a marker sweep across \"cut that time in half\"." }
+        ],
+        "craft": [
+          "X's reply dialog is recreated in its own dark theme, so the product shows up exactly where users will meet it.",
+          "The tweet and the generated reply are the site's own demo copy, and the testimonial is real.",
+          "Styled from WittyWing's own editorial identity: Playfair italics, mono labels, paper grain and an offset gold shadow.",
+          "Cut to a 100 BPM score, so the typing and deleting in the hook have room to land."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "wittywing-promo/out/wittywing-promo-16x9.mp4", "previewAt": 3, "duration": 34 }]
     },
     {
@@ -96,10 +241,29 @@
       "title": "GST Reco Pro",
       "tags": ["tool promo", "fintech"],
       "year": 2026,
+      "turnaround": "6 hours",
       "featured": true,
       "logline": "24 returns. Nothing uploaded.",
       "brief": "A browser tool that converts GSTR-1 and GSTR-3B PDFs into Excel locally, for chartered accountants and tax teams.",
       "approach": "We open on the pain every CA knows (a pasted table landing in column A) and fix it with the tool's real batch flow.",
+      "story": {
+        "challenge": "Chartered accountants have seen every \"AI-powered GST automation\" pitch. GST Reco Pro's real edge is narrower and stronger: batch conversion of returns to Excel, without client data ever leaving the machine. The film had to say exactly that, precisely, in about 20 seconds.",
+        "audience": "Chartered accountants, articles and corporate tax teams in India who live in GSTR-1 and GSTR-3B every filing season.",
+        "idea": "Start with the pain every CA knows: copy a GSTR-3B table out of the PDF, paste it into Excel, and watch everything land in column A. Then drop 24 returns into the tool and show the same numbers arriving in their own columns.",
+        "scenes": [
+          { "t": 0, "frame": 4.5, "title": "The hook", "text": "A GSTR-3B table is copied and pasted into Excel, lands in column A, and the cells flash red." },
+          { "t": 5, "frame": 7.5, "title": "The reveal", "text": "The logo bars stack in: From PDF to Perfect Excel." },
+          { "t": 8, "frame": 12, "title": "24 returns at once", "text": "A stack of 24 PDFs drops into the real tool. Files Queued counts up and processing starts." },
+          { "t": 12.5, "frame": 15.5, "title": "The result", "text": "The workbook fills month by month, the same numbers from the hook now each in its own column." },
+          { "t": 17, "frame": 19.5, "title": "Zero data risk", "text": "The site's dark panel: data never leaves your machine, and zero uploads to servers." }
+        ],
+        "craft": [
+          "The hook's PDF is recreated from a real GSTR-3B the client supplied, with the business's identifying details blurred.",
+          "The result uses the client's own export layout, so CAs see the exact workbook they'll get.",
+          "A polished, precise tone in the site's own colours and type, with no voiceover and a quiet 120 BPM score.",
+          "Delivered in 16:9 for LinkedIn and YouTube, and 1:1 for feeds."
+        ]
+      },
       "media": [
         { "ratio": "16x9", "src": "gstr-pdf-to-excel/out/gstr-pdf-to-excel-16x9.mp4", "previewAt": 2, "duration": 24 },
         { "ratio": "1x1", "src": "gstr-pdf-to-excel/out/gstr-pdf-to-excel-1x1.mp4", "previewAt": 2, "duration": 24 }
@@ -111,9 +275,31 @@
       "title": "Faceiom",
       "tags": ["app promo", "beauty"],
       "year": 2026,
+      "turnaround": "6 hours",
       "logline": "Three products. Not thirty.",
       "brief": "An Android app that reads one selfie and gives skin and face insights, plus product, routine, haircut and eyewear picks.",
       "approach": "An overflowing bathroom shelf and a phone full of contradictory advice, cut down to one clear report and three products.",
+      "story": {
+        "challenge": "Skincare apps all promise to \"analyse your skin\". Faceiom's difference is what comes after: a short list of what to actually use, plus frames and haircuts for your face. The video had to sell that payoff on a phone screen, as an install ad, without making medical claims.",
+        "audience": "Young adults buried in skincare advice and products, or unsure which glasses or haircut suit them.",
+        "idea": "Ananya stands at a bathroom mirror in front of a shelf overflowing with products while contradictory advice bursts out of her phone. One selfie later, the clutter tumbles off the shelf and three products are left standing. Three products. Not thirty.",
+        "scenes": [
+          { "t": 0, "frame": 4, "title": "The hook", "text": "An overflowing shelf and advice bubbles everywhere: \"Double cleanse!\", \"Never use oils!\". What does my skin need?" },
+          { "t": 5, "frame": 8.5, "title": "One selfie", "text": "Push into her phone: the upload screen, her face in the viewfinder, tap." },
+          { "t": 9, "frame": 13.5, "title": "The scan", "text": "A mesh sweeps over her face as labels pop up: face shape, eyes, nose, skin type." },
+          { "t": 14, "frame": 18.5, "title": "The results", "text": "Skin Score and Beauty Score rings fill, and the AI summary types itself in." },
+          { "t": 19, "frame": 22.5, "title": "The picks", "text": "Visible concerns, then three recommended products for her skin type." },
+          { "t": 23, "frame": 26, "title": "Three, not thirty", "text": "Back at the mirror, the clutter falls away. Cleanser, moisturiser and sunscreen stay." },
+          { "t": 27, "frame": 32, "title": "Frames for your face", "text": "Rohan can't choose glasses. Faceiom maps his face and the right frames snap on." },
+          { "t": 32.5, "frame": 34.5, "title": "Track progress", "text": "Report history and a progression line: track your skin journey." }
+        ],
+        "craft": [
+          "The app screens are recreated from the Play Store listing's own screenshots, so viewers see exactly what they'll install.",
+          "Two characters drawn in code carry the story, one for skin and one for style.",
+          "Made vertical-first at 9:16 for Reels, Shorts and app-install ads, cut to 120 BPM.",
+          "Ends on the app's own disclaimer: cosmetic insights, not a medical diagnosis."
+        ]
+      },
       "media": [{ "ratio": "9x16", "src": "faceiom-promo/out/faceiom-promo-9x16.mp4", "previewAt": 3, "duration": 39 }]
     },
     {
@@ -122,9 +308,27 @@
       "title": "Sofi",
       "tags": ["reel", "gaming"],
       "year": 2026,
+      "turnaround": "6 hours",
       "logline": "Type sd. Three cards drop.",
       "brief": "A card collecting and battling game bot that lives in your Discord server.",
       "approach": "A real-looking Discord channel. Three cards slam into chat within the first 1.5 seconds, and the fastest grab wins.",
+      "story": {
+        "challenge": "Sofi is a game that happens entirely inside Discord chat. Anyone who has played gets it instantly; anyone who hasn't needs to see the loop. The reel had to show the whole game in 20 seconds and earn the scroll-stop in the first one.",
+        "audience": "Discord communities and anime, K-pop and gaming fans who would add a card game to their server.",
+        "idea": "No intro, no logo first. A real-looking Discord channel, \"sd\" typed, and three cards slam into chat inside the first second and a half. Grab one, make it yours, then show how many people are already doing the same.",
+        "scenes": [
+          { "t": 0, "frame": 3.5, "title": "The drop", "text": "\"sd\" is typed in a Discord channel and three cards drop into chat." },
+          { "t": 4, "frame": 7, "title": "The grab", "text": "Tap a number and the camera pushes in on the card. Fastest grab keeps it." },
+          { "t": 7.5, "frame": 11.8, "title": "Make it yours", "text": "Frames cycle, from a library of over 600,000, then glows and backgrounds." },
+          { "t": 12.5, "frame": 15.5, "title": "The scale", "text": "Sofi's own numbers count up: 28 million users and 265,571 servers." }
+        ],
+        "craft": [
+          "Discord's dark UI recreated to the pixel, so the drop reads as real chat.",
+          "The drop message and its 1, 2, 3 buttons match Sofi's own guide exactly.",
+          "Stats are taken live from sofi.gg on the day the reel was made.",
+          "Two masters, 9:16 for Reels, TikTok and Shorts and 4:5 for feeds, in Sofi's lavender and cyan."
+        ]
+      },
       "media": [
         { "ratio": "9x16", "src": "sofi-reel/out/sofi-reel-9x16.mp4", "previewAt": 1, "duration": 20 },
         { "ratio": "4x5", "src": "sofi-reel/out/sofi-reel-4x5.mp4", "previewAt": 1, "duration": 20 }
@@ -136,9 +340,31 @@
       "title": "solAcc",
       "tags": ["product promo", "edtech"],
       "year": 2026,
+      "turnaround": "6 hours",
       "logline": "Practise the OA you're actually facing.",
       "brief": "A practice desk for company online assessments: timed puzzles, MCQs, coding and communication rounds, laid out company by company.",
       "approach": "A week out from placement season: pick the company, then drill its real rounds, including the gamified puzzles nobody else lets you practise.",
+      "story": {
+        "challenge": "Placement-season students are flooded with question banks. solAcc's difference is that it's laid out company by company, including the game-based puzzle rounds nobody else lets you drill. The promo had to make a student feel that difference a week before their online assessment.",
+        "audience": "Indian engineering students in placement season (CSE, IT, ECE, EE and mechanical) a week away from a company's online assessment.",
+        "idea": "Open on the pain of the game-based round: the Key Maze, where the walls aren't drawn. The arrow hits a wall you can't see and you're sent back to the start. Then tour the desk built for that company, and come back to the same maze to clear it.",
+        "scenes": [
+          { "t": 0, "frame": 3, "title": "The hook", "text": "The Key Maze: the arrow hits an invisible wall, the cell flashes pink and you're back at the start. Walls you can't see." },
+          { "t": 4, "frame": 6.5, "title": "The reveal", "text": "The solAcc wordmark: a practice desk for company OAs." },
+          { "t": 7, "frame": 10.5, "title": "39 companies", "text": "The company table. Accenture gets bookmarked and slides into Saved." },
+          { "t": 11, "frame": 14.5, "title": "Not just DSA", "text": "Practice-focus rows light up for VLSI, embedded, electrical, mechanical and low-level design." },
+          { "t": 15, "frame": 18.9, "title": "One desk", "text": "The Accenture desk: OA puzzles, MCQs, coding lab and communication, one click each." },
+          { "t": 19.5, "frame": 23.4, "title": "The maze, cleared", "text": "The same maze again. Three keys collected, exit reached, with time to spare." },
+          { "t": 24, "frame": 27.5, "title": "MCQs by topic", "text": "A real pseudocode question, answered and marked attempted." },
+          { "t": 28, "frame": 31.5, "title": "Code and run", "text": "Python typed into Code Studio, Run, and both test cases pass." }
+        ],
+        "craft": [
+          "Every screen, question and coding problem is solAcc's real content, captured from the live site.",
+          "A small story arc: you fail the maze in the hook and clear it later in the film.",
+          "Built in the site's own dark sage palette and its Satoshi typeface.",
+          "Cut to 120 BPM with no voiceover, one feature per shot."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "solacc-promo/out/solacc-promo-16x9.mp4", "previewAt": 3, "duration": 38 }]
     },
     {
@@ -150,6 +376,26 @@
       "logline": "3,456.00 is not 3,546.00.",
       "brief": "A web app that reads invoices with AI, lets finance teams verify every field and the totals, then files them with a full audit trail.",
       "approach": "The old way fails on a single transposed number. The app's per-field confidence scores and live cross-check catch it before anything gets filed.",
+      "story": {
+        "challenge": "Invoice extraction tools all claim AI accuracy. For a finance team, the question is whether they can trust the numbers before approving them. The launch film had to show that trust being built, field by field and total by total, for an audience that's sceptical by profession.",
+        "audience": "Accounts payable and finance teams, and project accountants who file invoices against projects and vendors.",
+        "idea": "Open on the old way failing: someone keys an invoice into a spreadsheet and transposes two digits, and the cell flashes red. Then follow one invoice through the product, from upload to a Balanced cross-check, an approval and an audit trail.",
+        "scenes": [
+          { "t": 0, "frame": 3.5, "title": "The hook", "text": "An invoice keyed into a spreadsheet, two digits transposed, the total flashes red." },
+          { "t": 4, "frame": 6.5, "title": "The reveal", "text": "The DBT Invoice Extractor lockup on navy: read, verify, approve and file." },
+          { "t": 7, "frame": 10.5, "title": "Upload", "text": "The invoice is dropped into the ingestion page and extraction starts." },
+          { "t": 11, "frame": 17, "title": "Verify", "text": "A scan passes over the document as each field fills in with its own confidence score." },
+          { "t": 17.5, "frame": 22.3, "title": "Cross-check", "text": "Line items plus tax are checked against the declared total. Balanced. Approve and file." },
+          { "t": 24, "frame": 29, "title": "Analytics", "text": "Spend by project and vendor, and a payables horizon of what's due when." },
+          { "t": 30, "frame": 33.5, "title": "Audit trail", "text": "New rows slide into the immutable audit log." }
+        ],
+        "craft": [
+          "Every screen is captured from the real app and rebuilt shot for shot in its own light slate UI.",
+          "The invoice, vendor and amounts are illustrative. No accuracy or speed figures are claimed, because the workspace was a test one.",
+          "A polished, precise tone on a navy stage, with the logo's orange used sparingly for highlights.",
+          "Cut to 120 BPM with cuts on the beat. No voiceover."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "dbt-invoice-launch/out/dbt-invoice-launch-16x9.mp4", "previewAt": 3, "duration": 38 }]
     },
     {
@@ -161,6 +407,25 @@
       "logline": "One product record, from pack to pitch.",
       "brief": "An internal workspace for product knowledge, competitor intel and sales enablement, with approvals and a cited AI assistant.",
       "approach": "A dashboard that builds itself, then one product record followed through every role: create, approve, compare, pitch, ask.",
+      "story": {
+        "challenge": "BOS is an internal tool, so this isn't an ad. It's a tutorial its own staff would actually watch. It had to show five roles and a full product lifecycle in under 40 seconds, and leave people knowing where to click.",
+        "audience": "Product managers, product owners and sales teams at AAA Bed who use BOS every day.",
+        "idea": "Follow one real product, Biscamix Choco, through the whole documented lifecycle, from pack artwork to a sales pitch, in five numbered steps. The cursor clicks the real sidebar every time, so the tour doubles as a map of the app.",
+        "scenes": [
+          { "t": 0, "frame": 3.5, "title": "The promise", "text": "A dashboard builds itself, then the promise: new product to sales pitch in 5 steps." },
+          { "t": 5.5, "frame": 12, "title": "Step 1: create", "text": "The Biscamix Choco pack is dropped onto Scan product and the code, barcode and names fill in." },
+          { "t": 13, "frame": 16.4, "title": "Step 2: approve", "text": "The product owner approves. It's published, indexed for the AI Assistant and logged." },
+          { "t": 18, "frame": 23, "title": "Step 3: compare", "text": "Two products side by side, with the differentiator highlighted." },
+          { "t": 23.5, "frame": 28.5, "title": "Step 4: the pitch", "text": "Pick the buyer, cafés, and a positioning statement types itself out, with citations." },
+          { "t": 29, "frame": 33.5, "title": "Step 5: ask", "text": "A question to the AI Assistant, answered from the published record and cited." }
+        ],
+        "craft": [
+          "Every screen is the real BOS app, captured logged in, and the product is a real SKU with its own pack artwork.",
+          "The steps follow BOS's own documentation of each role's journey, so the video matches the training material.",
+          "Calm and confident rather than salesy: a clean walkthrough in the app's dark theme.",
+          "Cut to 120 BPM with no voiceover, so it can be shared and watched with the sound off."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "bos-tutorial/out/bos-tutorial-16x9.mp4", "previewAt": 3, "duration": 40 }]
     },
     {
@@ -169,9 +434,29 @@
       "title": "ProMed United",
       "tags": ["character journey", "education"],
       "year": 2026,
+      "turnaround": "6 hours",
       "logline": "A clearer path.",
       "brief": "Physician-led medical education, from premed and the MCAT through boards, the Match and intern year.",
       "approach": "A drawn premed student faces a giant tangled scribble between first science class and first patient, and the path straightens out stage by stage.",
+      "story": {
+        "challenge": "Medical education is a long, confusing road: MCAT, med school, research, boards, the Match, intern year. ProMed United's promise is one clearer path with a physician beside you. The film had to make that journey feel lighter in about 25 seconds.",
+        "audience": "Premeds and medical students facing the long road from MCAT to the Match, who want a plan and a mentor.",
+        "idea": "A premed student faces a giant tangled scribble between \"first science class\" and \"first patient\", tagged with every exam on the way. Then the knot pulls straight into one blue path, a mentor walks in beside her, and she changes from hoodie to white coat to scrubs as she passes each gate.",
+        "scenes": [
+          { "t": 0, "frame": 2.5, "title": "The knot", "text": "Night. A tangled scribble between first science class and first patient, tagged MCAT, USMLE, COMLEX, the Match. Medicine is a long journey." },
+          { "t": 3, "frame": 5.8, "title": "A clearer path", "text": "The knot pulls straight into a blue path, day breaks and the mentor walks in. Big ambitions. A clearer path." },
+          { "t": 6, "frame": 9, "title": "Med School Launchpad", "text": "An MCAT practice question with its explanation, then through the Med School gate into a white coat." },
+          { "t": 9.6, "frame": 12.8, "title": "Research Accelerator", "text": "At the lab bench, a 16-week research path and a forest plot drawing itself." },
+          { "t": 13.2, "frame": 16, "title": "Study together", "text": "Late night: a study channel full of classmates and live mentor office hours." },
+          { "t": 16.8, "frame": 20, "title": "Intern Bootcamp", "text": "In scrubs at a patient's bedside, the patient journey ticks from the ED to the first follow-up." }
+        ],
+        "craft": [
+          "The student, the mentor, classmates and a patient are all drawn and rigged in code, with costume changes at each gate.",
+          "Every headline is ProMed United's own copy, and the hero is rebuilt from promedunited.com.",
+          "The classroom is behind a login, so its screens are recreated in the site's own design.",
+          "A hopeful 100 BPM score with day breaking on the reveal. No voiceover."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "promed-united-path/out/promed-united-path-16x9.mp4", "previewAt": 2, "duration": 25 }]
     },
     {
@@ -181,9 +466,30 @@
       "tags": ["concept promo", "developer tools"],
       "concept": true,
       "year": 2026,
+      "turnaround": "6 hours",
       "logline": "Issue to merge.",
       "brief": "The developer platform pitched as the whole loop in one place: issues, an AI agent's fix, a cloud dev environment, CI, security and the merge.",
       "approach": "A cursor assigns an issue to the coding agent, and within three seconds a draft PR appears. The rest of the loop runs at the same pace.",
+      "story": {
+        "challenge": "A concept piece: could the same pipeline make a convincing launch-style film for one of the most familiar products in software? Developers know GitHub's interface by heart, so every screen had to feel exactly right.",
+        "audience": "Shipping developers who want flow, green CI and no secrets leaking into the repo.",
+        "idea": "Follow one bug from issue to merge without leaving GitHub. Assign the issue to Copilot, and a few seconds later a draft pull request appears. Then Codespaces, Actions, push protection and the merge, one product per shot.",
+        "scenes": [
+          { "t": 0, "frame": 3.5, "title": "Assign the issue", "text": "Issue #482 is assigned to Copilot, and a draft pull request appears in the timeline." },
+          { "t": 4, "frame": 6.5, "title": "The reveal", "text": "The Invertocat over GitHub's own headline: The future of building happens together." },
+          { "t": 7, "frame": 11.5, "title": "Copilot", "text": "The agent session ticks through its steps alongside the diff that fixes the bug." },
+          { "t": 12, "frame": 15, "title": "Codespaces", "text": "A codespace spins up, npm test runs and three tests pass." },
+          { "t": 15.5, "frame": 20, "title": "Actions", "text": "Matrix builds on Ubuntu, macOS and Windows go green. All checks have passed." },
+          { "t": 20.5, "frame": 25.5, "title": "Push protection", "text": "A git push carrying a secret is declined, next to GitHub's own figure of 8.3M leaks stopped." },
+          { "t": 26, "frame": 29.2, "title": "Merged", "text": "Merge pull request, confirm, and the issue closes itself." }
+        ],
+        "craft": [
+          "Every headline is GitHub's own copy, and the stat is taken from github.com on the day it was made.",
+          "GitHub's dark UI rebuilt in its own colours and typeface, with Mona Sans and mono uppercase eyebrows.",
+          "The repository, issue, code and the leaked key are invented. The key is fake and masked.",
+          "Cut to a 120 BPM electronic score, one product per shot."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "github-promo/out/github-promo-16x9.mp4", "previewAt": 3, "duration": 35 }]
     },
     {
@@ -193,9 +499,29 @@
       "tags": ["concept promo", "enterprise ai"],
       "concept": true,
       "year": 2026,
+      "turnaround": "6 hours",
       "logline": "Who carries the accountability?",
       "brief": "Outcome-backed enterprise automation, pitched to the leaders who sign off on AI budgets.",
       "approach": "We frame it around the CFO's risk, then answer with the company's published outcomes and guarantee.",
+      "story": {
+        "challenge": "Enterprise AI is a crowded pitch, and the person who signs off carries the risk. Techolution's own positioning is accountability: outcome-backed AI with a money-back challenge. The film had to put that in front of a CFO without a boardroom full of buzzwords.",
+        "audience": "Enterprise leaders who sign off on AI budgets and carry the risk, above all the CFO.",
+        "idea": "A boardroom where three department heads slide AI pilot folders at the CFO, and the pile keeps growing. She does her due diligence: she takes the site's own profitability quiz, then follows three real Techolution case studies floor by floor, each with its own character, before signing up for the money-back challenge.",
+        "scenes": [
+          { "t": 0, "frame": 5, "title": "The hook", "text": "Department heads slide AI pilot folders across the table. Everyone wants the budget. Nobody wants the accountability." },
+          { "t": 6, "frame": 11.5, "title": "The quiz", "text": "The CFO takes the site's own profitability quiz, clicks past 100% and builds her roadmap." },
+          { "t": 12, "frame": 18.5, "title": "Value Finder", "text": "A plant director's wall of 30+ AI ideas narrows to five high-ROI projects." },
+          { "t": 19, "frame": 26.5, "title": "Learns on the job", "text": "A media scheduler overrides a slot and the AI asks to learn from it. Yes, learn this." },
+          { "t": 27, "frame": 33.5, "title": "Roadside help", "text": "A driver on the hard shoulder finds roadside assistance instantly through the AI assistant." },
+          { "t": 40, "frame": 49, "title": "Full Enterprise Automation", "text": "The feature board: the BPA 4.0 components and services, with the whole cast along the bottom." }
+        ],
+        "craft": [
+          "Every claim and case figure is from techolution.com, captured on the day it was made.",
+          "Flat illustrated characters for each case on the site's light blue-grid world, all drawn in code.",
+          "The quiz, the Value Finder and the Teach Me panel are rebuilt from the site's own interface.",
+          "A 56-second B2B story cut to 120 BPM in a minor key, with no voiceover."
+        ]
+      },
       "media": [{ "ratio": "16x9", "src": "techolution-fea-promo/out/techolution-fea-promo-16x9.mp4", "previewAt": 3, "duration": 56 }]
     }
   ]

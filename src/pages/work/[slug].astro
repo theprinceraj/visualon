@@ -1,5 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
+import WorkCard from "../../components/WorkCard.astro";
 import { projects, media, ratioLabel, type Project } from "../../data/site";
 import { breadcrumbs, video } from "../../data/seo";
 
@@ -8,8 +9,17 @@ export function getStaticPaths() {
 }
 const { p, n, next } = Astro.props as { p: Project; n: number; next: Project };
 const main = p.media[0];
+const story = p.story;
 const kind = /film|reel|ad$|video/.test(p.tags[0]) ? p.tags[0] : `${p.tags[0]} video`;
 const schema = [video(Astro.site!, p), breadcrumbs(Astro.site!, [["Work", "/work"], [p.title, `/work/${p.slug}`]])];
+const clock = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+// Related: most shared tags first, then the portfolio order. The next project already has its own link.
+const related = projects
+  .filter((x) => x !== p && x !== next)
+  .map((x, i) => ({ x, i, score: x.tags.filter((t) => p.tags.includes(t)).length }))
+  .sort((a, b) => b.score - a.score || a.i - b.i)
+  .slice(0, 2)
+  .map(({ x }) => x);
 ---
 
 <Base
@@ -26,7 +36,7 @@ const schema = [video(Astro.site!, p), breadcrumbs(Astro.site!, [["Work", "/work
       <p class="display it blue logline">{p.logline}</p>
     </header>
 
-    <div class="player wrap">
+    <div class="player wrap" id="player">
       {
         p.media.length > 1 && (
           <div class="ratios" role="group" aria-label="Format">
@@ -56,7 +66,7 @@ const schema = [video(Astro.site!, p), breadcrumbs(Astro.site!, [["Work", "/work
       </section>
       <section>
         <span class="caps muted">the idea</span>
-        <p class="read">{p.approach}</p>
+        <p class="read">{story?.idea ?? p.approach}</p>
       </section>
       <section>
         <span class="caps muted">delivered as</span>
@@ -64,6 +74,77 @@ const schema = [video(Astro.site!, p), breadcrumbs(Astro.site!, [["Work", "/work
         <a href="/#packages" class="btn">get one like this <span aria-hidden="true">→</span></a>
       </section>
     </div>
+
+    {
+      story && (
+        <>
+          <section class="brief wrap">
+            <div>
+              <span class="caps muted">the challenge</span>
+              <p class="lead">{story.challenge}</p>
+            </div>
+            <div>
+              <span class="caps muted">made for</span>
+              <p class="read">{story.audience}</p>
+            </div>
+          </section>
+
+          <section class="scenes wrap" aria-labelledby="scenes-h">
+            <h2 class="display h" id="scenes-h">
+              Scene by <em class="blue">scene</em>.
+            </h2>
+            <ol class:list={{ tall: main.ratio === "9x16" || main.ratio === "4x5" }}>
+              {story.scenes.map((s, i) => (
+                <li>
+                  <a href="#player" class="scene" data-seek={s.t} aria-label={`Play from ${clock(s.t)}: ${s.title}`}>
+                    <span class:list={["still", `r${main.ratio}`]}>
+                      <img src={media(p.slug, main.ratio, `scene-${i + 1}.jpg`)} alt="" loading="lazy" decoding="async" />
+                      <span class="caps t">▶ {clock(s.t)}</span>
+                    </span>
+                    <span class="display st">{s.title}</span>
+                    <span class="read muted">{s.text}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section class="craft wrap" aria-labelledby="craft-h">
+            <h2 class="display h" id="craft-h">
+              How it was <em class="blue">made</em>.
+            </h2>
+            <ol>
+              {story.craft.map((c, i) => (
+                <li>
+                  <span class="caps num">{String(i + 1).padStart(2, "0")}</span>
+                  <p class="read">{c}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        </>
+      )
+    }
+
+    {
+      (p.turnaround || !p.concept) && (
+        <section class="result wrap">
+          <span class="caps muted">the result</span>
+          {p.turnaround && (
+            <p class="display stat">
+              {p.turnaround} <em class="blue">from request to final cut.</em>
+            </p>
+          )}
+          {!p.concept && <p class="lead">The client was stunned by the result, and more so that it was made entirely by AI.</p>}
+          {p.concept && <p class="lead">A concept piece: no client, same pipeline, same turnaround as client work.</p>}
+        </section>
+      )
+    }
+
+    <section class="more wrap" aria-labelledby="more-h">
+      <span class="caps muted" id="more-h">more like this</span>
+      <div class="grid">{related.map((r) => <WorkCard p={r} n={projects.indexOf(r) + 1} />)}</div>
+    </section>
 
     <a href={`/work/${next.slug}`} class="next wrap">
       <span class="caps muted">next</span>
@@ -94,6 +175,7 @@ const schema = [video(Astro.site!, p), breadcrumbs(Astro.site!, [["Work", "/work
   }
   .player {
     margin-top: 64px;
+    scroll-margin-top: 24px;
   }
   .ratios {
     display: flex;
@@ -140,6 +222,124 @@ const schema = [video(Astro.site!, p), breadcrumbs(Astro.site!, [["Work", "/work
     display: flex;
     gap: 8px;
   }
+  .lead {
+    font-family: var(--body);
+    font-size: clamp(19px, 1.7vw, 24px);
+    line-height: 1.45;
+    margin: 16px 0 0;
+    max-width: 34em;
+  }
+  .brief {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    padding-block: 72px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .brief .read {
+    margin: 16px 0 0;
+  }
+  .h {
+    font-size: clamp(40px, 5vw, 80px);
+    margin: 0 0 48px;
+  }
+  .scenes,
+  .craft,
+  .result,
+  .more {
+    padding-block: 72px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .scenes ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 40px 28px;
+  }
+  .scene {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .scene:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+  }
+  .still {
+    position: relative;
+    display: block;
+    border: 1px solid var(--line-paper);
+    padding: 8px;
+  }
+  .still img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--ink-soft);
+  }
+  .scenes ol.tall {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+  .still.r9x16 img {
+    aspect-ratio: 9 / 16;
+  }
+  .still.r4x5 img {
+    aspect-ratio: 4 / 5;
+  }
+  .still .t {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5px 8px;
+    transition: background 0.3s;
+  }
+  .scene:hover .t,
+  .scene:focus-visible .t {
+    background: var(--accent);
+  }
+  .st {
+    font-size: 26px;
+    margin-top: 6px;
+  }
+  .scene .read {
+    margin: 0;
+  }
+  .craft ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 48px;
+  }
+  .craft li {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    align-items: baseline;
+    border-top: 1px solid var(--line-paper);
+    padding-top: 20px;
+  }
+  .craft .num {
+    color: var(--accent-soft);
+  }
+  .craft .read {
+    margin: 0;
+  }
+  .stat {
+    font-size: clamp(40px, 6vw, 96px);
+    margin: 20px 0 0;
+  }
+  .more .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 48px 32px;
+    margin-top: 28px;
+  }
   .next {
     display: flex;
     flex-direction: column;
@@ -158,21 +358,52 @@ const schema = [video(Astro.site!, p), breadcrumbs(Astro.site!, [["Work", "/work
     transform: translateX(16px);
   }
   @media (max-width: 860px) {
-    .notes {
+    .notes,
+    .brief,
+    .craft ol,
+    .more .grid {
       grid-template-columns: 1fr;
     }
   }
 </style>
 
 <script>
+  const screens = [...document.querySelectorAll<HTMLElement>("[data-screen]")];
+  const visible = () => screens.find((s) => !s.hidden)?.querySelector("video");
+
   document.querySelectorAll<HTMLButtonElement>("[data-ratio]").forEach((b) =>
     b.addEventListener("click", () => {
+      const t = visible()?.currentTime ?? 0;
       document.querySelectorAll<HTMLButtonElement>("[data-ratio]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-      document.querySelectorAll<HTMLElement>("[data-screen]").forEach((s) => {
+      screens.forEach((s) => {
         const on = s.dataset.screen === b.dataset.ratio;
         s.hidden = !on;
-        if (!on) s.querySelector("video")?.pause();
+        const v = s.querySelector("video");
+        if (!on) v?.pause();
+        else if (v && t) v.currentTime = t;
       });
     }),
   );
+
+  // Scenes (and ?t= links from search "key moments") play the visible format from that second.
+  const seek = (t: number, play: boolean) => {
+    const v = visible();
+    if (!v) return;
+    const go = () => {
+      v.currentTime = t;
+      if (play) v.play().catch(() => {});
+    };
+    if (v.readyState >= 1) go();
+    else {
+      v.preload = "metadata";
+      v.addEventListener("loadedmetadata", go, { once: true });
+      v.load();
+    }
+  };
+  // The links scroll to #player through the site's smooth-scroll handler; this only seeks.
+  document.querySelectorAll<HTMLAnchorElement>("[data-seek]").forEach((a) =>
+    a.addEventListener("click", () => seek(Number(a.dataset.seek), true)),
+  );
+  const start = Number(new URLSearchParams(location.search).get("t"));
+  if (start > 0) seek(start, false);
 </script>

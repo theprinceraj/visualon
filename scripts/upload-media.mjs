@@ -1,5 +1,6 @@
 // Uploads public/media to the R2 bucket that serves PUBLIC_MEDIA_BASE.
-// Usage: node scripts/upload-media.mjs [--bucket visualon-media] [--only slug]
+// Usage: node scripts/upload-media.mjs [--bucket visualon-media] [--only slug] [--stills]
+// --stills uploads only the case-study scene stills (scene-<n>.jpg).
 // Needs `npx wrangler login` once. Run `npm run media` first to build the files.
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -9,13 +10,16 @@ const args = process.argv.slice(2);
 const flag = (n, d) => (args.includes(n) ? args[args.indexOf(n) + 1] : d);
 const bucket = flag("--bucket", process.env.R2_BUCKET || "visualon-media");
 const only = flag("--only");
+const stillsOnly = args.includes("--stills");
 const root = path.resolve(import.meta.dirname, "../public/media");
 const types = { ".mp4": "video/mp4", ".jpg": "image/jpeg" };
 
 const walk = (dir) =>
   fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => (d.isDirectory() ? walk(path.join(dir, d.name)) : [path.join(dir, d.name)]));
 
-const files = walk(root).filter((f) => !only || path.relative(root, f).startsWith(only + path.sep));
+const files = walk(root)
+  .filter((f) => !only || path.relative(root, f).startsWith(only + path.sep))
+  .filter((f) => !stillsOnly || /^scene-\d+\.jpg$/.test(path.basename(f)));
 for (const f of files) {
   const key = path.relative(root, f).split(path.sep).join("/");
   const type = types[path.extname(f)] ?? "application/octet-stream";

@@ -83,11 +83,25 @@ export const checkoutBase =
 // Dev serves public/media; production builds use the R2 bucket unless PUBLIC_MEDIA_BASE overrides it.
 const R2_MEDIA = "https://media.visualon.top";
 const mediaBase = (import.meta.env.PUBLIC_MEDIA_BASE || (import.meta.env.DEV ? "/media" : R2_MEDIA)).replace(/\/$/, "");
-export const media = (slug: string, ratio: string, file: "full.mp4" | "preview.mp4" | "poster.jpg" | "preview.jpg") =>
+export const media = (
+  slug: string,
+  ratio: string,
+  file: "full.mp4" | "preview.mp4" | "poster.jpg" | "preview.jpg" | `scene-${number}.jpg`,
+) =>
   `${mediaBase}/${slug}/${ratio}/${file}`;
 export const reelUrl = `${mediaBase}/reel.mp4`;
 
-export type Project = (typeof work.projects)[number] & { concept?: boolean };
+/** Case-study write-up on a project's page. Scene times are seconds into the video (the same in every format). */
+export type Story = {
+  challenge: string;
+  audience: string;
+  idea: string;
+  /** `t` is where the scene starts; `frame` is the moment used for its still (scene-<n>.jpg, built by npm run media). */
+  scenes: { t: number; frame: number; title: string; text: string }[];
+  craft: string[];
+};
+
+export type Project = (typeof work.projects)[number] & { concept?: boolean; turnaround?: string; story?: Story };
 export const projects = work.projects as Project[];
 export const featured = projects.filter((p) => p.featured);
 export const vertical = projects.flatMap((p) =>

@@ -89,6 +89,16 @@ export function video(base: URL, p: Project): Node {
     genre: p.tags.join(", "),
     inLanguage: "en",
     publisher: { "@id": orgId(base) },
+    // Scenes become "key moments" in search. The work page seeks to ?t= on load.
+    ...(p.story && {
+      hasPart: p.story.scenes.map((s, i, all) => ({
+        "@type": "Clip",
+        name: s.title,
+        startOffset: Math.floor(s.t),
+        endOffset: Math.floor(all[i + 1]?.t ?? m.duration),
+        url: abs(`/work/${p.slug}?t=${Math.floor(s.t)}`, base),
+      })),
+    }),
   };
 }
 

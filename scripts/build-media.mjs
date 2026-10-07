@@ -1,5 +1,6 @@
 // Turns finished renders into web media: a faststart full MP4, a short muted preview loop and a poster.
-// Usage: node scripts/build-media.mjs [--src "D:/Claude Videos/projects"] [--only slug]
+// Usage: node scripts/build-media.mjs [--src "D:/Claude Videos/projects"] [--only slug] [--stills]
+// --stills only (re)builds the case-study scene stills, skipping the video encodes and the reel.
 // Reads the `media` list in src/data/work.json and writes public/media/<slug>/<variant>/{full.mp4,preview.mp4,poster.jpg}.
 // public/media is gitignored; production serves it from R2 (see scripts/upload-media.mjs).
 import { execFileSync } from "node:child_process";
@@ -10,6 +11,7 @@ const args = process.argv.slice(2);
 const flag = (n, d) => (args.includes(n) ? args[args.indexOf(n) + 1] : d);
 const SRC = flag("--src", process.env.VIDEO_SRC || "D:/Claude Videos/projects");
 const only = flag("--only");
+const stillsOnly = args.includes("--stills");
 const root = path.resolve(import.meta.dirname, "..");
 const work = JSON.parse(fs.readFileSync(path.join(root, "src/data/work.json"), "utf8"));
 
@@ -33,6 +35,17 @@ for (const p of work.projects) {
     const start = v.previewAt ?? Math.min(2, dur / 4);
     const len = Math.min(v.previewLen ?? 8, dur - start);
 
+    // Case-study stills: one frame per scene, from the first format only (the page shows them under the player).
+    const scenes = v === p.media[0] ? (p.story?.scenes ?? []) : [];
+    scenes.forEach((s, i) =>
+      ff(["-ss", String(s.frame), "-i", src, "-frames:v", "1", "-vf", vertical ? "scale=360:-2" : "scale=640:-2", "-q:v", "5",
+        path.join(out, `scene-${i + 1}.jpg`)]),
+    );
+    if (stillsOnly) {
+      if (scenes.length) console.log(`${p.slug}/${v.ratio}: ${scenes.length} scene stills`);
+      continue;
+    }
+
     // Full video: re-encode for the web (1080p, ~3.5 Mbps cap) with the moov atom up front.
     ff(["-i", src, "-c:v", "libx264", "-preset", "slow", "-crf", "23", "-maxrate", "3500k", "-bufsize", "7000k",
       "-pix_fmt", "yuv420p", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", path.join(out, "full.mp4")]);
@@ -45,7 +58,8 @@ for (const p of work.projects) {
     ff(["-i", path.join(out, "preview.mp4"), "-frames:v", "1", "-q:v", "5", path.join(out, "preview.jpg")]);
 
     const kb = (f) => Math.round(fs.statSync(path.join(out, f)).size / 1024);
-    console.log(`${p.slug}/${v.ratio}: full ${kb("full.mp4")}K · preview ${kb("preview.mp4")}K · poster ${kb("poster.jpg")}K`);
+    console.log(`${p.slug}/${v.ratio}: full ${kb("full.mp4")}K · preview ${kb("preview.mp4")}K · poster ${kb("poster.jpg")}K` +
+      (scenes.length ? ` · ${scenes.length} scene stills` : ""));
   }
 }
 
@@ -54,7 +68,7 @@ const clips = work.projects
   .filter((p) => p.featured && p.media.some((m) => m.ratio === "16x9"))
   .map((p) => path.join(root, "public/media", p.slug, "16x9", "preview.mp4"))
   .filter((f) => fs.existsSync(f));
-if (clips.length && !only) {
+if (clips.length && !only && !stillsOnly) {
   const inputs = clips.flatMap((f) => ["-ss", "1", "-t", "2.2", "-i", f]);
   const chain = clips.map((_, i) => `[${i}:v]scale=960:540,setsar=1,fps=30[v${i}]`).join(";");
   const concat = clips.map((_, i) => `[v${i}]`).join("") + `concat=n=${clips.length}:v=1:a=0[out]`;
