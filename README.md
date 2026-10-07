@@ -55,7 +55,7 @@ switch the variable. Adding a project: render it in the studio repo, add an entr
 Cloudflare Pages project `visualon` (account "Prince Raj"), Git-connected: every push to `main` deploys to
 https://visualon.theprinceraj.in (and visualon.pages.dev). Build `npm run build` → `dist`, `NODE_VERSION=22`.
 
-| Environment | Branch | URL | `PUBLIC_DODO_MODE` |
+| Environment | Branch | URL | `PUBLIC_DODO_MODE` (set in `wrangler.jsonc`) |
 |---|---|---|---|
 | Production | `main` | visualon.theprinceraj.in | `live` |
 | Dev / test | `dev` | dev.visualon.pages.dev | `test` (Pages "Preview" variables) |

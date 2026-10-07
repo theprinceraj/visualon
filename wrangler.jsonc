@@ -2,5 +2,11 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "visualon",
   "compatibility_date": "2026-10-01",
-  "pages_build_output_dir": "./dist"
+  "pages_build_output_dir": "./dist",
+  // This file is the source of truth for build variables (the Pages dashboard values are ignored while it exists).
+  // Top-level vars = production (main). env.preview = dev and every other branch.
+  "vars": { "PUBLIC_DODO_MODE": "live" },
+  "env": {
+    "preview": { "vars": { "PUBLIC_DODO_MODE": "test" } }
+  }
 }
