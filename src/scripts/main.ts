@@ -9,7 +9,7 @@ type Pkg = {
   delivery: string;
   includes: string[];
   formats: string[];
-  dodo: Record<Currency, string>;
+  dodo: Record<"test" | "live", string>;
 };
 
 const $ = <T extends Element = HTMLElement>(s: string, r: ParentNode = document) => r.querySelector<T>(s);
@@ -206,7 +206,7 @@ $$<HTMLButtonElement>("[data-currency]").forEach((b) =>
 // ---------- order dialog → Dodo checkout ----------
 const dialog = $<HTMLDialogElement>("#order");
 const cfgEl = $("#order-config");
-const cfg = cfgEl ? (JSON.parse(cfgEl.textContent || "{}") as { packages: Pkg[]; checkoutBase: string; email: string }) : null;
+const cfg = cfgEl ? (JSON.parse(cfgEl.textContent || "{}") as { packages: Pkg[]; checkoutBase: string; mode: "test" | "live"; email: string }) : null;
 let current: Pkg | null = null;
 
 function updateOrder() {
@@ -292,7 +292,7 @@ dialog?.querySelector("form")?.addEventListener("submit", (e) => {
   if (brief.length < 10) return fail("give us a line or two of brief.");
   const formats = $$<HTMLButtonElement>(`[data-o="formats"] button[aria-pressed="true"]`, dialog).map((b) => b.dataset.value);
   const tone = picked(dialog, "tone");
-  const productId = current.dodo[currency];
+  const productId = current.dodo[cfg.mode];
 
   if (!productId) {
     // Checkout not configured yet: send the order as an email instead.

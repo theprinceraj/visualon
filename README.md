@@ -41,18 +41,25 @@ switch the variable. Adding a project: render it in the studio repo, add an entr
 
 ## Payments (Dodo)
 
-1. One Dodo one-time product per package, priced in USD with a localized INR price. Its `pdt_…` ID goes in both
-   `packages[].dodo.INR` and `.USD`; checkout receives `paymentCurrency` so the buyer pays in the currency they picked.
-   Keep the prices in `site.ts` in sync with Dodo. Dodo adds tax on top, so the site says "+ tax".
-   Test-mode and live-mode products have different IDs. When going live, recreate them in live mode and swap the IDs.
-2. Until an ID is filled in, "order" falls back to a pre-filled email to the studio, so the site works before Dodo is live.
+1. One Dodo one-time product per package, in **both** test and live mode, each with a USD price plus a localized
+   (fixed) INR price, **tax-inclusive**. IDs go in `packages[].dodo.test` / `.live` in `src/data/site.ts`; keep the
+   prices there in sync with Dodo. Checkout receives `paymentCurrency`, so the buyer pays in the currency they picked.
+2. `PUBLIC_DODO_MODE=live` → live checkout + live IDs. Anything else (unset, `test`) → test checkout, test IDs, a yellow
+   "test mode" strip and `noindex`.
 3. Checkout gets the buyer's name/email plus `metadata_package`, `metadata_product_link`, `metadata_formats`,
-   `metadata_feel`, `metadata_brief`. You'll see them on each payment in the dashboard.
-4. After paying, Dodo redirects to `/thanks?payment_id=…&status=…`.
-5. `PUBLIC_DODO_MODE=test` uses the test checkout; switch to `live` once the account is verified.
+   `metadata_feel`, `metadata_brief` (visible on each payment in the dashboard).
+4. After paying, Dodo redirects to `/thanks?payment_id=…&status=…` on whichever site the order started from.
 
 ## Deploy (Cloudflare Pages)
 
 Cloudflare Pages project `visualon` (account "Prince Raj"), Git-connected: every push to `main` deploys to
-https://visualon.pages.dev, other branches get preview URLs. Build `npm run build` → `dist`, `NODE_VERSION=22`. No other variables are required (media defaults to R2 in production builds).
+https://visualon.theprinceraj.in (and visualon.pages.dev). Build `npm run build` → `dist`, `NODE_VERSION=22`.
+
+| Environment | Branch | URL | `PUBLIC_DODO_MODE` |
+|---|---|---|---|
+| Production | `main` | visualon.theprinceraj.in | `live` |
+| Dev / test | `dev` | dev.visualon.pages.dev | `test` (Pages "Preview" variables) |
+
+Work on `dev`, test the full checkout with Dodo test payments, then merge `dev` → `main` to ship. Every other branch
+also gets its own preview URL in test mode. Media defaults to R2 in all deployed builds.
 Custom domain: `visualon.theprinceraj.in` now (CNAME → `<project>.pages.dev`), `visualon.top` later.

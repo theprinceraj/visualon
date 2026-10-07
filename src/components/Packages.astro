@@ -44,7 +44,7 @@ const steps = [
               <span data-price data-inr={p.price.INR} data-usd={p.price.USD}>
                 {formatPrice(p.price.INR, "INR")}
               </span>
-              <span class="caps once muted">one-time + tax · {p.delivery}</span>
+              <span class="caps once muted">one-time · tax incl. · {p.delivery}</span>
             </p>
             <ul class="chips">
               {p.includes.map((x) => (

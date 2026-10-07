@@ -13,6 +13,7 @@ export const site = {
 };
 
 export type Currency = "INR" | "USD";
+export type DodoMode = "test" | "live";
 
 export type Package = {
   id: string;
@@ -24,10 +25,11 @@ export type Package = {
   formats: string[];
   recommended?: boolean;
   /**
-   * Dodo Payments product ID per currency. One product with a localized INR price serves both; checkout
-   * gets `paymentCurrency` so the buyer pays the shown price. While empty, "order" falls back to a pre-filled email.
+   * Dodo Payments product IDs for test and live mode. Each product has a USD price plus a localized INR price
+   * (both tax-inclusive); checkout gets `paymentCurrency` so the buyer pays the shown price. While empty,
+   * "order" falls back to a pre-filled email.
    */
-  dodo: Record<Currency, string>;
+  dodo: Record<DodoMode, string>;
 };
 
 export const packages: Package[] = [
@@ -39,7 +41,7 @@ export const packages: Package[] = [
     delivery: "48 hours",
     includes: ["15–25s video", "1 format", "music + sfx scored", "poster frame", "1 revision"],
     formats: ["9:16", "16:9", "1:1", "4:5"],
-    dodo: { INR: "pdt_0NpAtJ2l6aMzO3MFgOlQH", USD: "pdt_0NpAtJ2l6aMzO3MFgOlQH" },
+    dodo: { test: "pdt_0NpAtJ2l6aMzO3MFgOlQH", live: "pdt_0NpCw6aOU2aBJdF9s4Tz3" },
   },
   {
     id: "launch",
@@ -50,7 +52,7 @@ export const packages: Package[] = [
     includes: ["20–45s film", "9:16 + 1:1 + 16:9", "captions + hashtags", "poster frames", "2 revisions"],
     formats: ["9:16", "1:1", "16:9", "4:5"],
     recommended: true,
-    dodo: { INR: "pdt_0NpAuSxSjYx4eqtKXmu8M", USD: "pdt_0NpAuSxSjYx4eqtKXmu8M" },
+    dodo: { test: "pdt_0NpAuSxSjYx4eqtKXmu8M", live: "pdt_0NpCw6Vd7u7UmZevij3qB" },
   },
   {
     id: "hooks",
@@ -60,7 +62,7 @@ export const packages: Package[] = [
     delivery: "72 hours",
     includes: ["1 ad, 5 hook variants", "9:16 + 4:5", "a/b test plan", "2 revisions"],
     formats: ["9:16", "4:5", "1:1"],
-    dodo: { INR: "pdt_0NpAvG1pPno986EEh79OH", USD: "pdt_0NpAvG1pPno986EEh79OH" },
+    dodo: { test: "pdt_0NpAvG1pPno986EEh79OH", live: "pdt_0NpCw6fC8L5MZnSygDwSa" },
   },
 ];
 
@@ -68,7 +70,8 @@ export const symbols: Record<Currency, string> = { INR: "₹", USD: "$" };
 export const formatPrice = (n: number, c: Currency) =>
   symbols[c] + n.toLocaleString(c === "INR" ? "en-IN" : "en-US", { maximumFractionDigits: 2 });
 
-export const dodoMode = (import.meta.env.PUBLIC_DODO_MODE ?? "test") as "test" | "live";
+// "live" only when the build says so (Cloudflare Pages production). Everything else — dev, previews — is test.
+export const dodoMode: DodoMode = import.meta.env.PUBLIC_DODO_MODE === "live" ? "live" : "test";
 export const checkoutBase =
   dodoMode === "live" ? "https://checkout.dodopayments.com" : "https://test.checkout.dodopayments.com";
 

@@ -3,7 +3,7 @@ import "../styles/global.css";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
 import OrderDialog from "../components/OrderDialog.astro";
-import { site } from "../data/site";
+import { site, dodoMode } from "../data/site";
 
 interface Props {
   title?: string;
@@ -30,6 +30,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="theme-color" content="#f4f5f7" />
+    {dodoMode === "test" && <meta name="robots" content="noindex, nofollow" />}
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -38,12 +39,35 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body class={home ? "is-home" : ""}>
+    {
+      dodoMode === "test" && (
+        <div class="test-strip caps" role="note">
+          test mode · payments use dodo's test checkout, no real money
+        </div>
+      )
+    }
     <Nav />
     <main>
       <slot />
     </main>
     <Footer />
     <OrderDialog />
+    <style>
+      .test-strip {
+        position: fixed;
+        left: 50%;
+        bottom: 14px;
+        transform: translateX(-50%);
+        z-index: 70;
+        max-width: calc(100vw - 32px);
+        padding: 8px 14px;
+        background: #ffd400;
+        color: #101113;
+        font-size: 10px;
+        text-align: center;
+        pointer-events: none;
+      }
+    </style>
     <script>
       import "../scripts/main";
     </script>
