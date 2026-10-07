@@ -53,6 +53,6 @@ switch the variable. Adding a project: render it in the studio repo, add an entr
 
 ## Deploy (Cloudflare Pages)
 
-Pages → Create → connect this repo. Build command `npm run build`, output `dist`, Node 22+.
-Environment variables: `PUBLIC_MEDIA_BASE`, `PUBLIC_DODO_MODE`, `SITE_URL`.
+Cloudflare Pages project `visualon` (account "Prince Raj"), Git-connected: every push to `main` deploys to
+https://visualon.pages.dev, other branches get preview URLs. Build `npm run build` → `dist`, `NODE_VERSION=22`. No other variables are required (media defaults to R2 in production builds).
 Custom domain: `visualon.theprinceraj.in` now (CNAME → `<project>.pages.dev`), `visualon.top` later.
