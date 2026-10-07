@@ -22,7 +22,8 @@
           { "t": 11.5, "frame": 15, "title": "The review writes itself", "text": "The guest picks what stood out, chooses a warm tone and watches the review draft itself. They edit a line, copy it and paste it straight onto Google." },
           { "t": 21, "frame": 23.5, "title": "Two outcomes", "text": "Two phones side by side. Four and five stars go to Google, Zomato or Swiggy. One to three stars go to the owner, privately, and are never posted." },
           { "t": 26, "frame": 29, "title": "One dashboard", "text": "The owner's view: total scans, average rating, reviews routed to Google against feedback kept private, and every branch in one table." },
-          { "t": 31, "frame": 33.5, "title": "The proof", "text": "The product's own numbers count up over close-up footage of stars being tapped, followed by a café owner's testimonial." }
+          { "t": 31, "frame": 33.5, "title": "The proof", "text": "The product's own numbers count up over close-up footage of stars being tapped, followed by a café owner's testimonial." },
+          { "t": 35.5, "frame": 37.5, "title": "The plans", "text": "The pricing cards rise in, then a toggle flips to the organic-review plans. Start free for 15 days." }
         ],
         "craft": [
           "Every screen is the live product. The guest flow and the owner dashboard were rebuilt from scan4feedback.com, with copy lifted word for word from its language files.",
@@ -356,7 +357,8 @@
           { "t": 15, "frame": 18.9, "title": "One desk", "text": "The Accenture desk: OA puzzles, MCQs, coding lab and communication, one click each." },
           { "t": 19.5, "frame": 23.4, "title": "The maze, cleared", "text": "The same maze again. Three keys collected, exit reached, with time to spare." },
           { "t": 24, "frame": 27.5, "title": "MCQs by topic", "text": "A real pseudocode question, answered and marked attempted." },
-          { "t": 28, "frame": 31.5, "title": "Code and run", "text": "Python typed into Code Studio, Run, and both test cases pass." }
+          { "t": 28, "frame": 31.5, "title": "Code and run", "text": "Python typed into Code Studio, Run, and both test cases pass." },
+          { "t": 32, "frame": 35, "title": "Unlock every set", "text": "Free and paid side by side: start free, then one unlock for every question, with ₹40 off for a partner-college email." }
         ],
         "craft": [
           "Every screen, question and coding problem is solAcc's real content, captured from the live site.",
@@ -513,6 +515,7 @@
           { "t": 12, "frame": 18.5, "title": "Value Finder", "text": "A plant director's wall of 30+ AI ideas narrows to five high-ROI projects." },
           { "t": 19, "frame": 26.5, "title": "Learns on the job", "text": "A media scheduler overrides a slot and the AI asks to learn from it. Yes, learn this." },
           { "t": 27, "frame": 33.5, "title": "Roadside help", "text": "A driver on the hard shoulder finds roadside assistance instantly through the AI assistant." },
+          { "t": 34, "frame": 39.5, "title": "The 100K Challenge", "text": "The CFO signs: invest $100k, Techolution multiplies it with BPA 4.0, and delivers at least 2x ROI in 100 days or your money back." },
           { "t": 40, "frame": 49, "title": "Full Enterprise Automation", "text": "The feature board: the BPA 4.0 components and services, with the whole cast along the bottom." }
         ],
         "craft": [

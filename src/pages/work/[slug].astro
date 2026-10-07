@@ -98,7 +98,8 @@ const related = projects
                 <li>
                   <a href="#player" class="scene" data-seek={s.t} aria-label={`Play from ${clock(s.t)}: ${s.title}`}>
                     <span class:list={["still", `r${main.ratio}`]}>
-                      <img src={media(p.slug, main.ratio, `scene-${i + 1}.jpg`)} alt="" loading="lazy" decoding="async" />
+                      {/* Stills are cached as immutable; the frame time in the URL busts the cache when a scene changes. */}
+                      <img src={`${media(p.slug, main.ratio, `scene-${i + 1}.jpg`)}?f=${s.frame}`} alt="" loading="lazy" decoding="async" />
                       <span class="caps t">▶ {clock(s.t)}</span>
                     </span>
                     <span class="display st">{s.title}</span>

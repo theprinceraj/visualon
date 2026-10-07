@@ -37,7 +37,8 @@ the video structured data. Add both when adding a project (`ffprobe -v error -sh
 
 Case studies: a project's optional `story` (challenge, audience, idea, `scenes`, `craft`) fills its work page. Each scene's
 `t` is where it starts (scene links and `?t=` seek there; Google gets them as key moments) and `frame` is the moment
-used for its still. `turnaround` adds the "from request to final cut" line. No prices in case-study copy or stills.
+used for its still (its URL carries `?f=<frame>`, so changing a frame busts the immutable cache). `turnaround` adds the
+"from request to final cut" line. Never state what a client paid VisualOn.
 After changing scenes: `npm run media -- --stills` and `npm run media:upload -- --stills`.
 
 ## Videos (R2)
