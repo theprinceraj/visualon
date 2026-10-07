@@ -60,9 +60,12 @@ export function initHero() {
   stage.add(root);
 
   // ---- impossible triangle, built along world axes ----
+  // mouse sway lives in the screen plane (roll + drift): any real 3D tilt would break the illusion
+  const sway = new THREE.Group();
+  root.add(sway);
   const orient = new THREE.Group();
   orient.quaternion.copy(camera.quaternion).invert();
-  root.add(orient);
+  sway.add(orient);
   const spin = new THREE.Group();
   orient.add(spin);
   const tilt = new THREE.Group();
@@ -227,12 +230,9 @@ export function initHero() {
     const triScale = lerp(0.42, portrait ? 1.25 : 1.2, ei) * (1 - smooth(range(smoothP, 0.18, 0.44)));
     tri.visible = triScale > 0.002;
     tilt.scale.setScalar(Math.max(triScale, 0.0001));
-    tilt.rotation.set(
-      lerp(-0.9, 0, ei) + mouse.sy * 0.16 * (1 - away) - away * 0.6,
-      lerp(1.9, 0, ei) + mouse.sx * 0.26 * (1 - away) + away * 1.8,
-      0,
-    );
-    capMat.color.lerpColors(blue.color, mat.color, smooth(range(intro, 0.55, 1)));
+    tilt.rotation.set(lerp(-0.9, 0, ei) - away * 0.6, lerp(1.9, 0, ei) + away * 1.8, 0);
+    sway.rotation.z = -mouse.sx * 0.07 * (1 - away);
+    sway.position.set(mouse.sx * 0.18 * (1 - away), -mouse.sy * 0.12 * (1 - away), 0);
     const tiltMag = Math.abs(tilt.rotation.x) + Math.abs(tilt.rotation.y);
     capMat.depthTest = tiltMag > 0.3;
     shadowPlane.visible = smoothP < 0.3;
