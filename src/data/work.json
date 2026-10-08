@@ -1,6 +1,40 @@
 {
   "projects": [
     {
+      "slug": "flavorlinq",
+      "date": "2026-10-08",
+      "title": "FlavorLinq",
+      "tags": ["character film", "SaaS promo"],
+      "year": 2026,
+      "featured": true,
+      "logline": "Saturday, 8 PM. Table 4 still has no menu.",
+      "brief": "A QR digital-menu and restaurant OS: guests scan a table QR and get a web menu with no app, while owners edit prices, mark dishes out of stock, read feedback and see sales insights from one dashboard.",
+      "approach": "One Saturday night at a busy bistro, told by a cast of drawn characters: a waiter buried in paper menus, an owner reprinting them for one price change, and Amit at Table 4. Then FlavorLinq takes over, one real feature per beat, until the same night is calm.",
+      "story": {
+        "challenge": "Restaurant software usually gets sold with dashboards and feature lists. Busy owners need to feel the weekend rush they already live with, then see in seconds how each part of FlavorLinq takes it away, without a voiceover.",
+        "audience": "Owners and managers of busy Indian restaurants and cafés who are tired of reprinting menus and chasing tables on a Saturday night, and want results without a long setup.",
+        "idea": "Tell it as one night. The rush, the toppled tower of menus and a full reprint for a ₹20 price change set up the pain. Then the same guest, owner and chef show the scan, the live update, the feedback and the insights, and the film ends back in the same room: Saturday, 8 PM, sorted.",
+        "scenes": [
+          { "t": 0, "frame": 2.5, "title": "The rush", "text": "A packed bistro at night. The waiter sprints in with a wobbling tower of paper menus, three tables wave at him, and Table 4 still has nothing. The tower topples." },
+          { "t": 6, "frame": 8.9, "title": "The reprint", "text": "In the back office the owner strikes ₹160 off the paper menu and scribbles ₹180, the printer starts spitting out a new stack, and she facepalms." },
+          { "t": 10, "frame": 12.8, "title": "The reveal", "text": "The site hero, rebuilt: eyebrow pill, wordmark and \"The Smart OS for Modern Dining.\", with the QR table stand and phone menu dropping in." },
+          { "t": 13.5, "frame": 18, "title": "Scan, no app", "text": "Amit points his phone at the table stand, the scan corners lock on, and the real web menu rises into frame and scrolls." },
+          { "t": 19, "frame": 22.6, "title": "Live updates", "text": "The chef calls the Tandoori finished. The owner flips it to unavailable and changes a price, and Amit's menu updates on the spot." },
+          { "t": 25, "frame": 28.5, "title": "Feedback", "text": "Amit rates spice, service and taste and types \"Waah! Mast Biryani thi!\". It lands on the owner's dashboard and she replies." },
+          { "t": 29, "frame": 31.5, "title": "Insights", "text": "Scans tick up, Butter Chicken races Dal Makhani in the live chart, and average order value climbs 20% while the owner sips her chai." },
+          { "t": 33, "frame": 37.5, "title": "Real owners", "text": "The site's testimonial cards, with a pull line from each of three restaurant owners and the \"Reaching 50+ Venues\" badge." },
+          { "t": 38.5, "frame": 42.7, "title": "Sorted", "text": "The same bistro, now calm: QR stands on every table, guests browsing on their phones, the waiter carrying food. Start Free Trial gets a click." }
+        ],
+        "craft": [
+          "The waiter, owner, chef and guests, and the bistro itself, are drawn and animated in code, so the story feels warm and specific without stock footage.",
+          "The guest menu, Menu Management table, feedback screen and insights dashboard are rebuilt from the product's real screenshots, with the site's own copy, ₹ prices and dishes.",
+          "Brand system lifted from flavorlinq.com: slate #0F172A, ember orange #F97316 and amber, with the orange-to-peach headline gradient and pill eyebrows.",
+          "A warm 120 BPM score with every scene change on the beat, scan beeps, toggle clicks and printer whirr mixed under the music. No voiceover."
+        ]
+      },
+      "media": [{ "ratio": "16x9", "src": "flavorlinq-promo/out/flavorlinq-promo-16x9.mp4", "previewAt": 13.5, "duration": 44 }]
+    },
+    {
       "slug": "taskloco",
       "date": "2026-10-08",
       "title": "TaskLoco",
