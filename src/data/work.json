@@ -6,6 +6,7 @@
       "title": "FlavorLinq",
       "tags": ["character film", "SaaS promo"],
       "year": 2026,
+      "turnaround": "1 hour",
       "featured": true,
       "logline": "Saturday, 8 PM. Table 4 still has no menu.",
       "brief": "A QR digital-menu and restaurant OS: guests scan a table QR and get a web menu with no app, while owners edit prices, mark dishes out of stock, read feedback and see sales insights from one dashboard.",
