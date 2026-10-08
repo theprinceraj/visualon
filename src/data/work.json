@@ -1,6 +1,44 @@
 {
   "projects": [
     {
+      "slug": "young-growth",
+      "date": "2026-10-08",
+      "title": "Young Growth Diagnostic",
+      "tags": ["launch film", "agency promo"],
+      "year": 2026,
+      "featured": true,
+      "logline": "Posting. Campaigns. PR. Films. Events. So why is growth flat?",
+      "brief": "A free online Growth Readiness Diagnostic from Young, a Mumbai marketing agency: a short form, 22 questions across six growth levers, a score out of 90 that places the business in Stability, Success or Scale, a PDF report sent on WhatsApp and email, and a free 30-minute call with their growth experts.",
+      "approach": "Start with the founder's real problem: a screen full of finished marketing and a growth line that won't move. Then walk the viewer through the whole real funnel, from the site's hero to the report and the free call, and close on the brands Young has worked with and the agency's own call to action.",
+      "story": {
+        "challenge": "Agencies usually sell themselves with showreels and service lists. Young wanted to sell a diagnosis, not more activity, so the film had to make busy-but-flat founders recognise themselves in seconds and then understand exactly what happens after they click, without a voiceover.",
+        "audience": "Founders and business leaders of established Indian companies whose marketing is busy but whose pipeline is unpredictable, and who are open to fixing the system rather than adding another campaign.",
+        "idea": "Busy is not growing. Activity cards tick in as done, one per word, while the growth line beside them stays flat and turns red. An orange scan beam sweeps the screen like an X-ray, and the brand's circled-Y ring opens into every next step of the real funnel.",
+        "scenes": [
+          { "t": 0, "frame": 3.3, "title": "Busy, not growing", "text": "Reel posted, campaign live, press mention, brand film, event: every card ticks green while the business growth line stays flat and turns red." },
+          { "t": 4.5, "frame": 6.3, "title": "The hero", "text": "The site's own hero, rebuilt: orange gradient, duotone portrait, \"Your Business is Growing?\" and the cream Diagnose My Growth System button, which gets a click." },
+          { "t": 7.5, "frame": 9.6, "title": "The form", "text": "The real form fills at speed: years in business, revenue band, and \"More qualified leads\" picked from the actual priority list." },
+          { "t": 10.5, "frame": 11.6, "title": "22 questions", "text": "A glimpse of the real diagnostic: the live statements and its 1 to 5 scale, two answered on camera, three more flicking past, then \"Our team is reviewing your growth system...\"." },
+          { "t": 14.5, "frame": 17.8, "title": "The result", "text": "A score out of 90 lands in the Success band, six levers fill out of 15, and the camera pushes in as the leak turns red next to what is working." },
+          { "t": 19, "frame": 21.5, "title": "The report", "text": "The PDF report arrives on WhatsApp and in the inbox, and its cover opens: Growth Readiness Diagnostic, prepared for the business, with its stage and score." },
+          { "t": 23, "frame": 25.6, "title": "The free call", "text": "\"Let us understand your business, not just your score.\" The three benefits stack in and Book My Free 30-Minute Expert Call gets pressed." },
+          { "t": 26.5, "frame": 29.0, "title": "Four engines", "text": "Young, Youngagement, YFX Creations and youngXperiences rise in on the beat and are threaded into one circled Y: one accountable partner." },
+          { "t": 29.5, "frame": 31.6, "title": "Brands worked with", "text": "Lodha, Tata, Raheja Realty, Saint-Gobain, The Times of India, Ekta World and the Filmfare Awards pop in as a logo wall." },
+          { "t": 32.5, "frame": 35.5, "title": "Find the gap", "text": "The site's closing line, \"Before You Add More Marketing, Find the Gap That Matters Most.\", with the button pressed, the URL and the offer: free diagnostic, report on WhatsApp and email, free expert call." }
+        ],
+        "craft": [
+          "The landing page, form, questionnaire, result view and free-call section are rebuilt from the live site's markup, in the site's own Harabara display font, with every headline and question in the agency's words.",
+          "The report pages follow the design of Young's real PDF report, filled with a sample business and sample scores rather than any real client's data.",
+          "Revised with the client after the first cut to show the full funnel and the brands they have worked with, then laid out shot by shot for both 16:9 and 9:16.",
+          "A 120 BPM score in A minor that lifts at the reveal, with every shot change on the beat and ticks, clicks and a scan riser mixed under the music. No voiceover."
+        ]
+      },
+      "media": [
+        { "ratio": "16x9", "src": "ygs-launch/out/ygs-launch-16x9.mp4", "previewAt": 1, "duration": 36.6 },
+        { "ratio": "9x16", "src": "ygs-launch/out/ygs-launch-9x16.mp4", "previewAt": 1, "duration": 36.6 }
+      ]
+    },
+    {
       "slug": "flavorlinq",
       "date": "2026-10-08",
       "title": "FlavorLinq",
