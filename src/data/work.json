@@ -1,6 +1,42 @@
 {
   "projects": [
     {
+      "slug": "taskloco",
+      "date": "2026-10-08",
+      "title": "TaskLoco",
+      "tags": ["character film", "app promo"],
+      "year": 2026,
+      "featured": true,
+      "logline": "Sticky notes are great. Until the window is open.",
+      "brief": "A sticky-note to-do list and task manager: tasks, to-dos and calendar on one visual wall, with real alarms, tags, web clipping and sharing across web, iPhone, Android and Chrome.",
+      "approach": "Maya runs her whole life on paper Post-its until a breeze blows them off the wall and she misses a client call. Then we move her notes into the real TaskLoco app, one feature per beat, until the alarm rings on time.",
+      "story": {
+        "challenge": "TaskLoco's own site is busy, with many colours and a long feature list. The video had to pick the few things that matter to a sticky-note person and make each one land in seconds, without a voiceover.",
+        "audience": "Visual thinkers who already cover their desk in Post-its, like freelancers, students, creators and small teams, who find heavier project tools too much and just want to see everything on one wall.",
+        "idea": "Tell it as one afternoon. A freelance designer's wall of paper notes blows away and the \"Call Sam 3 PM!\" note slides behind the desk. She moves her notes into TaskLoco, and the same call comes back as an alarm that actually rings, five minutes early.",
+        "scenes": [
+          { "t": 0, "frame": 4.6, "title": "The hook", "text": "A sunny desk and a wall of paper sticky notes. The window's open, the curtains billow and the notes start falling, one by one." },
+          { "t": 6, "frame": 10.5, "title": "The miss", "text": "3:14 PM. Notes all over the desk, a missed call from the client on the phone, and \"Call Sam 3 PM!\" lying right next to it." },
+          { "t": 12, "frame": 16.5, "title": "The reveal", "text": "The TaskLoco roundel spins in and the fallen paper notes fly up and flip into app stickies." },
+          { "t": 18, "frame": 25.4, "title": "Note, task, event", "text": "One sticky, typed, ticked and given a reminder, word for word from the site: it's a note, it's a task, it's an event." },
+          { "t": 26, "frame": 29.6, "title": "The storyboard", "text": "The real board with its menu. One sticky turns red for urgent, then a #client filter clears the board in one go." },
+          { "t": 34, "frame": 39.5, "title": "Clip the web", "text": "The Chrome extension popup saves a video as a sticky, with the video embedded, in a single click." },
+          { "t": 42, "frame": 44.5, "title": "The alarm", "text": "2:55 PM. The phone rings with the app's own alarm screen, and Maya calls Sam five minutes early." },
+          { "t": 48, "frame": 52.5, "title": "Share", "text": "A sticky shared with a teammate in one tap. It lands on their board as their own copy." },
+          { "t": 54, "frame": 58, "title": "Try it free", "text": "Paper notes drift down like confetti behind the logo, the site's headline and the Try it free button." }
+        ],
+        "craft": [
+          "Maya, her desk and the falling notes are drawn and animated in code, so the story could feel warm without stock footage.",
+          "The storyboard, the Chrome extension popup and the phone alarm are rebuilt from the app's real screenshots, and every feature line is the site's own copy.",
+          "A cleaner brand system than the site itself: cream paper, sticky yellow, plum and green, with Fredoka and Nunito taken from taskloco.com.",
+          "Cut to a bright 120 BPM score so every scene change lands on a bar, with paper rustles, ticks and an alarm ring under the music. No voiceover."
+        ]
+      },
+      "media": [
+        { "ratio": "16x9", "src": "taskloco-promo/out/taskloco-promo-16x9.mp4", "previewAt": 3, "duration": 60 }
+      ]
+    },
+    {
       "slug": "scan4feedback",
       "date": "2026-10-07",
       "title": "Scan4Feedback",
