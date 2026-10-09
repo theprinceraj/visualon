@@ -103,7 +103,13 @@ export type Story = {
 
 export type Project = (typeof work.projects)[number] & { concept?: boolean; turnaround?: string; story?: Story };
 export const projects = work.projects as Project[];
-export const featured = projects.filter((p) => p.featured);
+/** Homepage "selected work": projects with a `home` position, in that order, capped at 7. New work goes to /work only
+ *  (no `home`) unless the homepage is asked for explicitly. */
+export const HOME_MAX = 7;
+export const featured = projects
+  .filter((p) => typeof p.home === "number")
+  .sort((a, b) => (a.home ?? 0) - (b.home ?? 0))
+  .slice(0, HOME_MAX);
 export const vertical = projects.flatMap((p) =>
   p.media.filter((m) => m.ratio === "9x16").map((m) => ({ project: p, ratio: m.ratio })),
 );

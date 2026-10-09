@@ -63,9 +63,12 @@ for (const p of work.projects) {
   }
 }
 
-// Studio reel for the hero screen: ~2s from each featured 16:9 preview, hard cuts, muted.
+// Studio reel for the hero screen: ~2s from each homepage project's 16:9 preview (same order and cap as the
+// homepage list in src/data/site.ts), hard cuts, muted.
 const clips = work.projects
-  .filter((p) => p.featured && p.media.some((m) => m.ratio === "16x9"))
+  .filter((p) => typeof p.home === "number" && p.media.some((m) => m.ratio === "16x9"))
+  .sort((a, b) => a.home - b.home)
+  .slice(0, 7)
   .map((p) => path.join(root, "public/media", p.slug, "16x9", "preview.mp4"))
   .filter((f) => fs.existsSync(f));
 if (clips.length && !only && !stillsOnly) {
