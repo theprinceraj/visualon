@@ -68,7 +68,7 @@ export const services: Service[] = [
       { t: "Gets it in one glance", b: "one idea per video. if the product takes a paragraph to explain, we find the moment that doesn't." },
       { t: "Ready for launch day", b: "captions, hashtags and poster frames come with the launch kit, so posting is copy and paste." },
     ],
-    work: ["scan4feedback", "parkkolkata", "wittywing", "gst-reco-pro", "solacc", "dbt-invoice", "bos", "github"],
+    work: ["scan4feedback", "parkkolkata", "wittywing", "gst-reco-pro", "solacc", "dbt-invoice", "github"],
     pkg: "launch",
     faqs: [
       { q: "What goes into a SaaS launch video?", a: "Your real interface, one idea, a hook in the first 1.5 seconds and a score timed to the cuts. Usually 20 to 45 seconds, cut for every platform you're launching on." },

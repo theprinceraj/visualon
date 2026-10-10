@@ -777,36 +777,6 @@
       "media": [{ "ratio": "16x9", "src": "dbt-invoice-launch/out/dbt-invoice-launch-16x9.mp4", "previewAt": 3, "duration": 38 }]
     },
     {
-      "slug": "bos",
-      "date": "2026-10-07",
-      "title": "BOS",
-      "tags": ["product tutorial", "internal tool"],
-      "year": 2026,
-      "logline": "One product record, from pack to pitch.",
-      "brief": "An internal workspace for product knowledge, competitor intel and sales enablement, with approvals and a cited AI assistant.",
-      "approach": "A dashboard that builds itself, then one product record followed through every role: create, approve, compare, pitch, ask.",
-      "story": {
-        "challenge": "BOS is an internal tool, so this isn't an ad. It's a tutorial its own staff would actually watch. It had to show five roles and a full product lifecycle in under 40 seconds, and leave people knowing where to click.",
-        "audience": "Product managers, product owners and sales teams at AAA Bed who use BOS every day.",
-        "idea": "Follow one real product, Biscamix Choco, through the whole documented lifecycle, from pack artwork to a sales pitch, in five numbered steps. The cursor clicks the real sidebar every time, so the tour doubles as a map of the app.",
-        "scenes": [
-          { "t": 0, "frame": 3.5, "title": "The promise", "text": "A dashboard builds itself, then the promise: new product to sales pitch in 5 steps." },
-          { "t": 5.5, "frame": 12, "title": "Step 1: create", "text": "The Biscamix Choco pack is dropped onto Scan product and the code, barcode and names fill in." },
-          { "t": 13, "frame": 16.4, "title": "Step 2: approve", "text": "The product owner approves. It's published, indexed for the AI Assistant and logged." },
-          { "t": 18, "frame": 23, "title": "Step 3: compare", "text": "Two products side by side, with the differentiator highlighted." },
-          { "t": 23.5, "frame": 28.5, "title": "Step 4: the pitch", "text": "Pick the buyer, cafés, and a positioning statement types itself out, with citations." },
-          { "t": 29, "frame": 33.5, "title": "Step 5: ask", "text": "A question to the AI Assistant, answered from the published record and cited." }
-        ],
-        "craft": [
-          "Every screen is the real BOS app, captured logged in, and the product is a real SKU with its own pack artwork.",
-          "The steps follow BOS's own documentation of each role's journey, so the video matches the training material.",
-          "Calm and confident rather than salesy: a clean walkthrough in the app's dark theme.",
-          "Cut to 120 BPM with no voiceover, so it can be shared and watched with the sound off."
-        ]
-      },
-      "media": [{ "ratio": "16x9", "src": "bos-tutorial/out/bos-tutorial-16x9.mp4", "previewAt": 3, "duration": 40 }]
-    },
-    {
       "slug": "promed-united",
       "date": "2026-10-07",
       "title": "ProMed United",
