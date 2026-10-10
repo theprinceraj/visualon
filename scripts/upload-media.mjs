@@ -1,5 +1,5 @@
 // Uploads public/media to the R2 bucket that serves PUBLIC_MEDIA_BASE.
-// Usage: node scripts/upload-media.mjs [--bucket visualon-media] [--only slug] [--stills]
+// Usage: node scripts/upload-media.mjs [--bucket visualon-media] [--only slug|slug/film] [--stills]
 // --stills uploads only the case-study scene stills (scene-<n>.jpg).
 // Needs `npx wrangler login` once. Run `npm run media` first to build the files.
 import { execFileSync } from "node:child_process";
@@ -17,18 +17,18 @@ const types = { ".mp4": "video/mp4", ".jpg": "image/jpeg" };
 const walk = (dir) =>
   fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => (d.isDirectory() ? walk(path.join(dir, d.name)) : [path.join(dir, d.name)]));
 
+const key = (f) => path.relative(root, f).split(path.sep).join("/");
 const files = walk(root)
-  .filter((f) => !only || path.relative(root, f).startsWith(only + path.sep))
+  .filter((f) => !only || key(f).startsWith(only + "/"))
   .filter((f) => !stillsOnly || /^scene-\d+\.jpg$/.test(path.basename(f)));
 for (const f of files) {
-  const key = path.relative(root, f).split(path.sep).join("/");
   const type = types[path.extname(f)] ?? "application/octet-stream";
   execFileSync(
     "npx",
-    ["wrangler", "r2", "object", "put", `${bucket}/${key}`, "--file", f, "--content-type", type,
+    ["wrangler", "r2", "object", "put", `${bucket}/${key(f)}`, "--file", f, "--content-type", type,
       "--cache-control", "public,max-age=31536000,immutable", "--remote"],
     { stdio: ["ignore", "ignore", "inherit"], shell: process.platform === "win32" },
   );
-  console.log(`↑ ${key}`);
+  console.log(`↑ ${key(f)}`);
 }
 console.log(`${files.length} files → r2://${bucket}`);

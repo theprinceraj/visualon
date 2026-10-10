@@ -1,5 +1,5 @@
 // Structured data (schema.org JSON-LD). Base.astro always emits the organization + website; pages add their own nodes.
-import { site, packages, media, type Project } from "./site";
+import { site, packages, media, type Film, type Project } from "./site";
 
 type Node = Record<string, unknown>;
 
@@ -76,27 +76,31 @@ export function productionService(base: URL, name: string, description: string, 
   };
 }
 
-export function video(base: URL, p: Project): Node {
-  const m = p.media[0];
+/** The project's main film, or with `f` one of its further films (same page, seeked with ?film=<id>&t=). */
+export function video(base: URL, p: Project, f?: Film): Node {
+  const v = f ?? p;
+  const m = v.media[0];
+  const dir = f ? `${p.slug}/${f.id}` : p.slug;
+  const at = (t: number) => `/work/${p.slug}?${f ? `film=${f.id}&` : ""}t=${Math.floor(t)}`;
   return {
     "@type": "VideoObject",
-    name: `${p.title}: ${p.logline}`,
-    description: p.brief,
-    thumbnailUrl: [abs(media(p.slug, m.ratio, "poster.jpg"), base)],
-    contentUrl: abs(media(p.slug, m.ratio, "full.mp4"), base),
-    uploadDate: `${p.date}T00:00:00+05:30`,
+    name: f ? `${p.title}, ${f.title}: ${f.logline}` : `${p.title}: ${p.logline}`,
+    description: v.brief,
+    thumbnailUrl: [abs(media(dir, m.ratio, "poster.jpg"), base)],
+    contentUrl: abs(media(dir, m.ratio, "full.mp4"), base),
+    uploadDate: `${v.date}T00:00:00+05:30`,
     duration: `PT${m.duration}S`,
     genre: p.tags.join(", "),
     inLanguage: "en",
     publisher: { "@id": orgId(base) },
     // Scenes become "key moments" in search. The work page seeks to ?t= on load.
-    ...(p.story && {
-      hasPart: p.story.scenes.map((s, i, all) => ({
+    ...(v.story && {
+      hasPart: v.story.scenes.map((s, i, all) => ({
         "@type": "Clip",
         name: s.title,
         startOffset: Math.floor(s.t),
         endOffset: Math.floor(all[i + 1]?.t ?? m.duration),
-        url: abs(`/work/${p.slug}?t=${Math.floor(s.t)}`, base),
+        url: abs(at(s.t), base),
       })),
     }),
   };

@@ -1,6 +1,258 @@
 {
   "projects": [
     {
+      "slug": "boothtrack",
+      "date": "2026-10-10",
+      "title": "BoothTrack 2.0",
+      "tags": [
+        "product guide",
+        "internal tool"
+      ],
+      "year": 2026,
+      "logline": "Every exhibition in one place.",
+      "brief": "BoothTrack is BakeMate's booth lead tracker, a phone app the team uses at trade shows. Version 2.0 handles many exhibitions at once, adds roles for leadership, event admins and booth staff, event summaries you can email, an audit log and a new design.",
+      "approach": "A calm page-by-page guide for the team who already use version 1: the real 2.0 app filmed chapter by chapter inside one phone, a title and one line beside it, and a progress bar showing where you are in the guide.",
+      "story": {
+        "challenge": "2.0 changes almost every screen, and the team needed to learn it before the next show without a training session. The guide had to cover ten features in under a minute and a half, accurately, at a pace people can follow.",
+        "audience": "BakeMate's own team: leadership, event admins and the booth staff who capture leads on their phones at exhibitions.",
+        "idea": "No metaphor, just the app. Each feature is filmed in the real app with a visible fingertip and gets one chapter on a downbeat of the music: a number, a title, one line, and the screen wiping up to the next page.",
+        "scenes": [
+          {
+            "t": 3.9,
+            "frame": 6.5,
+            "title": "Sign in with a PIN",
+            "text": "Staff tap a 4-digit booth PIN. Admins sign in with a username and password."
+          },
+          {
+            "t": 9.76,
+            "frame": 14,
+            "title": "Every exhibition",
+            "text": "Live, upcoming and ended shows, each with its own artwork, admins and staff."
+          },
+          {
+            "t": 17.56,
+            "frame": 19.5,
+            "title": "Booth snapshot",
+            "text": "Open a show to see today's numbers and start capturing."
+          },
+          {
+            "t": 21.46,
+            "frame": 26,
+            "title": "Scan a badge",
+            "text": "The SIF badge QR is scanned and name, company and contact fill in on their own."
+          },
+          {
+            "t": 29.27,
+            "frame": 33,
+            "title": "Business card",
+            "text": "Photograph the card, type the details, rate the lead and save."
+          },
+          {
+            "t": 37.07,
+            "frame": 42,
+            "title": "Duplicate check",
+            "text": "A manual entry spots someone already captured at this show and offers to update their lead instead."
+          },
+          {
+            "t": 44.88,
+            "frame": 50,
+            "title": "Find any lead",
+            "text": "Search, filter by visit and lead quality, and mark leads followed up."
+          },
+          {
+            "t": 56.59,
+            "frame": 62,
+            "title": "Event summary",
+            "text": "Totals, by staff, by day, top companies and activity, emailed with the Excel attached."
+          },
+          {
+            "t": 66.34,
+            "frame": 69,
+            "title": "Management",
+            "text": "Add event admins and staff PINs, and assign people to each show."
+          },
+          {
+            "t": 72.2,
+            "frame": 75,
+            "title": "Audit log",
+            "text": "Change your password, and see every action recorded across events."
+          }
+        ],
+        "craft": [
+          "Filmed from the real 2.0 build running on seed demo data, with a visible fingertip on every tap. Only the outside world is stubbed: the badge lookup, the email send and the card upload.",
+          "Simulated camera feeds drive the app's own QR scanner and card camera, so the badge and card chapters show the real capture flow.",
+          "BoothTrack's own brand: warm paper #FAF7F5, brown #563226 and terracotta #E14226, in Poppins titles and Inter text.",
+          "A calm score (\"Future Inspiration\" by Soundrider/Dope, CC BY) with every chapter starting on a downbeat. Laid out for both 16:9 and 9:16. No voiceover."
+        ]
+      },
+      "media": [
+        {
+          "ratio": "16x9",
+          "src": "boothtrack-2-0-every-exhibition/out/boothtrack-2-0-every-exhibition-16x9.mp4",
+          "previewAt": 21.5,
+          "duration": 83.9
+        },
+        {
+          "ratio": "9x16",
+          "src": "boothtrack-2-0-every-exhibition/out/boothtrack-2-0-every-exhibition-9x16.mp4",
+          "previewAt": 21.5,
+          "duration": 83.9
+        }
+      ]
+    },
+    {
+      "slug": "bugwalk",
+      "date": "2026-10-09",
+      "title": "Bugwalk",
+      "tags": [
+        "launch film",
+        "developer tools"
+      ],
+      "year": 2026,
+      "logline": "Follow the click to the line that broke.",
+      "brief": "Bugwalk is an AI debug engineer. When a customer says something broke, it follows their visit to the exact line of code that was live, and opens the fix as a pull request for you to review.",
+      "approach": "One continuous take: the camera rides a single orange thread from a customer's failed checkout click, through her visit, into the failing line, and out as a pull request you merge.",
+      "story": {
+        "challenge": "Every debugging tool promises to find bugs faster. Bugwalk's real difference is the chain: from a customer's name to the request, the error, the version that was live and the pull request. The film had to show that chain unbroken in about 20 seconds.",
+        "audience": "Small product teams who get \"it broke\" messages from customers and lose an afternoon tracing each one.",
+        "idea": "Follow the click. One orange thread leaves the Pay button the moment checkout fails and never cuts away: it lights each row of the visit timeline, plugs into the line that failed, and that line flips into the fix.",
+        "scenes": [
+          {
+            "t": 0,
+            "frame": 2,
+            "title": "Checkout broke",
+            "text": "On a demo shop's checkout, a coupon is typed, Pay is clicked and an error appears. An orange thread leaves the button."
+          },
+          {
+            "t": 2.65,
+            "frame": 4.6,
+            "title": "The visit",
+            "text": "The camera follows the thread down into the customer's visit timeline, lighting each row until the red TypeError."
+          },
+          {
+            "t": 5.32,
+            "frame": 7.3,
+            "title": "The line",
+            "text": "The thread runs into the code window and plugs into total.ts line 84, marked \"fails here\"."
+          },
+          {
+            "t": 7.99,
+            "frame": 9.8,
+            "title": "The fix",
+            "text": "On the drop, line 84 becomes a diff and the pull request opens with its title, why and where."
+          },
+          {
+            "t": 10.66,
+            "frame": 12.6,
+            "title": "You decide",
+            "text": "You decide when it merges: the camera pushes into Merge, one click, merged."
+          },
+          {
+            "t": 13.33,
+            "frame": 18.3,
+            "title": "Same bug",
+            "text": "The site's own comparison: 2 h 6 min by hand, then 11 min with Bugwalk."
+          },
+          {
+            "t": 18.65,
+            "frame": 21,
+            "title": "Know why it broke",
+            "text": "The logo, the trial button and bugwalk.app."
+          }
+        ],
+        "craft": [
+          "The visit timeline, code window, diff and pull request panel are rebuilt from bugwalk.app's own product UI, so developers see the real flow.",
+          "The thread is drawn frame by frame as it travels, so the whole hunt reads as one shot without a single cut.",
+          "Bugwalk's palette from the site's CSS: paper #FBFAF7, ink #181612 and the orange #A54C00, in DM Sans.",
+          "A chill 90 BPM track (\"Helios Tilt\" by CM ONNI, CC BY) that builds through the hunt and lands its groove on the fix. 16:9, no voiceover."
+        ]
+      },
+      "media": [
+        {
+          "ratio": "16x9",
+          "src": "bugwalk-launch/out/bugwalk-launch-16x9.mp4",
+          "previewAt": 5.4,
+          "duration": 22.5
+        }
+      ]
+    },
+    {
+      "slug": "peerpush",
+      "date": "2026-10-09",
+      "title": "PeerPush",
+      "tags": [
+        "product promo",
+        "SaaS promo"
+      ],
+      "year": 2026,
+      "logline": "Same question, twice.",
+      "brief": "PeerPush is a product discovery platform for people and AI. Paste your URL, AI builds a structured profile of your product that assistants can read, and you launch it to 51,000+ builders.",
+      "approach": "A customer asks an AI for the best tool and you're not in the answer. The chat rewinds like tape, you list on PeerPush, and the exact same question now names you.",
+      "story": {
+        "challenge": "\"Get found by AI\" is a new and fuzzy promise. The film had to make founders feel the problem in one glance, then show the concrete thing PeerPush does about it: a profile written in words AI can read.",
+        "audience": "Indie founders, makers and small SaaS teams who have shipped something and want to be found by people and by AI assistants.",
+        "idea": "Ask the same question twice. The opening AI chat names two other tools; the chat rewinds like a tape into PeerPush, and after the listing goes live the identical chat replays with a new answer.",
+        "scenes": [
+          {
+            "t": 0,
+            "frame": 2.7,
+            "title": "Not in the answer",
+            "text": "A customer asks an AI chat for the best tool. It recommends two others."
+          },
+          {
+            "t": 3.81,
+            "frame": 5.4,
+            "title": "Rewind",
+            "text": "The chat rewinds like tape into PeerPush's own how-it-works page, and the cursor clicks Paste your URL."
+          },
+          {
+            "t": 6.67,
+            "frame": 8.6,
+            "title": "Paste your URL",
+            "text": "The URL is typed into step 1 and the camera pans to step 2 as AI builds the profile."
+          },
+          {
+            "t": 9.52,
+            "frame": 12.5,
+            "title": "Words AI can read",
+            "text": "The site's example profile fills the frame: who it's for, use cases, what it replaces, pricing, platforms, then Live."
+          },
+          {
+            "t": 13.33,
+            "frame": 14.8,
+            "title": "Launch day",
+            "text": "On the site's example launch board, the product climbs to the top. Launch to 51,000+ builders."
+          },
+          {
+            "t": 15.28,
+            "frame": 18.6,
+            "title": "Same question",
+            "text": "The identical chat replays, and this time the answer names the product."
+          },
+          {
+            "t": 19.07,
+            "frame": 20.3,
+            "title": "Read by AI",
+            "text": "The homepage's counter: read 32.8M times by 33 AI systems in the last 30 days."
+          }
+        ],
+        "craft": [
+          "The how-it-works steps, example profile and launch board are rebuilt from peerpush.com's own pages and copy. Product names in the chats and on the board are PeerPush's own examples, labelled as examples on screen.",
+          "The rewind is the film's turn: the chat un-types in reverse through tape tracking bands, then plays again with a new ending.",
+          "PeerPush's look from the site's CSS: white, black and purple #9333EA, all in Geist.",
+          "A funk track (\"Funk in my Pocket\" by OptiKill, CC BY) with cuts on its real downbeats, a zip and riser on the rewind and stamps as profile rows land. 16:9, no voiceover."
+        ]
+      },
+      "media": [
+        {
+          "ratio": "16x9",
+          "src": "peerpush-get-found/out/peerpush-get-found-16x9.mp4",
+          "previewAt": 6.7,
+          "duration": 23.6
+        }
+      ]
+    },
+    {
       "slug": "admiro",
       "home": 3,
       "date": "2026-10-09",
@@ -403,6 +655,91 @@
           "Delivered in 16:9 for LinkedIn and YouTube, and 1:1 for feeds."
         ]
       },
+      "films": [
+        {
+          "id": "tds-challan",
+          "date": "2026-10-09",
+          "title": "TDS Challan to Excel",
+          "logline": "Old 281. New 281N. One workbook.",
+          "brief": "GST Reco Pro's TDS challan tool converts ITNS 281 and the new section-wise ITNS 281N challan receipts into one Excel workbook, up to 1,000 at a time, in the browser.",
+          "approach": "Built as a companion to the GSTR film: the same column A pain, then one receipt flips from the old format to the new one and a mixed batch becomes a two-sheet workbook.",
+          "story": {
+            "challenge": "The new Income Tax Act brings a new challan format, so CAs now juggle two kinds of receipt. The film had to show that the tool reads both, in one batch, and what the workbook looks like, while matching the first GST Reco Pro film so the two read as a series.",
+            "audience": "Chartered accountants, articles and corporate tax teams in India who reconcile TDS payments challan by challan.",
+            "idea": "Same studio, new form. The hook repeats the GSTR film's paste-into-column-A pain with a 281N receipt, then a single receipt flips over like a card, legacy ITNS 281 on the front and the new ITNS 281N on the back.",
+            "scenes": [
+              {
+                "t": 0,
+                "frame": 4.8,
+                "title": "The hook",
+                "text": "A 281N challan's section table is copied into Excel and every line lands in column A."
+              },
+              {
+                "t": 5.5,
+                "frame": 7.6,
+                "title": "The tool",
+                "text": "Precision Conversion Engine: TDS Challan PDF to Excel."
+              },
+              {
+                "t": 8.5,
+                "frame": 13.6,
+                "title": "Both kinds",
+                "text": "One receipt flips from ITNS 281 to ITNS 281N, then both sit side by side, auto-detected."
+              },
+              {
+                "t": 15,
+                "frame": 19,
+                "title": "A mixed batch",
+                "text": "A stack of both formats drops into the real tool. Files Queued counts up and processing starts."
+              },
+              {
+                "t": 20.5,
+                "frame": 24.5,
+                "title": "Sheet 1",
+                "text": "The Monthly Summary fills April to March, with the total."
+              },
+              {
+                "t": 26,
+                "frame": 30,
+                "title": "Sheet 2",
+                "text": "A click on the Challan-Wise Breakup tab: every challan line by line, each 281N code beside its old 1961-Act section."
+              },
+              {
+                "t": 32,
+                "frame": 34,
+                "title": "Zero data risk",
+                "text": "The site's dark panel: it all runs in the browser, so client data never leaves the machine."
+              },
+              {
+                "t": 35.5,
+                "frame": 38.5,
+                "title": "Start free",
+                "text": "The logo and gstrecopro.in."
+              }
+            ],
+            "craft": [
+              "The receipts are recreated from real ITNS 281 and 281N challans, with identifying details blurred.",
+              "The workbook copies the tool's real export: its Monthly Summary and Challan-Wise Breakup sheets, headers and colours.",
+              "The GSTR film's identity carried over: the site's cream and orange, Hanken Grotesk and the three-bar mark, with the same 120 BPM score and a paper flip on the card turn.",
+              "Delivered in 16:9 and 1:1, like the first film. No voiceover."
+            ]
+          },
+          "media": [
+            {
+              "ratio": "16x9",
+              "src": "tds-challan-to-excel/out/tds-challan-to-excel-16x9.mp4",
+              "previewAt": 8.5,
+              "duration": 40
+            },
+            {
+              "ratio": "1x1",
+              "src": "tds-challan-to-excel/out/tds-challan-to-excel-1x1.mp4",
+              "previewAt": 8.5,
+              "duration": 40
+            }
+          ]
+        }
+      ],
       "media": [
         { "ratio": "16x9", "src": "gstr-pdf-to-excel/out/gstr-pdf-to-excel-16x9.mp4", "previewAt": 2, "duration": 24 },
         { "ratio": "1x1", "src": "gstr-pdf-to-excel/out/gstr-pdf-to-excel-1x1.mp4", "previewAt": 2, "duration": 24 }

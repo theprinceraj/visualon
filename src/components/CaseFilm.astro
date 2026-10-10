@@ -1,0 +1,333 @@
+---
+import { media, ratioLabel, type Media, type Story } from "../data/site";
+
+/** One film on a work page: the player with its format chips, the notes and, with a story, the case study.
+ *  `base` is the media folder: the project slug, or `<slug>/<film id>` for a project's further films. */
+interface Props {
+  id: string;
+  base: string;
+  items: Media[];
+  brief: string;
+  idea: string;
+  story?: Story;
+  /** Heading level of "Scene by scene" / "How it was made" (3 inside a further film's own section). */
+  level?: 2 | 3;
+}
+const { id, base, items, brief, idea, story, level = 2 } = Astro.props;
+const main = items[0];
+const H = `h${level}` as "h2" | "h3";
+const clock = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+---
+
+<div class="film" data-film={id}>
+  <div class="player wrap" id={id}>
+    {
+      items.length > 1 && (
+        <div class="ratios" role="group" aria-label="Format">
+          {items.map((m, i) => (
+            <button type="button" class="chip" aria-pressed={i === 0 ? "true" : "false"} data-ratio={m.ratio}>
+              {ratioLabel(m.ratio)}
+            </button>
+          ))}
+        </div>
+      )
+    }
+    {
+      items.map((m, i) => (
+        <div class:list={["screen", `r${m.ratio}`]} data-screen={m.ratio} hidden={i !== 0}>
+          <video controls playsinline preload={i === 0 ? "metadata" : "none"} poster={media(base, m.ratio, "poster.jpg")}>
+            <source src={media(base, m.ratio, "full.mp4")} type="video/mp4" />
+          </video>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="notes wrap">
+    <section>
+      <span class="caps muted">the product</span>
+      <p class="read">{brief}</p>
+    </section>
+    <section>
+      <span class="caps muted">the idea</span>
+      <p class="read">{idea}</p>
+    </section>
+    <section>
+      <span class="caps muted">delivered as</span>
+      <ul class="fmt">{items.map((m) => <li class="chip">{ratioLabel(m.ratio)}</li>)}</ul>
+      <a href="/#packages" class="btn">get one like this <span aria-hidden="true">→</span></a>
+    </section>
+  </div>
+
+  {
+    story && (
+      <>
+        <section class="brief wrap">
+          <div>
+            <span class="caps muted">the challenge</span>
+            <p class="lead">{story.challenge}</p>
+          </div>
+          <div>
+            <span class="caps muted">made for</span>
+            <p class="read">{story.audience}</p>
+          </div>
+        </section>
+
+        <section class="scenes wrap" aria-labelledby={`${id}-scenes`}>
+          <H class="display h" id={`${id}-scenes`}>
+            Scene by <em class="blue">scene</em>.
+          </H>
+          <ol class:list={{ tall: main.ratio === "9x16" || main.ratio === "4x5" }}>
+            {story.scenes.map((s, i) => (
+              <li>
+                <a href={`#${id}`} class="scene" data-seek={s.t} aria-label={`Play from ${clock(s.t)}: ${s.title}`}>
+                  <span class:list={["still", `r${main.ratio}`]}>
+                    {/* Stills are cached as immutable; the frame time in the URL busts the cache when a scene changes. */}
+                    <img src={`${media(base, main.ratio, `scene-${i + 1}.jpg`)}?f=${s.frame}`} alt="" loading="lazy" decoding="async" />
+                    <span class="caps t">▶ {clock(s.t)}</span>
+                  </span>
+                  <span class="display st">{s.title}</span>
+                  <span class="read muted">{s.text}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section class="craft wrap" aria-labelledby={`${id}-craft`}>
+          <H class="display h" id={`${id}-craft`}>
+            How it was <em class="blue">made</em>.
+          </H>
+          <ol>
+            {story.craft.map((c, i) => (
+              <li>
+                <span class="caps num">{String(i + 1).padStart(2, "0")}</span>
+                <p class="read">{c}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      </>
+    )
+  }
+</div>
+
+<style>
+  .player {
+    margin-top: 64px;
+    scroll-margin-top: 24px;
+  }
+  .ratios {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .screen {
+    border: 1px solid var(--line-paper);
+    padding: 12px;
+  }
+  .screen[hidden] {
+    display: none;
+  }
+  .screen video {
+    width: 100%;
+    background: #000;
+  }
+  .screen.r9x16 video,
+  .screen.r4x5 video,
+  .screen.r1x1 video {
+    max-height: 82vh;
+    width: auto;
+    margin-inline: auto;
+  }
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 48px;
+    padding-block: 72px 96px;
+  }
+  .notes section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .notes .read {
+    margin: 0;
+  }
+  .fmt {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 12px;
+    display: flex;
+    gap: 8px;
+  }
+  .lead {
+    font-family: var(--body);
+    font-size: clamp(19px, 1.7vw, 24px);
+    line-height: 1.45;
+    margin: 16px 0 0;
+    max-width: 34em;
+  }
+  .brief {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 48px;
+    padding-block: 72px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .brief .read {
+    margin: 16px 0 0;
+  }
+  .h {
+    font-size: clamp(40px, 5vw, 80px);
+    margin: 0 0 48px;
+  }
+  .scenes,
+  .craft {
+    padding-block: 72px;
+    border-top: 1px solid var(--line-paper);
+  }
+  .scenes ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 40px 28px;
+  }
+  .scene {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .scene:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+  }
+  .still {
+    position: relative;
+    display: block;
+    border: 1px solid var(--line-paper);
+    padding: 8px;
+  }
+  .still img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background: var(--ink-soft);
+  }
+  .scenes ol.tall {
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+  .still.r9x16 img {
+    aspect-ratio: 9 / 16;
+  }
+  .still.r4x5 img {
+    aspect-ratio: 4 / 5;
+  }
+  .still .t {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 5px 8px;
+    transition: background 0.3s;
+  }
+  .scene:hover .t,
+  .scene:focus-visible .t {
+    background: var(--accent);
+  }
+  .st {
+    font-size: 26px;
+    margin-top: 6px;
+  }
+  .scene .read {
+    margin: 0;
+  }
+  .craft ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 48px;
+  }
+  .craft li {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    align-items: baseline;
+    border-top: 1px solid var(--line-paper);
+    padding-top: 20px;
+  }
+  .craft .num {
+    color: var(--accent-soft);
+  }
+  .craft .read {
+    margin: 0;
+  }
+  @media (max-width: 860px) {
+    .notes,
+    .brief,
+    .craft ol {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // Each film on the page has its own player, format chips and scene links.
+  const films = [...document.querySelectorAll<HTMLElement>("[data-film]")];
+
+  const visible = (film: HTMLElement) =>
+    [...film.querySelectorAll<HTMLElement>("[data-screen]")].find((s) => !s.hidden)?.querySelector("video");
+
+  // Scenes (and ?t= links from search "key moments", with ?film= for a further film) play the visible format from that second.
+  const seek = (film: HTMLElement, t: number, play: boolean) => {
+    const v = visible(film);
+    if (!v) return;
+    const go = () => {
+      v.currentTime = t;
+      if (play) v.play().catch(() => {});
+    };
+    if (v.readyState >= 1) go();
+    else {
+      v.preload = "metadata";
+      v.addEventListener("loadedmetadata", go, { once: true });
+      v.load();
+    }
+  };
+
+  for (const film of films) {
+    const screens = [...film.querySelectorAll<HTMLElement>("[data-screen]")];
+    const chips = [...film.querySelectorAll<HTMLButtonElement>("[data-ratio]")];
+    chips.forEach((b) =>
+      b.addEventListener("click", () => {
+        const t = visible(film)?.currentTime ?? 0;
+        chips.forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        screens.forEach((s) => {
+          const on = s.dataset.screen === b.dataset.ratio;
+          s.hidden = !on;
+          const v = s.querySelector("video");
+          if (!on) v?.pause();
+          else if (v && t) v.currentTime = t;
+        });
+      }),
+    );
+    // The links scroll to the player through the site's smooth-scroll handler; this only seeks.
+    film.querySelectorAll<HTMLAnchorElement>("[data-seek]").forEach((a) =>
+      a.addEventListener("click", () => seek(film, Number(a.dataset.seek), true)),
+    );
+  }
+
+  const q = new URLSearchParams(location.search);
+  const start = Number(q.get("t"));
+  const target = films.find((f) => f.dataset.film === q.get("film")) ?? films[0];
+  if (start > 0 && target) {
+    // A further film's section (title + logline) sits just above its player.
+    if (target !== films[0]) target.parentElement?.scrollIntoView();
+    seek(target, start, false);
+  }
+</script>

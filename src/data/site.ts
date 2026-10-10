@@ -101,7 +101,22 @@ export type Story = {
   craft: string[];
 };
 
-export type Project = (typeof work.projects)[number] & { concept?: boolean; turnaround?: string; story?: Story };
+export type Media = { ratio: string; src: string; previewAt?: number; duration: number };
+
+/** A further film made for the same product, shown below the main one on the project's page. Its media lives in
+ *  `<slug>/<id>/<ratio>/`, and `?film=<id>&t=` links seek it. */
+export type Film = {
+  id: string;
+  date: string;
+  title: string;
+  logline: string;
+  brief: string;
+  approach: string;
+  story?: Story;
+  media: Media[];
+};
+
+export type Project = (typeof work.projects)[number] & { concept?: boolean; turnaround?: string; story?: Story; films?: Film[] };
 export const projects = work.projects as Project[];
 /** Homepage "selected work": projects with a `home` position, in that order, capped at 7. New work goes to /work only
  *  (no `home`) unless the homepage is asked for explicitly. */

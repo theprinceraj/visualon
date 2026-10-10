@@ -41,6 +41,11 @@ used for its still (its URL carries `?f=<frame>`, so changing a frame busts the 
 "from request to final cut" line. Never state what a client paid VisualOn.
 After changing scenes: `npm run media -- --stills` and `npm run media:upload -- --stills`.
 
+More films for the same product go in that project's `films` (each with `id`, `date`, `title`, `logline`, `brief`,
+`approach`, optional `story` and its own `media`), not in a new project. They appear below the main film on its page,
+their media lives in `<slug>/<film id>/<ratio>/`, and `?film=<id>&t=` deep-links them. Build and upload one with
+`--only <slug>/<film id>`.
+
 ## Videos (R2)
 
 Videos are **not** in git. `public/media/` is built from the studio renders and served from R2 in production.

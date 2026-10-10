@@ -1,7 +1,8 @@
 // Turns finished renders into web media: a faststart full MP4, a short muted preview loop and a poster.
-// Usage: node scripts/build-media.mjs [--src "D:/Claude Videos/projects"] [--only slug] [--stills]
+// Usage: node scripts/build-media.mjs [--src "D:/Claude Videos/projects"] [--only slug|slug/film] [--stills]
 // --stills only (re)builds the case-study scene stills, skipping the video encodes and the reel.
-// Reads the `media` list in src/data/work.json and writes public/media/<slug>/<variant>/{full.mp4,preview.mp4,poster.jpg}.
+// Reads the `media` list in src/data/work.json and writes public/media/<slug>/<variant>/{full.mp4,preview.mp4,poster.jpg};
+// a project's further `films` go to public/media/<slug>/<film id>/<variant>/.
 // public/media is gitignored; production serves it from R2 (see scripts/upload-media.mjs).
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -19,15 +20,21 @@ const ff = (a) => execFileSync("ffmpeg", ["-v", "error", "-y", ...a], { stdio: "
 const probe = (f) =>
   Number(execFileSync("ffprobe", ["-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", f]).toString().trim());
 
-for (const p of work.projects) {
-  if (only && p.slug !== only) continue;
+// Each project's main film, then its further films (same page, own media folder).
+const films = work.projects.flatMap((p) => [
+  { key: p.slug, slug: p.slug, media: p.media, story: p.story },
+  ...(p.films ?? []).map((f) => ({ key: `${p.slug}/${f.id}`, slug: p.slug, media: f.media, story: f.story })),
+]);
+
+for (const p of films) {
+  if (only && p.slug !== only && p.key !== only) continue;
   for (const v of p.media) {
     const src = path.join(SRC, v.src);
     if (!fs.existsSync(src)) {
-      console.warn(`skip ${p.slug}/${v.ratio}: ${src} not found`);
+      console.warn(`skip ${p.key}/${v.ratio}: ${src} not found`);
       continue;
     }
-    const out = path.join(root, "public/media", p.slug, v.ratio);
+    const out = path.join(root, "public/media", p.key, v.ratio);
     fs.mkdirSync(out, { recursive: true });
     const dur = probe(src);
     const vertical = v.ratio === "9x16" || v.ratio === "4x5";
@@ -42,7 +49,7 @@ for (const p of work.projects) {
         path.join(out, `scene-${i + 1}.jpg`)]),
     );
     if (stillsOnly) {
-      if (scenes.length) console.log(`${p.slug}/${v.ratio}: ${scenes.length} scene stills`);
+      if (scenes.length) console.log(`${p.key}/${v.ratio}: ${scenes.length} scene stills`);
       continue;
     }
 
@@ -58,7 +65,7 @@ for (const p of work.projects) {
     ff(["-i", path.join(out, "preview.mp4"), "-frames:v", "1", "-q:v", "5", path.join(out, "preview.jpg")]);
 
     const kb = (f) => Math.round(fs.statSync(path.join(out, f)).size / 1024);
-    console.log(`${p.slug}/${v.ratio}: full ${kb("full.mp4")}K · preview ${kb("preview.mp4")}K · poster ${kb("poster.jpg")}K` +
+    console.log(`${p.key}/${v.ratio}: full ${kb("full.mp4")}K · preview ${kb("preview.mp4")}K · poster ${kb("poster.jpg")}K` +
       (scenes.length ? ` · ${scenes.length} scene stills` : ""));
   }
 }
