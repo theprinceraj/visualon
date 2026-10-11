@@ -6,3 +6,6 @@ dist/
 !.env.example
 public/media/
 .wrangler/
+
+# Private outreach lead list
+outreach.md
