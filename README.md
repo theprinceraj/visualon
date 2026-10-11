@@ -28,12 +28,17 @@ npm run check        # type check
 | Titles, descriptions, Open Graph, robots meta, JSON-LD output | `src/layouts/Base.astro` |
 | Brand alternate names, social profiles (`sameAs`) | `src/data/site.ts` → `site` |
 | Structured data builders (organization, service + offers, video, FAQ, breadcrumbs) | `src/data/seo.ts` |
-| Service landing pages (`/ai-product-videos`, `/saas-launch-videos`, `/ecommerce-product-videos`) | `src/data/services.ts`, `src/pages/[service].astro` |
+| Service landing pages (`/ai-product-videos`, `/saas-launch-videos`, `/app-promo-videos`, `/explainer-videos`, `/ecommerce-product-videos`, `/restaurant-videos`) | `src/data/services.ts`, `src/pages/[service].astro` |
 | Sitemap, robots.txt | `src/pages/sitemap.xml.ts`, `src/pages/robots.txt.ts` |
 | `noindex` on *.pages.dev, asset caching | `public/_headers` |
 
 Each project in `work.json` carries a `date` (published on the site) and a `duration` (seconds) per media entry for
-the video structured data. Add both when adding a project (`ffprobe -v error -show_entries format=duration -of csv=p=0 full.mp4`).
+the video structured data and the video sitemap. Add both when adding a project (`ffprobe -v error -show_entries format=duration -of csv=p=0 full.mp4`).
+
+Each project also lists its `sectors` (`saas`, `apps`, `devtools`, `ecommerce`, `local`, `fintech`, `education`,
+`marketing`). These drive the filters on `/work` (`filters` in `src/data/site.ts`) and pick the work shown on each service
+page (`filters` on each entry in `src/data/services.ts`, newest first, up to 6), so a new project shows up in both without
+editing either list.
 
 Case studies: a project's optional `story` (challenge, audience, idea, `scenes`, `craft`) fills its work page. Each scene's
 `t` is where it starts (scene links and `?t=` seek there; Google gets them as key moments) and `frame` is the moment

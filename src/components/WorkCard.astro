@@ -3,12 +3,14 @@ import { media, type Project } from "../data/site";
 interface Props {
   p: Project;
   n: number;
+  /** Space-separated ids of the /work filters this project matches. */
+  filters?: string;
 }
-const { p, n } = Astro.props;
+const { p, n, filters } = Astro.props;
 const m = p.media.find((x) => x.ratio === "16x9") ?? p.media[0];
 ---
 
-<a href={`/work/${p.slug}`} class="card" data-hoverplay data-reveal>
+<a href={`/work/${p.slug}`} class="card" data-hoverplay data-reveal data-filters={filters}>
   <div class="frame">
     <video muted loop playsinline preload="none" poster={media(p.slug, m.ratio, "preview.jpg")} src={media(p.slug, m.ratio, "preview.mp4")} />
   </div>

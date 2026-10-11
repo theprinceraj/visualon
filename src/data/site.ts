@@ -129,3 +129,25 @@ export const vertical = projects.flatMap((p) =>
   p.media.filter((m) => m.ratio === "9x16").map((m) => ({ project: p, ratio: m.ratio })),
 );
 export const ratioLabel = (r: string) => r.replace("x", ":");
+
+/** /work filters (?f=<id>). "business" filters read a project's `sectors`, "format" filters read its tags and media. A
+ *  service page names one to pick its projects, and links to /work?f=<id> for the rest. */
+export type WorkFilter = { id: string; label: string; group: "business" | "format"; match: (p: Project) => boolean };
+const sector = (id: string) => (p: Project) => p.sectors.includes(id);
+export const filters: WorkFilter[] = [
+  { id: "saas", label: "saas + web apps", group: "business", match: sector("saas") },
+  { id: "apps", label: "mobile apps + extensions", group: "business", match: sector("apps") },
+  { id: "devtools", label: "developer tools", group: "business", match: sector("devtools") },
+  { id: "ecommerce", label: "e-commerce + d2c", group: "business", match: sector("ecommerce") },
+  { id: "local", label: "restaurants + local", group: "business", match: sector("local") },
+  { id: "fintech", label: "fintech", group: "business", match: sector("fintech") },
+  { id: "education", label: "education + wellbeing", group: "business", match: sector("education") },
+  { id: "marketing", label: "marketing + ai", group: "business", match: sector("marketing") },
+  { id: "launch", label: "launch films", group: "format", match: (p) => p.tags[0] === "launch film" },
+  { id: "character", label: "character films", group: "format", match: (p) => p.tags[0].startsWith("character") },
+  { id: "vertical", label: "vertical 9:16", group: "format", match: (p) => p.media.some((m) => m.ratio === "9x16") },
+];
+export const filterById = (id: string) => filters.find((f) => f.id === id)!;
+/** Newest first; client work before concepts on the same day. */
+export const newest = (list: Project[]) =>
+  [...list].sort((a, b) => b.date.localeCompare(a.date) || Number(!!a.concept) - Number(!!b.concept));

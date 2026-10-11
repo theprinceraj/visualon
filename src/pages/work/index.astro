@@ -1,8 +1,19 @@
 ---
 import Base from "../../layouts/Base.astro";
 import WorkCard from "../../components/WorkCard.astro";
-import { projects } from "../../data/site";
+import { filters, projects } from "../../data/site";
 import { breadcrumbs } from "../../data/seo";
+
+const groups = [
+  ["business", "by business"],
+  ["format", "by format"],
+] as const;
+const matches = (p: (typeof projects)[number]) =>
+  filters
+    .filter((f) => f.match(p))
+    .map((f) => f.id)
+    .join(" ");
+const count = (id: string) => projects.filter(filters.find((f) => f.id === id)!.match).length;
 ---
 
 <Base
@@ -15,12 +26,73 @@ import { breadcrumbs } from "../../data/seo";
       <div class="label caps"><span class="num">01</span><span class="txt">— the whole shelf</span></div>
       <h1 class="display">All the <em>work</em>.</h1>
       <p class="read muted lede">{projects.length} products, each one shown as it really is: its own ui, its own copy, its own colours.</p>
+      <div class="filters" data-work-filters>
+        {
+          groups.map(([g, label]) => (
+            <div class="row">
+              <span class="caps muted g">{label}</span>
+              <div class="chips">
+                {filters
+                  .filter((f) => f.group === g)
+                  .map((f) => (
+                    <button type="button" class="chip" aria-pressed="false" data-filter={f.id}>
+                      {f.label} <span class="c">{count(f.id)}</span>
+                    </button>
+                  ))}
+              </div>
+            </div>
+          ))
+        }
+        <p class="caps muted status" aria-live="polite" data-work-status></p>
+      </div>
     </div>
     <div class="grid wrap">
-      {projects.map((p, i) => <WorkCard p={p} n={i + 1} />)}
+      {projects.map((p, i) => <WorkCard p={p} n={i + 1} filters={matches(p)} />)}
     </div>
   </section>
 </Base>
+
+<script>
+  // One filter at a time, kept in ?f= so a filtered view can be linked (service pages link here).
+  const root = document.querySelector<HTMLElement>("[data-work-filters]")!;
+  const chips = [...root.querySelectorAll<HTMLButtonElement>("[data-filter]")];
+  const cards = [...document.querySelectorAll<HTMLElement>(".card[data-filters]")];
+  const status = root.querySelector<HTMLElement>("[data-work-status]")!;
+
+  const apply = (id: string | null) => {
+    const chip = chips.find((c) => c.dataset.filter === id);
+    if (!chip) id = null;
+    chips.forEach((c) => c.setAttribute("aria-pressed", String(c === chip)));
+    let shown = 0;
+    cards.forEach((card) => {
+      const on = !id || card.dataset.filters!.split(" ").includes(id);
+      card.hidden = !on;
+      if (on) shown++;
+    });
+    status.textContent = id ? `${shown} of ${cards.length} projects · ` : "";
+    if (id) {
+      const clear = document.createElement("button");
+      clear.type = "button";
+      clear.className = "clear caps";
+      clear.textContent = "show all";
+      clear.addEventListener("click", () => set(null));
+      status.append(clear);
+    }
+  };
+  const set = (id: string | null) => {
+    apply(id);
+    const url = new URL(location.href);
+    id ? url.searchParams.set("f", id) : url.searchParams.delete("f");
+    history.replaceState(null, "", url);
+  };
+
+  root.addEventListener("click", (e) => {
+    const chip = (e.target as HTMLElement).closest<HTMLButtonElement>("[data-filter]");
+    if (!chip) return;
+    set(chip.getAttribute("aria-pressed") === "true" ? null : chip.dataset.filter!);
+  });
+  apply(new URLSearchParams(location.search).get("f"));
+</script>
 
 <style>
   .all {
@@ -32,14 +104,65 @@ import { breadcrumbs } from "../../data/seo";
   }
   .lede {
     max-width: 30em;
-    margin: 24px 0 72px;
+    margin: 24px 0 48px;
+  }
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 72px;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .g {
+    font-size: 11px;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .chip .c {
+    margin-left: 8px;
+    opacity: 0.55;
+  }
+  .status {
+    min-height: 1.4em;
+    margin: 8px 0 0;
+    font-size: 11px;
+  }
+  .status :global(.clear) {
+    font: inherit;
+    color: var(--paper);
+    background: none;
+    border: 0;
+    padding: 0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
   }
   .grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 64px 32px;
   }
+  .grid > :global([hidden]) {
+    display: none;
+  }
   @media (max-width: 760px) {
+    .row {
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    .chip {
+      white-space: normal;
+      height: auto;
+      min-height: 34px;
+    }
     .grid {
       grid-template-columns: 1fr;
     }
