@@ -1,0 +1,272 @@
+---
+import Base from "../layouts/Base.astro";
+import Packages from "../components/Packages.astro";
+import Faq from "../components/Faq.astro";
+import { packages, formatPrice, site } from "../data/site";
+import { priceLine, speedLine } from "../data/services";
+import { breadcrumbs, faqPage, type Faq as FaqItem } from "../data/seo";
+
+// Comparison page for people deciding how to get a product video made. Claims about freelancers and agencies stay
+// general ("usually", "often"): no named competitors, no invented market prices.
+const from = (c: "USD" | "INR") => formatPrice(Math.min(...packages.map((p) => p.price[c])), c);
+const path = "/ai-studio-vs-freelancer-vs-agency";
+const name = "AI studio vs freelancer vs agency";
+
+const rows: [criterion: string, us: string, freelancer: string, agency: string][] = [
+  ["price", `fixed before you pay, from ${from("USD")} / ${from("INR")}, tax included`, "quoted per job; varies widely with experience", "quoted per project; usually the highest, with production costs on top"],
+  ["turnaround", "48 hours for a single video, 72 for a launch kit or hook pack", "depends on their queue; often a week or more", "usually weeks, with briefing, scripting and approval rounds"],
+  ["starting point", "your live product: its real ui, copy, colours and fonts", "whatever you send; often stock footage or templates", "a discovery phase, then scripts, storyboards and sometimes a shoot"],
+  ["who makes the calls", "a director, on every cut", "the freelancer, if they direct; many are editors working to your notes", "a creative team, with account managers in between"],
+  ["formats", "9:16, 1:1, 16:9 and 4:5; the launch kit ships three", "usually what you ask for, often priced per format", "usually a master film plus cut-downs, often at extra cost"],
+  ["ad variants", "the hook pack: one ad, five openings, an a/b test plan", "possible, usually billed as extra edits", "possible, usually a separate scope"],
+  ["revisions", "1–2 rounds, fixed in the package", "whatever the agreement says", "whatever the contract says"],
+  ["if it goes wrong", "full refund before work starts or if we miss the window; after that, a remake or up to 50% back", "depends on the platform or agreement", "governed by the contract"],
+  ["best for", "launches, product promos and ads that need to ship this week", "one-off edits, or a creator whose style you already love", "large campaigns, live-action shoots, tv and brand films"],
+];
+
+const picks = [
+  { who: "A freelancer", when: "you already have footage and need an editor, or there's a creator whose style you love and their calendar is open." },
+  { who: "An agency", when: "you need real people on camera, a location shoot, a campaign that runs for months, or someone to buy the media too." },
+  { who: `${site.name}`, when: "your product is software or sold online, you need the video this week, and you want the price fixed before anything starts." },
+];
+
+const faqs: FaqItem[] = [
+  { q: "Is an AI video studio cheaper than a freelancer?", a: `Usually, for short product videos. ${priceLine} A freelancer's rate depends on their experience and the job, and extra formats or variants are often billed separately.` },
+  { q: "Is the quality as good as an agency's?", a: "For short product videos built from your real interface, yes, and every render is checked still by still before it reaches you. What we don't do is live action: if the idea needs real people on camera, an agency or a production crew is the better choice. <a href=\"/work\">See the work</a> and judge for yourself." },
+  { q: "What can an agency do that you can't?", a: "Live-action shoots, actors, location work, TV spots, long campaigns and media buying. If you need those, hire an agency. If you need a launch film, promo or ad from your product, fast and at a fixed price, that's what we're built for." },
+  { q: "How fast is delivery compared to a freelancer or agency?", a: `${speedLine} Agencies usually plan in weeks, and freelancers depend on their queue.` },
+  { q: "What do I need to get started?", a: "A link to your product and a line or two of brief. Pick a <a href=\"#packages\">package</a>, pay, and send logos, screenshots or a demo login by email if you have them." },
+];
+---
+
+<Base
+  title="AI Video Studio vs Freelancer vs Agency for Product Videos · VisualOn"
+  description={`How an AI product video studio compares with hiring a freelancer or an agency: price, turnaround, quality control, revisions and refunds. Fixed prices from ${from("USD")}.`}
+  schema={[breadcrumbs(Astro.site!, [[name, path]]), faqPage(faqs)]}
+>
+  <section class="hero on-ink section">
+    <div class="wrap">
+      <a href="/" class="link-arrow caps back"><span class="arr">←</span> visualon</a>
+      <div class="label caps"><span class="num">01</span><span class="txt">— studio vs freelancer vs agency</span></div>
+      <h1 class="display">Who should make your <em>product video</em>?</h1>
+      <p class="read muted lede">
+        there are three usual ways to get a product video made: hire a freelancer, brief an agency, or order from a studio
+        like ours that renders with ai and directs every cut. each is the right answer for someone. here's how they
+        compare, including when you shouldn't pick us.
+      </p>
+    </div>
+  </section>
+
+  <section class="compare on-paper section" aria-labelledby="compare-title">
+    <div class="wrap">
+      <div class="label caps" data-reveal><span class="num">02</span><span class="txt">— side by side</span></div>
+      <h2 id="compare-title" class="display title" data-reveal>The <em class="blue">comparison</em>.</h2>
+      <div class="table-wrap" data-reveal>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr">criterion</span></th>
+              <th scope="col" class="us">{site.wordmark}</th>
+              <th scope="col">freelancer</th>
+              <th scope="col">agency</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              rows.map(([c, us, fl, ag]) => (
+                <tr>
+                  <th scope="row" class="caps">{c}</th>
+                  <td class="us" data-col={site.wordmark}>{us}</td>
+                  <td data-col="freelancer">{fl}</td>
+                  <td data-col="agency">{ag}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="caps muted note">freelancer and agency columns describe how they usually work. every one is different, so ask.</p>
+    </div>
+  </section>
+
+  <section class="picks on-paper section" aria-labelledby="picks-title">
+    <div class="wrap">
+      <div class="label caps" data-reveal><span class="num">03</span><span class="txt">— the honest answer</span></div>
+      <h2 id="picks-title" class="display title" data-reveal>Pick <em class="blue">whoever</em> fits.</h2>
+      <div class="cells">
+        {
+          picks.map((p, i) => (
+            <article class="cell" data-reveal>
+              <span class="n caps">{String(i + 1).padStart(3, "0")}</span>
+              <h3 class="display">{p.who}</h3>
+              <p class="read muted">pick {p.who.toLowerCase() === site.name.toLowerCase() ? "us" : "one"} when {p.when}</p>
+            </article>
+          ))
+        }
+      </div>
+      <div class="ctas" data-reveal>
+        <a href="#packages" class="btn">see the packages <span aria-hidden="true">↓</span></a>
+        <a href="/work" class="link-arrow caps">see the work <span class="arr">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <Packages num="04" />
+
+  <Faq items={faqs} num="05" />
+</Base>
+
+<style>
+  .hero {
+    padding-block: 150px 120px;
+  }
+  .back {
+    color: #9a9da4;
+    margin-bottom: 48px;
+  }
+  .back:hover {
+    color: var(--paper);
+  }
+  h1 {
+    margin-top: 28px;
+    font-size: clamp(48px, 7.6vw, 124px);
+    max-width: 12em;
+  }
+  .lede {
+    max-width: 36em;
+    margin: 40px 0 0;
+  }
+  .compare {
+    padding-top: 120px;
+  }
+  .title {
+    margin: 28px 0 56px;
+    font-size: clamp(46px, 6.4vw, 104px);
+  }
+  .table-wrap {
+    overflow-x: auto;
+    border-top: 1px solid var(--line-ink);
+  }
+  table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: 20px 20px 22px 0;
+    border-bottom: 1px solid var(--line-ink);
+  }
+  thead th {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+  tbody th {
+    width: 15%;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  td {
+    width: 28%;
+    opacity: 0.72;
+  }
+  td.us {
+    opacity: 1;
+    font-weight: 500;
+  }
+  thead .us {
+    color: var(--accent);
+  }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .note {
+    margin: 20px 0 0;
+    font-size: 11px;
+  }
+  .picks {
+    padding-top: 40px;
+  }
+  .cells {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--line-ink);
+    border-left: 1px solid var(--line-ink);
+  }
+  .cell {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: clamp(24px, 2.8vw, 40px) clamp(20px, 2.4vw, 32px) 40px;
+    border-right: 1px solid var(--line-ink);
+    border-bottom: 1px solid var(--line-ink);
+  }
+  .cell .n {
+    font-size: 11px;
+    color: var(--accent);
+  }
+  .cell h3 {
+    font-size: clamp(26px, 2.2vw, 34px);
+    margin-top: 28px;
+  }
+  .cell .read {
+    margin: 0;
+  }
+  .ctas {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    margin-top: 48px;
+  }
+  @media (max-width: 760px) {
+    /* rows become cards: criterion on top, the three answers labelled underneath */
+    table,
+    tbody,
+    tr,
+    th,
+    td {
+      display: block;
+      min-width: 0;
+      width: auto;
+    }
+    table {
+      min-width: 0;
+    }
+    thead {
+      display: none;
+    }
+    tr {
+      padding: 20px 0 8px;
+      border-bottom: 1px solid var(--line-ink);
+    }
+    th,
+    td {
+      border: 0;
+      padding: 0 0 12px;
+    }
+    td::before {
+      content: attr(data-col);
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      opacity: 0.6;
+      margin-bottom: 2px;
+    }
+    .cells {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
