@@ -1,6 +1,94 @@
 {
   "projects": [
     {
+      "slug": "kodlo",
+      "date": "2026-10-12",
+      "title": "kōdlo",
+      "tags": [
+        "product promo",
+        "SaaS promo"
+      ],
+      "sectors": ["saas", "marketing"],
+      "year": 2026,
+      "logline": "Ten tabs fold into one.",
+      "brief": "kōdlo is an AI sales workspace for high-ticket B2B. It finds prospects that fit your ICP, researches them with cited sources, and its agent writes the message, the offer and the deck from your own docs, all on one record per deal.",
+      "approach": "One deal sprawls across a cramped browser until the tab strip folds into a single kōdlo tab. Then each tab the seller used to need flies into kōdlo and lands as the thing that replaced it.",
+      "story": {
+        "challenge": "Every sales tool claims to save time. kōdlo's real difference is quieter: one shared context, where every step feeds the next and every claim keeps its source. The film had to make that feel physical, without a single \"welcome to the dashboard\" shot.",
+        "audience": "Founders and senior reps selling high-ticket B2B (agencies, consultancies, technical products), solo or in small teams, who research every deal by hand across a dozen tabs.",
+        "idea": "The tab becomes the source. The careers page lands as a prospect's source chip, the search tab as a citation, the AI chat as a LinkedIn draft, the proposal template as an exported deck. The tabs don't close; they move in.",
+        "scenes": [
+          {
+            "t": 0,
+            "frame": 4.2,
+            "title": "One deal, ten tabs",
+            "text": "A dark browser fills the frame and the deal's tabs open one per beat: LinkedIn, the CRM, a lead sheet, a proposal template."
+          },
+          {
+            "t": 5.32,
+            "frame": 8.4,
+            "title": "Every tab starts from zero",
+            "text": "Tabs multiply into slivers, a red counter climbs and the frame closes in. The deal was never won in ten tabs."
+          },
+          {
+            "t": 10.66,
+            "frame": 12.2,
+            "title": "The fold",
+            "text": "On the music's lift the whole tab strip folds into one kōdlo tab, which grows into the frame: it's won in one workspace."
+          },
+          {
+            "t": 13.33,
+            "frame": 16.5,
+            "title": "Proof on arrival",
+            "text": "Prospect discovery stages Bramblewick Studio for approval; the old careers tab flies in and becomes its source chip."
+          },
+          {
+            "t": 18.67,
+            "frame": 21.5,
+            "title": "Every line has a source",
+            "text": "A pre-call brief draws a line from each citation to its source, and the search tab lands as source 2."
+          },
+          {
+            "t": 24.01,
+            "frame": 28.2,
+            "title": "Drafted here, sent by you",
+            "text": "The AI-chat tab lands in a LinkedIn connection draft; one click switches the tone and the message rewrites itself."
+          },
+          {
+            "t": 29.33,
+            "frame": 32.5,
+            "title": "It remembers the call",
+            "text": "Six weeks later, \"What's next with Elin?\" is answered from the call notes on her timeline."
+          },
+          {
+            "t": 34.67,
+            "frame": 38.2,
+            "title": "The deck, from your docs",
+            "text": "The proposal-template tab lands, six slides compose in the template and the offer exports to PPTX."
+          },
+          {
+            "t": 40.01,
+            "frame": 44.2,
+            "title": "The full cycle",
+            "text": "kōdlo's own Fig. 01 draws its nine-step route beside the lockup: start for free at kodlo.ai."
+          }
+        ],
+        "craft": [
+          "The app screens are rebuilt from kōdlo's own feature screenshots and site copy, and the feature headlines on screen are kōdlo's own lines. The deal thread that links the scenes (Bramblewick Studio, Elin Sarv, dates, message text) is illustrative, built from the names in kōdlo's demo screens.",
+          "Two looks: a dark, cramped browser for the problem, then kōdlo's own technical-print style (cream paper, ink, hairline grid, Space Grotesk and Geist Mono) once the tabs fold.",
+          "Every scene cuts on the downbeat of \"Helios Tilt\" by CM ONNI (CC BY 3.0), with whip pans between sections and foley for each tab that lands. 16:9, 45 seconds, no voiceover."
+        ]
+      },
+      "media": [
+        {
+          "ratio": "16x9",
+          "src": "kodlo-one-workspace/out/kodlo-one-workspace-16x9.mp4",
+          "previewAt": 10.2,
+          "duration": 45
+        }
+      ]
+    },
+    {
       "slug": "bugwalk",
       "date": "2026-10-09",
       "title": "Bugwalk",
