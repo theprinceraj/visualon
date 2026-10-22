@@ -10,3 +10,6 @@ public/media/
 # Private outreach records (contact details). The rules and playbook in outreach/ are tracked.
 outreach/*.csv
 outreach/archive-*.md
+
+# oh-my-claudecode state (any depth)
+.omc/
