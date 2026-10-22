@@ -7,5 +7,6 @@ dist/
 public/media/
 .wrangler/
 
-# Private outreach lead list
-outreach.md
+# Private outreach records (contact details). The rules and playbook in outreach/ are tracked.
+outreach/*.csv
+outreach/archive-*.md

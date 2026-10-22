@@ -21,6 +21,19 @@ npm run check        # type check
 | Order dialog → Dodo checkout, quote form → email, currency toggle | `src/scripts/main.ts` |
 | Terms / privacy / refunds (needed for Dodo verification) | `src/pages/{terms,privacy,refunds}.astro` |
 
+## Outreach (finding clients)
+
+| What | File |
+|---|---|
+| Rules for contacting leads (read before emailing anyone), statuses, CSV columns | `outreach/README.md` |
+| The play, where to find leads, email templates, reply handling | `outreach/playbook.md` |
+| Lead list and message log (private, gitignored) | `outreach/leads.csv`, `outreach/log.csv` |
+| Positioning, ICP, offer, proof (read by the marketing skills) | `.agents/product-marketing.md` |
+| Agent notes for outreach work | `AGENTS.md` |
+
+Links in outreach emails carry `?ref=<lead id>`. `src/scripts/main.ts` keeps the code in the browser and sends it to
+Dodo as `metadata_ref` (and as a `Ref:` line in order and quote emails), so each payment can be matched to its lead.
+
 ## SEO
 
 | What | File |

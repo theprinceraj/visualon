@@ -35,6 +35,14 @@ const store = {
     } catch {}
   },
 };
+// Outreach links carry ?ref=<lead id> (or utm_campaign). Keep the latest one so an order placed later can be traced
+// back to the message that brought it (outreach/README.md).
+const refIn = (() => {
+  const q = new URLSearchParams(location.search);
+  return (q.get("ref") || q.get("utm_campaign") || "").trim();
+})();
+if (/^[\w.-]{1,40}$/.test(refIn)) store.set("vo-ref", refIn);
+const ref = store.get("vo-ref") || "";
 
 // ---------- smooth scroll ----------
 let lenis: Lenis | null = null;
@@ -303,6 +311,7 @@ dialog?.querySelector("form")?.addEventListener("submit", (e) => {
       `Product: ${link}`,
       `Formats: ${formats.join(", ")}`,
       ...(tone.length ? [`Feel: ${tone.join(", ")}`] : []),
+      ...(ref ? [`Ref: ${ref}`] : []),
       "",
       brief,
     ].join("\n");
@@ -322,6 +331,7 @@ dialog?.querySelector("form")?.addEventListener("submit", (e) => {
     metadata_formats: formats.join(", "),
     metadata_feel: tone.join(", "),
     metadata_brief: brief.slice(0, 450),
+    ...(ref ? { metadata_ref: ref } : {}),
   });
   go(`${cfg.checkoutBase}/buy/${productId}?${q}`);
 });
@@ -344,6 +354,7 @@ contact?.addEventListener("submit", (e) => {
     "",
     name ? `— ${name}` : "",
     d.get("email") ? `Reply to: ${d.get("email")}` : "",
+    ref ? `Ref: ${ref}` : "",
   ]
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
