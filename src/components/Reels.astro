@@ -25,7 +25,7 @@ const shelf = [...vertical, ...extra.filter((e) => !vertical.some((v) => v.proje
               playsinline
               preload="none"
               poster={media(project.slug, ratio, "preview.jpg")}
-              src={media(project.slug, ratio, "preview.mp4")}
+              data-src={media(project.slug, ratio, "preview.mp4")}
             />
           </div>
           <span class="cap">

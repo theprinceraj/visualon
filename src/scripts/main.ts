@@ -114,10 +114,15 @@ $$("[data-reveal]").forEach((el, i) => {
 });
 
 // ---------- videos: play only when visible / hovered ----------
+// Previews carry their file in data-src so search sees one film per work page; it is attached on first play.
+const load = (v: HTMLVideoElement) => {
+  if (!v.getAttribute("src") && v.dataset.src) v.src = v.dataset.src;
+  return v;
+};
 const playIO = new IntersectionObserver((entries) =>
   entries.forEach((en) => {
     const v = en.target as HTMLVideoElement;
-    if (en.isIntersecting) v.play().catch(() => {});
+    if (en.isIntersecting) load(v).play().catch(() => {});
     else v.pause();
   }),
 );
@@ -128,7 +133,7 @@ $$("[data-hoverplay]").forEach((card) => {
   const v = $<HTMLVideoElement>("video", card);
   if (!v) return;
   if (canHover) {
-    card.addEventListener("mouseenter", () => v.play().catch(() => {}));
+    card.addEventListener("mouseenter", () => load(v).play().catch(() => {}));
     card.addEventListener("mouseleave", () => v.pause());
   } else playIO.observe(v);
 });
@@ -146,7 +151,7 @@ if (preview) {
       v.classList.toggle("on", on);
       if (on) {
         if (v.preload === "none") v.preload = "auto";
-        v.play().catch(() => {});
+        load(v).play().catch(() => {});
       } else v.pause();
     });
     preview.href = `/work/${slug}`;
@@ -161,7 +166,7 @@ if (preview) {
   new IntersectionObserver(([en]) => {
     const on = vids.find((v) => v.classList.contains("on"));
     if (!on) return;
-    en.isIntersecting ? on.play().catch(() => {}) : on.pause();
+    en.isIntersecting ? load(on).play().catch(() => {}) : on.pause();
   }).observe(preview);
 }
 
