@@ -36,7 +36,7 @@ Dodo as `metadata_ref` (and as a `Ref:` line in order and quote emails), so each
 
 ## Analytics
 
-Google Analytics 4 (funnel, films, sections, outreach attribution) plus Cloudflare Web Analytics. Event list, GA
+Google Analytics 4 (funnel, films, sections, outreach attribution). Event list, GA
 property setup (`npm run ga:setup`), debugging (`?ga_debug=1`), excluding your own visits (`?internal=1`) and the
 saved reports: `docs/analytics.md`. The measurement id is `PUBLIC_GA_ID` in `wrangler.jsonc` (production only).
 
