@@ -34,6 +34,12 @@ npm run check        # type check
 Links in outreach emails carry `?ref=<lead id>`. `src/scripts/main.ts` keeps the code in the browser and sends it to
 Dodo as `metadata_ref` (and as a `Ref:` line in order and quote emails), so each payment can be matched to its lead.
 
+## Analytics
+
+Google Analytics 4 (funnel, films, sections, outreach attribution) plus Cloudflare Web Analytics. Event list, GA
+property setup (`npm run ga:setup`), debugging (`?ga_debug=1`), excluding your own visits (`?internal=1`) and the
+saved reports: `docs/analytics.md`. The measurement id is `PUBLIC_GA_ID` in `wrangler.jsonc` (production only).
+
 ## SEO
 
 | What | File |

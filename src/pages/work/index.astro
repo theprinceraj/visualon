@@ -53,6 +53,7 @@ const count = (id: string) => projects.filter(filters.find((f) => f.id === id)!.
 </Base>
 
 <script>
+  import { track } from "../../scripts/analytics";
   // One filter at a time, kept in ?f= so a filtered view can be linked (service pages link here).
   const root = document.querySelector<HTMLElement>("[data-work-filters]")!;
   const chips = [...root.querySelectorAll<HTMLButtonElement>("[data-filter]")];
@@ -78,9 +79,11 @@ const count = (id: string) => projects.filter(filters.find((f) => f.id === id)!.
       clear.addEventListener("click", () => set(null));
       status.append(clear);
     }
+    return { id, shown };
   };
   const set = (id: string | null) => {
-    apply(id);
+    const r = apply(id);
+    track("work_filter", { filter: r.id ?? "all", results: r.shown, via: "chip" });
     const url = new URL(location.href);
     id ? url.searchParams.set("f", id) : url.searchParams.delete("f");
     history.replaceState(null, "", url);
@@ -91,7 +94,8 @@ const count = (id: string) => projects.filter(filters.find((f) => f.id === id)!.
     if (!chip) return;
     set(chip.getAttribute("aria-pressed") === "true" ? null : chip.dataset.filter!);
   });
-  apply(new URLSearchParams(location.search).get("f"));
+  const linked = apply(new URLSearchParams(location.search).get("f"));
+  if (linked.id) track("work_filter", { filter: linked.id, results: linked.shown, via: "link" });
 </script>
 
 <style>

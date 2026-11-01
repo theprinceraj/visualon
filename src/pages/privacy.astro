@@ -3,7 +3,7 @@ import Legal from "../layouts/Legal.astro";
 import { site } from "../data/site";
 ---
 
-<Legal title="Privacy" description="How VisualOn handles your data: what we collect when you order, what we never do, and who processes it." updated="7 October 2026">
+<Legal title="Privacy" description="How VisualOn handles your data: what we collect when you order, what we never do, and who processes it." updated="1 November 2026">
   <p>{site.name} collects as little as it can.</p>
   <h2>What we collect</h2>
   <ul>
@@ -11,13 +11,30 @@ import { site } from "../data/site";
     <li><strong>When you order:</strong> your name, email, product link and brief. These go to Dodo Payments with your checkout, and Dodo shares them with us so we can make the video. Dodo handles your card or UPI details. We never see them.</li>
     <li><strong>When you email us:</strong> whatever you choose to send.</li>
     <li><strong>When you browse:</strong> anonymous visit counts (pages viewed, referrer, country, device type) through Cloudflare Web Analytics. It sets no cookies, doesn't fingerprint you, and can't identify you.</li>
+    <li>
+      <strong>How the site is used:</strong> Google Analytics records which pages you view, which films you play and how far,
+      which package you look at and whether you reach checkout, plus your rough location (country, city), device and browser.
+      It sets two first-party cookies (<code>_ga</code> and <code>_ga_*</code>) that last up to 13 months, so a return visit counts as
+      the same visitor. Your name, email, brief and payment details are never sent to it. If you came from a link we
+      emailed you, its reference code is attached, so we can tell whether that email was useful.
+    </li>
   </ul>
+  <h2>Your choice about cookies</h2>
+  <p>
+    In the EU, the UK and Switzerland, Google Analytics sets no cookies unless you accept them: until then it gets only
+    cookieless, anonymous counts. Elsewhere the cookies are on by default. You can change your choice at any time, anywhere:
+  </p>
+  <p class="consent-buttons">
+    <button type="button" class="btn" data-consent-set="granted">allow analytics cookies</button>
+    <button type="button" class="chip" data-consent-set="denied">turn them off</button>
+  </p>
+  <p>Blocking cookies in your browser, or using an ad blocker, works too. The site works the same either way.</p>
   <h2>What we don't do</h2>
-  <p>No tracking cookies, no advertising, no cross-site tracking, no selling or sharing your data. The site remembers your currency choice in your browser's local storage, and that's it.</p>
+  <p>No advertising, no ad cookies, no cross-site tracking, no selling or sharing your data. Besides the analytics cookies above, the site remembers your currency choice, your cookie choice and a link's reference code in your browser's local storage, and that's it.</p>
   <h2>How long we keep it</h2>
   <p>Order details and project files are kept for as long as you're a customer, plus whatever period tax law requires. Ask us to delete your files at any time.</p>
   <h2>Third parties</h2>
-  <p>Payments: Dodo Payments (see their privacy policy). Hosting and visit counts: Cloudflare. Email: Google.</p>
+  <p>Payments: Dodo Payments (see their privacy policy). Hosting and visit counts: Cloudflare. Site analytics: Google Analytics (Google Ireland Ltd for visitors in the EU and UK). Email: Google.</p>
   <h2>Contact</h2>
   <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
 </Legal>
