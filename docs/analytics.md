@@ -1,9 +1,11 @@
 # Analytics
 
 Google Analytics 4 tracks the whole path, from landing to paying: what people watch, how far down they read, which
-package they open, where the order form loses them, and which outreach email or launch link brought them in. Cloudflare
-Web Analytics still runs alongside it. That one is cookieless and ad blockers don't stop it, so it's the honest
-baseline for raw visit counts.
+package they open, where the order form loses them, and which outreach email or launch link brought them in. It is the
+site's only analytics: Cloudflare Web Analytics is switched off in the Pages project (Metrics → Web Analytics).
+
+Property: account "VisualOn" (414257252) → property "visualon.top" (561808614) → web stream 16249513014,
+measurement id `G-K0PS39066Y`.
 
 | What | File |
 |---|---|
@@ -152,4 +154,5 @@ Build these once and they update themselves. Use the Content group and custom di
 - Payments that are still `processing` on return are logged as `payment_incomplete` and never become a `purchase` in
   GA, for the same reason.
 - Seeking a film forward fires every progress milestone it skips past, like GA's own YouTube tracking does.
-- Ad blockers stop GA for part of a tech audience. Cloudflare Web Analytics shows the true visit count.
+- Ad blockers stop GA for part of a tech audience, so GA undercounts visits. Turning Cloudflare Web Analytics back on
+  (Pages project → Metrics) gives a cookieless count to compare against, but the privacy page must mention it again.
