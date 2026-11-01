@@ -100,6 +100,7 @@ const steps = [
 </style>
 
 <script>
+  import { item, track } from "../scripts/analytics";
   const q = new URLSearchParams(location.search);
   const id = q.get("payment_id") || q.get("subscription_id");
   const status = (q.get("status") || "").toLowerCase();
@@ -114,6 +115,36 @@ const steps = [
     const to = u.pathname;
     mail.href = `mailto:${to}?subject=${encodeURIComponent(`VisualOn order ${id}${pkg ? ` (${pkg})` : ""}`)}&body=${encodeURIComponent(`Payment ID: ${id}\n\nAssets / links:\n`)}`;
   }
+
+  // Paid: the purchase GA counts. Dodo sends status=succeeded; the payment id is the transaction id, so a reload
+  // (or a second tab) isn't counted twice — GA drops repeats of the same transaction id, and so do we.
+  const config = JSON.parse(document.getElementById("order-config")?.textContent || "{}") as {
+    packages?: { id: string; name: string; price: Record<string, number> }[];
+  };
+  const pack = config.packages?.find((p) => p.id === pkg);
+  const currency = q.get("currency") === "INR" ? "INR" : "USD";
+  const paid = id && (status === "succeeded" || status === "active");
+  const key = `vo-paid-${id}`;
+  let seen = false;
+  try {
+    seen = Boolean(id && localStorage.getItem(key));
+    if (paid) localStorage.setItem(key, "1");
+  } catch {}
+  if (paid && !seen) {
+    track("purchase", {
+      transaction_id: id,
+      currency,
+      value: pack ? pack.price[currency] : 0,
+      package: pkg ?? "",
+      items: pack ? [item(pack, currency)] : [],
+    });
+  } else if (id && status && !paid && !seen) {
+    try {
+      localStorage.setItem(key, "1");
+    } catch {}
+    track("payment_incomplete", { status, package: pkg ?? "", currency });
+  }
+
   if (status && status !== "succeeded" && status !== "active") {
     el("label").textContent = "— payment not completed";
     el("title").innerHTML = 'That didn\'t go <em class="blue">through.</em>';

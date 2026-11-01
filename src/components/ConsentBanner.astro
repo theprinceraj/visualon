@@ -1,0 +1,44 @@
+---
+// Cookie choice for visitors in Europe (src/scripts/analytics.ts decides who sees it and stores the answer).
+// Hidden until then; the privacy page can reopen it with [data-consent-open].
+---
+
+<aside class="consent" data-consent hidden aria-label="Cookie choice">
+  <p class="read">
+    we use google analytics cookies to see which films and pages people find useful. nothing for ads. ok with that?{" "}
+    <a href="/privacy">privacy</a>
+  </p>
+  <div class="actions">
+    <button type="button" class="btn" data-consent-set="granted">accept</button>
+    <button type="button" class="chip" data-consent-set="denied">no thanks</button>
+  </div>
+</aside>
+
+<style>
+  .consent {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 80;
+    width: min(380px, calc(100vw - 32px));
+    padding: 18px;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--line-paper);
+    font-size: 14px;
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  .consent p {
+    margin: 0 0 14px;
+  }
+  .consent a {
+    color: var(--accent-soft);
+  }
+  .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+</style>

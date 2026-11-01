@@ -19,7 +19,7 @@ const H = `h${level}` as "h2" | "h3";
 const clock = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
 ---
 
-<div class="film" data-film={id}>
+<div class="film" data-film={id} data-base={base}>
   <div class="player wrap" id={id}>
     {
       items.length > 1 && (
@@ -278,6 +278,7 @@ const clock = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60))
 </style>
 
 <script>
+  import { track } from "../scripts/analytics";
   // Each film on the page has its own player, format chips and scene links.
   const films = [...document.querySelectorAll<HTMLElement>("[data-film]")];
 
@@ -318,8 +319,47 @@ const clock = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60))
     );
     // The links scroll to the player through the site's smooth-scroll handler; this only seeks.
     film.querySelectorAll<HTMLAnchorElement>("[data-seek]").forEach((a) =>
-      a.addEventListener("click", () => seek(film, Number(a.dataset.seek), true)),
+      a.addEventListener("click", () => {
+        seek(film, Number(a.dataset.seek), true);
+        track("scene_click", {
+          film: film.dataset.base,
+          scene: (a.querySelector(".st")?.textContent || "").trim().slice(0, 80),
+          seconds: Number(a.dataset.seek),
+          via: "scene_list",
+        });
+      }),
     );
+
+    // Watching: start, 25/50/75 % and the end, once each per film and format on this page view.
+    chips.forEach((b) =>
+      b.addEventListener("click", () => track("film_format", { film: film.dataset.base, ratio: b.dataset.ratio })),
+    );
+    screens.forEach((s) => {
+      const v = s.querySelector("video");
+      if (!v) return;
+      const base = { film: film.dataset.base, ratio: s.dataset.screen, video_provider: "visualon", video_title: film.dataset.base };
+      const hit = new Set<number>();
+      v.addEventListener("play", () => {
+        if (hit.has(0)) return;
+        hit.add(0);
+        track("video_start", { ...base, video_duration: Math.round(v.duration || 0), video_current_time: Math.round(v.currentTime) });
+      });
+      v.addEventListener("timeupdate", () => {
+        if (!v.duration) return;
+        const pct = (v.currentTime / v.duration) * 100;
+        for (const m of [25, 50, 75]) {
+          if (pct >= m && !hit.has(m)) {
+            hit.add(m);
+            track("video_progress", { ...base, video_percent: m, video_duration: Math.round(v.duration) });
+          }
+        }
+      });
+      v.addEventListener("ended", () => {
+        if (hit.has(100)) return;
+        hit.add(100);
+        track("video_complete", { ...base, video_percent: 100, video_duration: Math.round(v.duration || 0) });
+      });
+    });
   }
 
   const q = new URLSearchParams(location.search);
@@ -329,5 +369,6 @@ const clock = (t: number) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60))
     // A further film's section (title + logline) sits just above its player.
     if (target !== films[0]) target.parentElement?.scrollIntoView();
     seek(target, start, false);
+    track("scene_click", { film: target.dataset.base, seconds: start, via: "url" });
   }
 </script>

@@ -5,6 +5,8 @@ import Footer from "../components/Footer.astro";
 import OrderDialog from "../components/OrderDialog.astro";
 import { site, dodoMode } from "../data/site";
 import { siteGraph, jsonLd } from "../data/seo";
+import { services } from "../data/services";
+import ConsentBanner from "../components/ConsentBanner.astro";
 
 interface Props {
   title?: string;
@@ -27,6 +29,19 @@ const {
 const base = Astro.site!;
 const canonical = new URL(Astro.url.pathname.replace(/\.html$/, "").replace(/\/index$/, "/"), base);
 const ogImage = new URL(image, base);
+// Which kind of page this is, for analytics ("Content group" in GA reports).
+const path = Astro.url.pathname.replace(/\.html$/, "").replace(/\/(index)?$/, "") || "/";
+const pageType = (() => {
+  if (path === "/") return "home";
+  if (path === "/work") return "work_index";
+  if (path.startsWith("/work/")) return "work";
+  if (path === "/thanks") return "thanks";
+  if (path === "/404") return "not_found";
+  if (["/terms", "/privacy", "/refunds"].includes(path)) return "legal";
+  if (path === "/ai-studio-vs-freelancer-vs-agency") return "compare";
+  if (services.some((s) => path === `/${s.slug}`)) return "service";
+  return "other";
+})();
 ---
 
 <!doctype html>
@@ -73,7 +88,7 @@ const ogImage = new URL(image, base);
     <meta name="twitter:image" content={ogImage} />
     <script type="application/ld+json" set:html={jsonLd([...siteGraph(base), ...schema])} />
   </head>
-  <body class={home ? "is-home" : ""}>
+  <body class={home ? "is-home" : ""} data-page={pageType}>
     {
       dodoMode === "test" && (
         <div class="test-strip caps" role="note">
@@ -87,6 +102,7 @@ const ogImage = new URL(image, base);
     </main>
     <Footer />
     <OrderDialog />
+    <ConsentBanner />
     <style>
       .test-strip {
         position: fixed;

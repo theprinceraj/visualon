@@ -1,4 +1,5 @@
 import Lenis from "lenis";
+import { item, setUserProperty, track, trackOnce } from "./analytics";
 
 type Currency = "INR" | "USD";
 type Pkg = {
@@ -133,7 +134,11 @@ $$("[data-hoverplay]").forEach((card) => {
   const v = $<HTMLVideoElement>("video", card);
   if (!v) return;
   if (canHover) {
-    card.addEventListener("mouseenter", () => load(v).play().catch(() => {}));
+    card.addEventListener("mouseenter", () => {
+      load(v).play().catch(() => {});
+      const film = (card as HTMLAnchorElement).pathname?.split("/").pop();
+      if (film) trackOnce(`pv:${film}`, "preview_play", { film, list: listOf(card) });
+    });
     card.addEventListener("mouseleave", () => v.pause());
   } else playIO.observe(v);
 });
@@ -155,6 +160,7 @@ if (preview) {
       } else v.pause();
     });
     preview.href = `/work/${slug}`;
+    trackOnce(`pv:${slug}`, "preview_play", { film: slug, list: "work_list" });
     if (title) title.textContent = row.dataset.title ?? "";
     if (line) line.textContent = row.dataset.line ?? "";
   };
@@ -210,8 +216,11 @@ const applyCurrency = () => {
 };
 $$<HTMLButtonElement>("[data-currency]").forEach((b) =>
   b.addEventListener("click", () => {
+    if (currency === b.dataset.currency) return;
     currency = b.dataset.currency as Currency;
     store.set("vo-currency", currency);
+    setUserProperty("display_currency", currency);
+    track("currency_switch", { currency, list: listOf(b) });
     applyCurrency();
   }),
 );
@@ -233,7 +242,8 @@ function updateOrder() {
   set("summary", `${current.sub}. ${current.includes.join(" · ")}. delivered in ${current.delivery}.`);
 }
 
-function openOrder(id: string) {
+let submitted = false;
+function openOrder(id: string, from?: string) {
   if (!dialog || !cfg) return;
   current = cfg.packages.find((p) => p.id === id) ?? null;
   if (!current) return;
@@ -253,6 +263,16 @@ function openOrder(id: string) {
   });
   $(".error", dialog)!.hidden = true;
   updateOrder();
+  submitted = false;
+  track("select_item", {
+    currency,
+    value: current.price[currency],
+    item_list_id: listId,
+    item_list_name: listId,
+    package: current.id,
+    from: from ?? "",
+    items: [item(current, currency)],
+  });
   dialog.showModal();
   lenis?.stop();
 }
@@ -269,9 +289,16 @@ formatsBox?.addEventListener("click", (e) => {
 
 document.addEventListener("click", (e) => {
   const btn = (e.target as HTMLElement).closest<HTMLElement>("[data-order]");
-  if (btn) openOrder(btn.dataset.order!);
+  if (btn) openOrder(btn.dataset.order!, listOf(btn));
 });
-dialog?.addEventListener("close", () => lenis?.start());
+dialog?.addEventListener("close", () => {
+  lenis?.start();
+  if (submitted || !current) return;
+  // Closed without ordering: how far they got says whether the form or the price put them off.
+  const form = dialog.querySelector("form");
+  const filled = form ? ["name", "email", "link", "brief"].filter((k) => String(new FormData(form).get(k) || "").trim()) : [];
+  track("order_abandon", { package: current.id, fields_filled: filled.length, last_field: filled.at(-1) ?? "none" });
+});
 dialog?.addEventListener("click", (e) => {
   if (e.target === dialog || (e.target as HTMLElement).closest("[data-close]")) dialog.close();
 });
@@ -295,14 +322,15 @@ dialog?.querySelector("form")?.addEventListener("submit", (e) => {
   const brief = String(data.get("brief") || "").trim();
   if (link && !/^https?:\/\//i.test(link)) link = `https://${link}`;
   const err = $(".error", dialog)!;
-  const fail = (m: string) => {
+  const fail = (m: string, reason: string) => {
     err.textContent = m;
     err.hidden = false;
+    track("order_form_error", { package: current!.id, reason });
   };
-  if (!name) return fail("we need a name to put on the order.");
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("that email doesn't look right.");
-  if (!link) return fail("add a link to the product, site or app.");
-  if (brief.length < 10) return fail("give us a line or two of brief.");
+  if (!name) return fail("we need a name to put on the order.", "name_missing");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("that email doesn't look right.", "email_invalid");
+  if (!link) return fail("add a link to the product, site or app.", "link_missing");
+  if (brief.length < 10) return fail("give us a line or two of brief.", "brief_short");
   const formats = $$<HTMLButtonElement>(`[data-o="formats"] button[aria-pressed="true"]`, dialog).map((b) => b.dataset.value);
   const tone = picked(dialog, "tone");
   const productId = current.dodo[cfg.mode];
@@ -320,6 +348,8 @@ dialog?.querySelector("form")?.addEventListener("submit", (e) => {
       "",
       brief,
     ].join("\n");
+    submitted = true;
+    track("generate_lead", { method: "order_email", package: current.id, value: current.price[currency], currency });
     go(`mailto:${cfg.email}?subject=${encodeURIComponent(`Order: ${current.name}`)}&body=${encodeURIComponent(body)}`);
     return;
   }
@@ -328,7 +358,7 @@ dialog?.querySelector("form")?.addEventListener("submit", (e) => {
     quantity: "1",
     fullName: name,
     email,
-    redirect_url: `${location.origin}/thanks?package=${current.id}`,
+    redirect_url: `${location.origin}/thanks?package=${current.id}&currency=${currency}`,
     paymentCurrency: currency,
     showCurrencySelector: "false",
     metadata_package: current.id,
@@ -338,7 +368,21 @@ dialog?.querySelector("form")?.addEventListener("submit", (e) => {
     metadata_brief: brief.slice(0, 450),
     ...(ref ? { metadata_ref: ref } : {}),
   });
-  go(`${cfg.checkoutBase}/buy/${productId}?${q}`);
+  submitted = true;
+  const url = `${cfg.checkoutBase}/buy/${productId}?${q}`;
+  // Leaving for Dodo: wait (briefly) for GA to take the event, or it's lost with the page.
+  track(
+    "begin_checkout",
+    {
+      currency,
+      value: current.price[currency],
+      package: current.id,
+      formats: formats.join(", "),
+      feel: tone.join(", "),
+      items: [item(current, currency)],
+    },
+    () => go(url),
+  );
 });
 
 // ---------- contact → pre-filled email ----------
@@ -364,8 +408,78 @@ contact?.addEventListener("submit", (e) => {
     .join("\n")
     .replace(/\n{3,}/g, "\n\n")
     .trim();
+  track("generate_lead", {
+    method: "quote_form",
+    regarding: regarding.join(", "),
+    start: picked(contact, "start")[0] ?? "",
+    budget: picked(contact, "budget")[0] ?? "",
+  });
   const subject = `Quote request${regarding.length ? `: ${regarding.join(", ")}` : ""}${name ? ` from ${name}` : ""}`;
   go(`mailto:${contact.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
 });
 
 applyCurrency();
+
+// ---------- analytics: what people look at ----------
+// Where on the page an element sits: its section id (packages, work, contact...) or the page area.
+function listOf(el: Element) {
+  if (el.closest("#mobile-menu, header, nav")) return "nav";
+  if (el.closest("footer")) return "footer";
+  return el.closest("section[id]")?.id || "page";
+}
+const listId =
+  document.body.dataset.page === "service" ? `service:${location.pathname.split("/").pop()}` : (document.body.dataset.page ?? "page");
+
+// Packages seen: the top of the checkout funnel.
+const pkgSection = $("#packages") ?? $("main [data-order]")?.closest("section") ?? null;
+if (pkgSection && cfg) {
+  const ids = new Set($$("[data-order]", pkgSection).map((b) => b.dataset.order));
+  new IntersectionObserver(
+    ([en], obs) => {
+      if (!en.isIntersecting) return;
+      obs.disconnect();
+      track("view_item_list", {
+        currency,
+        item_list_id: listId,
+        item_list_name: listId,
+        items: cfg.packages.filter((p) => ids.has(p.id)).map((p, i) => item(p, currency, i)),
+      });
+    },
+    { rootMargin: "0px 0px -40% 0px" }, // its top reaches 60% down the screen (works for any section height)
+  ).observe(pkgSection);
+}
+
+// Sections reached (once each, when one reaches the middle of the screen; works for sections taller than the
+// screen): how far down people get, and where they stop.
+const sectionIO = new IntersectionObserver(
+  (entries) =>
+    entries.forEach((en) => {
+      if (!en.isIntersecting) return;
+      sectionIO.unobserve(en.target);
+      trackOnce(`sec:${en.target.id}`, "section_view", { section: en.target.id });
+    }),
+  { rootMargin: "0px 0px -50% 0px" },
+);
+$$("main section[id]").forEach((s) => sectionIO.observe(s));
+
+// Clicks: films opened, emails, buttons and arrow links (order buttons are select_item above).
+document.addEventListener("click", (e) => {
+  const el = (e.target as HTMLElement).closest<HTMLElement>("a, button");
+  if (!el || el.closest("[data-consent], #order") || el.hasAttribute("data-order")) return;
+  const a = el instanceof HTMLAnchorElement ? el : null;
+  const text = (el.textContent || el.getAttribute("aria-label") || "").replace(/\s+/g, " ").trim().slice(0, 60);
+  if (a?.protocol === "mailto:") return track("email_click", { location: listOf(a) });
+  const samePage = a && a.origin === location.origin && a.pathname === location.pathname;
+  if (a && !samePage && a.origin === location.origin && /^\/work\/[^/]+$/.test(a.pathname))
+    return track("film_click", { film: a.pathname.split("/").pop(), list: listOf(a) });
+  if (el.matches(".btn, .cta, .link-arrow") || (a && listOf(a) === "nav"))
+    track("cta_click", { cta_text: text, cta_location: listOf(el), link_url: a?.pathname ?? "" });
+});
+
+// FAQ answers opened (the first starts open, so only opens by the visitor count).
+$$<HTMLDetailsElement>("details").forEach((d) =>
+  d.addEventListener("toggle", () => {
+    const question = (d.querySelector("summary")?.textContent || "").replace(/\s+/g, " ").trim().slice(0, 90);
+    if (d.open) trackOnce(`faq:${question}`, "faq_open", { question, list: listOf(d) });
+  }),
+);

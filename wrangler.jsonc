@@ -5,7 +5,8 @@
   "pages_build_output_dir": "./dist",
   // This file is the source of truth for build variables (the Pages dashboard values are ignored while it exists).
   // Top-level vars = production (main). env.preview = dev and every other branch.
-  "vars": { "PUBLIC_DODO_MODE": "live" },
+  // PUBLIC_GA_ID: the GA4 measurement id (G-...). Production only, so previews send nothing; empty = analytics off.
+  "vars": { "PUBLIC_DODO_MODE": "live", "PUBLIC_GA_ID": "G-K0PS39066Y" },
   "env": {
     "preview": { "vars": { "PUBLIC_DODO_MODE": "test" } }
   }
