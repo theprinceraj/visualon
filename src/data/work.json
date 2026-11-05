@@ -1,6 +1,48 @@
 {
   "projects": [
     {
+      "slug": "velkri",
+      "date": "2026-11-05",
+      "title": "Velkri",
+      "tags": ["concept promo", "SaaS promo"],
+      "sectors": ["saas"],
+      "concept": true,
+      "year": 2026,
+      "logline": "What if Jira could tell you where it was decided?",
+      "brief": "Velkri is a project workspace for chat, calls, meetings, files and tasks that remembers what was decided, by whom and where it was said. Decisions, tasks and docs stay linked to the message, call or file they came from.",
+      "approach": "An unofficial \"what if\" concept ad. A ticket tells you what to do but never why, so we imagine Jira telling you where it was decided. One click prints a receipt of the call, and then the twist: Velkri already does this.",
+      "story": {
+        "challenge": "Project memory is easy to promise and hard to show. Team leads already live in tickets but decide things on calls and in threads, so the film had to start in a tool they recognise, make them feel the hour lost digging for a reason, and only then name Velkri.",
+        "audience": "Team leads and project managers who live in tickets but decide things on calls and in threads.",
+        "idea": "Borrow the \"what if this app had feature X\" format and let it turn on its own premise. A click on a ticket's \"Decided in\" chip prints a receipt of that moment on the call, with who said it, when, and who confirmed it. Then the ticket re-skins itself into Velkri: you don't have to wait for Jira.",
+        "scenes": [
+          { "t": 0, "frame": 5, "title": "But not why", "text": "A ticket fills the frame: what to do, an empty description, and \"why?!\" scrawled across it in ember handwriting." },
+          { "t": 6.2, "frame": 8.6, "title": "The dig", "text": "Three whip pans hunting for the reason: the chat, the call notes, that one doc." },
+          { "t": 9.55, "frame": 12.3, "title": "You've lost an hour", "text": "The full-frame doc shrinks into a word chip inside the sentence, then flips to a clock: 1 hour." },
+          { "t": 12.6, "frame": 15.2, "title": "What if", "text": "On an indigo and ember halftone field: \"But what if Jira could tell you where it was decided?\"" },
+          { "t": 15.7, "frame": 20.9, "title": "The receipt", "text": "One click on the \"Decided in\" chip prints the receipt: who said it, when and \"Confirmed by Priya\", with the moment playing from the call." },
+          { "t": 21.8, "frame": 25.6, "title": "Receipts pile up", "text": "One per line: that decision, that deadline, and that thing the client swears they never asked for." },
+          { "t": 27.8, "frame": 32.2, "title": "Plot twist", "text": "The ticket re-skins into Velkri's tasks and recent decisions, and a citation opens the call at 14:32. Velkri already does this." },
+          { "t": 33, "frame": 36.5, "title": "Nothing decided gets lost", "text": "Velkri's own headline and logo, with 14 days free at velkri.com." }
+        ],
+        "craft": [
+          "An unofficial concept, labelled as one in the film: Jira is a trademark of Atlassian and Velkri is not affiliated with Atlassian. The film makes no claim about what Jira can or can't do.",
+          "Velkri's tasks, recent decisions and citation card, plus the names and call lines, are rebuilt from velkri.com's own demo. The Jira-style ticket, the chat, notes and doc, the \"1 hour\" and the client's logo line are illustrative.",
+          "The people in the call clips are stock actors (Pixabay) standing in for the site's demo cast.",
+          "Velkri's look from its site's CSS: near-black panels, indigo, cream and one ember-orange dot, in Archivo, with ember handwriting as the brand's voice in the margins.",
+          "A voiced film, using a synthetic voice (Kokoro TTS), with \"Helios Tilt\" by CM ONNI (CC BY 3.0) lifting on \"But what if\" and foley for the pen, paper and stamp. 16:9, 37 seconds."
+        ]
+      },
+      "media": [
+        {
+          "ratio": "16x9",
+          "src": "velkri-what-if-jira/out/velkri-what-if-jira-16x9.mp4",
+          "previewAt": 16,
+          "duration": 37.1
+        }
+      ]
+    },
+    {
       "slug": "kodlo",
       "date": "2026-10-12",
       "title": "kōdlo",
