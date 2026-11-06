@@ -3,16 +3,16 @@
     {
       "slug": "onto",
       "date": "2026-11-06",
-      "title": "onto (concept)",
-      "tags": ["concept promo", "app promo"],
+      "title": "onto",
+      "tags": ["app promo", "travel"],
       "sectors": ["apps"],
       "concept": true,
       "year": 2026,
-      "logline": "An unofficial concept ad: the price rewrites itself.",
-      "brief": "A concept film, not commissioned by or affiliated with onto. onto is an app that keeps watching a hotel price after you book. If the same hotel, room type and dates come back cheaper, it rebooks the stay and refunds you the difference.",
-      "approach": "An unofficial concept ad. The logo does the work: a perforated onto stamp crosses a printed hotel price and leaves a lower one behind, using the example card from onto's own site.",
+      "logline": "The price rewrites itself.",
+      "brief": "onto is an app that keeps watching a hotel price after you book. If the same hotel, room type and dates come back cheaper, it rebooks the stay and refunds you the difference.",
+      "approach": "The logo does the work: a perforated onto stamp crosses a printed hotel price and leaves a lower one behind, using the example card from onto's own site.",
       "story": {
-        "challenge": "A concept piece with no client: onto does its job after you've closed the app, so what is there to film? The ad had to make a price drop visible on a printed page, and make sense with the sound off.",
+        "challenge": "A concept piece: onto does its job after you've closed the app, so what is there to film? The ad had to make a price drop visible on a printed page, and make sense with the sound off.",
         "audience": "People in India who book hotel stays and wonder whether the price fell afterwards.",
         "idea": "Treat the booking confirmation as paper. It comes out of an envelope, the onto stamp sweeps across the ₹10,200 like a squeegee, and ₹8,600 is left in its wake. Then the questions a careful booker would ask get answered in onto's own words.",
         "scenes": [
@@ -24,7 +24,6 @@
           { "t": 15.76, "frame": 19.3, "title": "We keep working after you book", "text": "onto's headline over a handwritten note on ruled paper, then the Google Play badge." }
         ],
         "craft": [
-          "An unofficial concept, labelled as one here: not commissioned by or affiliated with onto, and nobody at onto briefed or approved it.",
           "The ₹10,200, ₹8,600 and \"You saved ₹1,600\" are from the example card on onto.travel, and the film labels them as an example. They are not a typical saving. The \"₹1,600 Refunded\" chip pairs the site's chip style with that card's amount and is marked as an example amount.",
           "\"9/10 bookings saw a price change\" is onto's own claim from its site, which doesn't state the method. The other product lines and answers come from onto.travel too. The opening line is ours.",
           "The envelope, hotel photo, logo, colours and app screen are rebuilt from onto.travel. The polaroid's \"Goa\" caption is illustrative.",
@@ -37,6 +36,48 @@
           "src": "onto-ad/out/onto-ad-9x16.mp4",
           "previewAt": 1,
           "duration": 19.8
+        }
+      ]
+    },
+    {
+      "slug": "wudhomes",
+      "date": "2026-11-06",
+      "title": "wudhomes",
+      "tags": ["product promo", "furniture"],
+      "sectors": ["ecommerce"],
+      "concept": true,
+      "year": 2026,
+      "logline": "Soft names, heavy landings.",
+      "brief": "wudhomes is a Bengaluru furniture brand whose sofas, accent chairs and poufs carry names like Gulab, Juhi and Mayur, with design, fabric and size you can customise.",
+      "approach": "Every name is delicate and every product is furniture. The word arrives first, then the thing it names lands in the room, until the tower ends on a joke: Kesar means saffron, and the sofa is green.",
+      "story": {
+        "challenge": "A concept piece: could a furniture catalogue get a laugh in a phone feed, with no shoot and no lifestyle footage? All it had was the store's own product photos and the names on them, and it had to work with the sound off.",
+        "audience": "Home buyers in Bengaluru scrolling Instagram.",
+        "idea": "Read the catalogue literally. Gulab means rose, so a sofa slams down and bursts into petals. Bird-named chairs flutter in and perch, and a pouf called mushroom sprouts from the floor. Then Kesar means saffron, and its sofa is green, which is the setup for picking your own fabric.",
+        "scenes": [
+          { "t": 0, "frame": 2.2, "title": "Gulab means rose", "text": "The word first, then the Gulab 3 Seater Sofa slams into the room in a burst of petals." },
+          { "t": 3.2, "frame": 4.2, "title": "Juhi means jasmine", "text": "The mustard Juhi sofa lands on top of it, and white petals fly." },
+          { "t": 4.7, "frame": 8, "title": "The birds perch", "text": "Mayur means peacock and Tota means parrot: two accent chairs flutter in and settle on the tower." },
+          { "t": 9, "frame": 10.2, "title": "Kukurmutta", "text": "A dive to the floor, where the Kukurmutta Pouf sprouts. It means mushroom." },
+          { "t": 11, "frame": 12.6, "title": "Kesar means saffron", "text": "A whip back up, and the Kesar sofa slams onto the tower in saffron-coloured petals." },
+          { "t": 13.2, "frame": 14.4, "title": "It's green", "text": "The film stops to point out that the sofa called saffron is green." },
+          { "t": 15.2, "frame": 18.4, "title": "Customise", "text": "Design, fabric and size: the sofa runs through Mint, Navy, Camel and Rust, then stretches to 90 inches." },
+          { "t": 19.2, "frame": 20.8, "title": "One visit away", "text": "A real wudhomes photo under the site's own line, with the Sarjapur Main Road address and the wordmark." }
+        ],
+        "craft": [
+          "The product names and photos are from wudhomes' own store, cut out for the room. The closing photo and \"Your sofa is one visit away.\" are from its home page.",
+          "The meanings are dictionary Hindi. wudhomes doesn't state them, and the film doesn't say why the names were chosen.",
+          "Fabric names and the 90-inch length are real options on the Kesar page, but the changes themselves are illustrative: one Kesar photo recoloured, then stretched for the joke. They don't show those fabrics or that length.",
+          "The petals and feathers are drawn in code.",
+          "No voiceover. \"Little Tomcat (Instrumental Version)\" by Josh Woodward (CC BY 3.0), with thuds, pops and whooshes on the beat. 9:16, 23 seconds."
+        ]
+      },
+      "media": [
+        {
+          "ratio": "9x16",
+          "src": "wudhomes-ad/out/wudhomes-ad-9x16.mp4",
+          "previewAt": 2,
+          "duration": 22.6
         }
       ]
     },
