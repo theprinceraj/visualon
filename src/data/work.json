@@ -1,6 +1,46 @@
 {
   "projects": [
     {
+      "slug": "onto",
+      "date": "2026-11-06",
+      "title": "onto (concept)",
+      "tags": ["concept promo", "app promo"],
+      "sectors": ["apps"],
+      "concept": true,
+      "year": 2026,
+      "logline": "An unofficial concept ad: the price rewrites itself.",
+      "brief": "A concept film, not commissioned by or affiliated with onto. onto is an app that keeps watching a hotel price after you book. If the same hotel, room type and dates come back cheaper, it rebooks the stay and refunds you the difference.",
+      "approach": "An unofficial concept ad. The logo does the work: a perforated onto stamp crosses a printed hotel price and leaves a lower one behind, using the example card from onto's own site.",
+      "story": {
+        "challenge": "A concept piece with no client: onto does its job after you've closed the app, so what is there to film? The ad had to make a price drop visible on a printed page, and make sense with the sound off.",
+        "audience": "People in India who book hotel stays and wonder whether the price fell afterwards.",
+        "idea": "Treat the booking confirmation as paper. It comes out of an envelope, the onto stamp sweeps across the ₹10,200 like a squeegee, and ₹8,600 is left in its wake. Then the questions a careful booker would ask get answered in onto's own words.",
+        "scenes": [
+          { "t": 0, "frame": 1.5, "title": "Then the price dropped", "text": "A booking confirmation sits in its envelope on lilac paper: booked 2 days ago, ₹10,200." },
+          { "t": 2.53, "frame": 3, "title": "The stamp", "text": "The price fills the frame, and the perforated onto stamp crosses it, leaving the site's example card behind: rebooked just now, ₹8,600." },
+          { "t": 6.11, "frame": 8.6, "title": "Refund, automatically", "text": "A chip marked as an example amount lands on a taped polaroid of the stay, with the site's line on when the money usually arrives." },
+          { "t": 9.15, "frame": 11.8, "title": "Will my room change?", "text": "onto's FAQ opens and answers itself with a giant No., then same hotel, same room type, same dates." },
+          { "t": 12.7, "frame": 15.2, "title": "Booked elsewhere", "text": "The app's tracking screen for 3 days to Udaipur draws its price line, next to the site's own 9/10 figure." },
+          { "t": 15.76, "frame": 19.3, "title": "We keep working after you book", "text": "onto's headline over a handwritten note on ruled paper, then the Google Play badge." }
+        ],
+        "craft": [
+          "An unofficial concept, labelled as one here: not commissioned by or affiliated with onto, and nobody at onto briefed or approved it.",
+          "The ₹10,200, ₹8,600 and \"You saved ₹1,600\" are from the example card on onto.travel, and the film labels them as an example. They are not a typical saving. The \"₹1,600 Refunded\" chip pairs the site's chip style with that card's amount and is marked as an example amount.",
+          "\"9/10 bookings saw a price change\" is onto's own claim from its site, which doesn't state the method. The other product lines and answers come from onto.travel too. The opening line is ours.",
+          "The envelope, hotel photo, logo, colours and app screen are rebuilt from onto.travel. The polaroid's \"Goa\" caption is illustrative.",
+          "No voiceover. \"D-Funk Express\" by Doctor Frost (CC BY 3.0), with stamp, coin and paper foley on the beat. 9:16, 20 seconds."
+        ]
+      },
+      "media": [
+        {
+          "ratio": "9x16",
+          "src": "onto-ad/out/onto-ad-9x16.mp4",
+          "previewAt": 1,
+          "duration": 19.8
+        }
+      ]
+    },
+    {
       "slug": "velkri",
       "date": "2026-11-05",
       "title": "Velkri",
