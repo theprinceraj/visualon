@@ -12,9 +12,14 @@ export const site = {
   description:
     "VisualOn makes AI product videos, SaaS and app launch films and e-commerce ads from your real product. Fixed prices, delivered in days.",
   // Other ways people spell or search the brand. Used in structured data so search engines connect them to this site.
-  alternateNames: ["Visual On", "Visual On Top", "VisualOn Top", "visualon.top"],
+  alternateNames: [
+    "Visual On",
+    "Visual On Top",
+    "VisualOn Top",
+    "visualon.top",
+  ],
   // Public profiles (Instagram, X, LinkedIn, YouTube...). Each one added here becomes a `sameAs` link for search engines.
-  sameAs: [] as string[],
+  sameAs: ["https://www.producthunt.com/products/visualon"] as string[],
 };
 
 export type Currency = "INR" | "USD";
@@ -44,9 +49,18 @@ export const packages: Package[] = [
     sub: "one product video",
     price: { INR: 1199, USD: 19.99 },
     delivery: "48 hours",
-    includes: ["15–25s video", "1 format", "music + sfx scored", "poster frame", "1 revision"],
+    includes: [
+      "15–25s video",
+      "1 format",
+      "music + sfx scored",
+      "poster frame",
+      "1 revision",
+    ],
     formats: ["9:16", "16:9", "1:1", "4:5"],
-    dodo: { test: "pdt_0NpAtJ2l6aMzO3MFgOlQH", live: "pdt_0NpCw6aOU2aBJdF9s4Tz3" },
+    dodo: {
+      test: "pdt_0NpAtJ2l6aMzO3MFgOlQH",
+      live: "pdt_0NpCw6aOU2aBJdF9s4Tz3",
+    },
   },
   {
     id: "launch",
@@ -54,10 +68,19 @@ export const packages: Package[] = [
     sub: "the whole launch, every feed",
     price: { INR: 2999, USD: 32.99 },
     delivery: "72 hours",
-    includes: ["20–45s film", "9:16 + 1:1 + 16:9", "captions + hashtags", "poster frames", "2 revisions"],
+    includes: [
+      "20–45s film",
+      "9:16 + 1:1 + 16:9",
+      "captions + hashtags",
+      "poster frames",
+      "2 revisions",
+    ],
     formats: ["9:16", "1:1", "16:9", "4:5"],
     recommended: true,
-    dodo: { test: "pdt_0NpAuSxSjYx4eqtKXmu8M", live: "pdt_0NpCw6Vd7u7UmZevij3qB" },
+    dodo: {
+      test: "pdt_0NpAuSxSjYx4eqtKXmu8M",
+      live: "pdt_0NpCw6Vd7u7UmZevij3qB",
+    },
   },
   {
     id: "hooks",
@@ -65,30 +88,51 @@ export const packages: Package[] = [
     sub: "five openings, one ad",
     price: { INR: 4499, USD: 44.99 },
     delivery: "72 hours",
-    includes: ["1 ad, 5 hook variants", "9:16 + 4:5", "a/b test plan", "2 revisions"],
+    includes: [
+      "1 ad, 5 hook variants",
+      "9:16 + 4:5",
+      "a/b test plan",
+      "2 revisions",
+    ],
     formats: ["9:16", "4:5", "1:1"],
-    dodo: { test: "pdt_0NpAvG1pPno986EEh79OH", live: "pdt_0NpCw6fC8L5MZnSygDwSa" },
+    dodo: {
+      test: "pdt_0NpAvG1pPno986EEh79OH",
+      live: "pdt_0NpCw6fC8L5MZnSygDwSa",
+    },
   },
 ];
 
 export const symbols: Record<Currency, string> = { INR: "₹", USD: "$" };
 export const formatPrice = (n: number, c: Currency) =>
-  symbols[c] + n.toLocaleString(c === "INR" ? "en-IN" : "en-US", { maximumFractionDigits: 2 });
+  symbols[c] +
+  n.toLocaleString(c === "INR" ? "en-IN" : "en-US", {
+    maximumFractionDigits: 2,
+  });
 
 // "live" only when the build says so (Cloudflare Pages production). Everything else — dev, previews — is test.
-export const dodoMode: DodoMode = import.meta.env.PUBLIC_DODO_MODE === "live" ? "live" : "test";
+export const dodoMode: DodoMode =
+  import.meta.env.PUBLIC_DODO_MODE === "live" ? "live" : "test";
 export const checkoutBase =
-  dodoMode === "live" ? "https://checkout.dodopayments.com" : "https://test.checkout.dodopayments.com";
+  dodoMode === "live"
+    ? "https://checkout.dodopayments.com"
+    : "https://test.checkout.dodopayments.com";
 
 // Dev serves public/media; production builds use the R2 bucket unless PUBLIC_MEDIA_BASE overrides it.
 const R2_MEDIA = "https://media.visualon.top";
-const mediaBase = (import.meta.env.PUBLIC_MEDIA_BASE || (import.meta.env.DEV ? "/media" : R2_MEDIA)).replace(/\/$/, "");
+const mediaBase = (
+  import.meta.env.PUBLIC_MEDIA_BASE ||
+  (import.meta.env.DEV ? "/media" : R2_MEDIA)
+).replace(/\/$/, "");
 export const media = (
   slug: string,
   ratio: string,
-  file: "full.mp4" | "preview.mp4" | "poster.jpg" | "preview.jpg" | `scene-${number}.jpg`,
-) =>
-  `${mediaBase}/${slug}/${ratio}/${file}`;
+  file:
+    | "full.mp4"
+    | "preview.mp4"
+    | "poster.jpg"
+    | "preview.jpg"
+    | `scene-${number}.jpg`,
+) => `${mediaBase}/${slug}/${ratio}/${file}`;
 export const reelUrl = `${mediaBase}/reel.mp4`;
 
 /** Case-study write-up on a project's page. Scene times are seconds into the video (the same in every format). */
@@ -101,7 +145,12 @@ export type Story = {
   craft: string[];
 };
 
-export type Media = { ratio: string; src: string; previewAt?: number; duration: number };
+export type Media = {
+  ratio: string;
+  src: string;
+  previewAt?: number;
+  duration: number;
+};
 
 /** A further film made for the same product, shown below the main one on the project's page. Its media lives in
  *  `<slug>/<id>/<ratio>/`, and `?film=<id>&t=` links seek it. */
@@ -116,7 +165,12 @@ export type Film = {
   media: Media[];
 };
 
-export type Project = (typeof work.projects)[number] & { concept?: boolean; turnaround?: string; story?: Story; films?: Film[] };
+export type Project = (typeof work.projects)[number] & {
+  concept?: boolean;
+  turnaround?: string;
+  story?: Story;
+  films?: Film[];
+};
 export const projects = work.projects as Project[];
 /** Homepage "selected work": projects with a `home` position, in that order, capped at 7. New work goes to /work only
  *  (no `home`) unless the homepage is asked for explicitly. */
@@ -126,28 +180,93 @@ export const featured = projects
   .sort((a, b) => (a.home ?? 0) - (b.home ?? 0))
   .slice(0, HOME_MAX);
 export const vertical = projects.flatMap((p) =>
-  p.media.filter((m) => m.ratio === "9x16").map((m) => ({ project: p, ratio: m.ratio })),
+  p.media
+    .filter((m) => m.ratio === "9x16")
+    .map((m) => ({ project: p, ratio: m.ratio })),
 );
 export const ratioLabel = (r: string) => r.replace("x", ":");
 
 /** /work filters (?f=<id>). "business" filters read a project's `sectors`, "format" filters read its tags and media. A
  *  service page names one to pick its projects, and links to /work?f=<id> for the rest. */
-export type WorkFilter = { id: string; label: string; group: "business" | "format"; match: (p: Project) => boolean };
+export type WorkFilter = {
+  id: string;
+  label: string;
+  group: "business" | "format";
+  match: (p: Project) => boolean;
+};
 const sector = (id: string) => (p: Project) => p.sectors.includes(id);
 export const filters: WorkFilter[] = [
-  { id: "saas", label: "saas + web apps", group: "business", match: sector("saas") },
-  { id: "apps", label: "mobile apps + extensions", group: "business", match: sector("apps") },
-  { id: "devtools", label: "developer tools", group: "business", match: sector("devtools") },
-  { id: "ecommerce", label: "e-commerce + d2c", group: "business", match: sector("ecommerce") },
-  { id: "local", label: "restaurants + local", group: "business", match: sector("local") },
-  { id: "fintech", label: "fintech", group: "business", match: sector("fintech") },
-  { id: "education", label: "education + wellbeing", group: "business", match: sector("education") },
-  { id: "marketing", label: "marketing + ai", group: "business", match: sector("marketing") },
-  { id: "launch", label: "launch films", group: "format", match: (p) => p.tags[0] === "launch film" },
-  { id: "character", label: "character films", group: "format", match: (p) => p.tags[0].startsWith("character") },
-  { id: "vertical", label: "vertical 9:16", group: "format", match: (p) => p.media.some((m) => m.ratio === "9x16") },
+  {
+    id: "saas",
+    label: "saas + web apps",
+    group: "business",
+    match: sector("saas"),
+  },
+  {
+    id: "apps",
+    label: "mobile apps + extensions",
+    group: "business",
+    match: sector("apps"),
+  },
+  {
+    id: "devtools",
+    label: "developer tools",
+    group: "business",
+    match: sector("devtools"),
+  },
+  {
+    id: "ecommerce",
+    label: "e-commerce + d2c",
+    group: "business",
+    match: sector("ecommerce"),
+  },
+  {
+    id: "local",
+    label: "restaurants + local",
+    group: "business",
+    match: sector("local"),
+  },
+  {
+    id: "fintech",
+    label: "fintech",
+    group: "business",
+    match: sector("fintech"),
+  },
+  {
+    id: "education",
+    label: "education + wellbeing",
+    group: "business",
+    match: sector("education"),
+  },
+  {
+    id: "marketing",
+    label: "marketing + ai",
+    group: "business",
+    match: sector("marketing"),
+  },
+  {
+    id: "launch",
+    label: "launch films",
+    group: "format",
+    match: (p) => p.tags[0] === "launch film",
+  },
+  {
+    id: "character",
+    label: "character films",
+    group: "format",
+    match: (p) => p.tags[0].startsWith("character"),
+  },
+  {
+    id: "vertical",
+    label: "vertical 9:16",
+    group: "format",
+    match: (p) => p.media.some((m) => m.ratio === "9x16"),
+  },
 ];
 export const filterById = (id: string) => filters.find((f) => f.id === id)!;
 /** Newest first; client work before concepts on the same day. */
 export const newest = (list: Project[]) =>
-  [...list].sort((a, b) => b.date.localeCompare(a.date) || Number(!!a.concept) - Number(!!b.concept));
+  [...list].sort(
+    (a, b) =>
+      b.date.localeCompare(a.date) || Number(!!a.concept) - Number(!!b.concept),
+  );
